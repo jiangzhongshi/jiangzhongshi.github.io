@@ -1,0 +1,69 @@
+{{/* Display author list - truncated when too many authors */}}
+{{- $taxonomy := "authors" }}
+{{- $authors_param := .Params.authors }}
+{{- $max_display := 6 }}
+{{- $trunc_display := 3 }}
+
+{{/* If using taxonomy terms (preferred Wowchemy way) */}}
+{{- if .Param $taxonomy }}
+  {{- $terms := .GetTerms $taxonomy }}
+  {{- $n := len $terms }}
+  {{- if gt $n 0 }}
+    {{- if gt $n $max_display }}
+      {{- range $i, $author := first $trunc_display $terms }}
+        {{- $highlight_name := .Page.Params.highlight_name | default false -}}
+        {{- if gt $i 0 }}, {{ end -}}
+        <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
+          {{- if .RelPermalink -}}
+            <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
+          {{- else -}}
+            {{ .LinkTitle }}
+          {{- end -}}
+        </span>
+      {{- end -}}
+      <span>, et al.</span>
+    {{- else }}
+      {{- range $index, $value := $terms }}
+        {{- $highlight_name := .Page.Params.highlight_name | default false -}}
+        {{- if gt $index 0 }}, {{ end -}}
+        <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
+          {{- if .RelPermalink -}}
+            <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
+          {{- else -}}
+            {{ .LinkTitle }}
+          {{- end -}}
+        </span>
+      {{- end }}
+    {{- end }}
+  {{- else if $authors_param }}
+    {{/* Fallback to raw authors param when taxonomy not resolved (e.g., ** markdown) */}}
+    {{- $n2 := len $authors_param }}
+    {{- if gt $n2 $max_display }}
+      {{- range $i, $a := first $trunc_display $authors_param }}
+        {{- if gt $i 0 }}, {{ end -}}
+        <span>{{ $a | markdownify | plainify }}</span>
+      {{- end -}}
+      <span>, et al.</span>
+    {{- else }}
+      {{- range $i, $a := $authors_param }}
+        {{- if gt $i 0 }}, {{ end -}}
+        <span>{{ $a | markdownify | plainify }}</span>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- else if $authors_param }}
+  {{/* No taxonomy, use param directly */}}
+  {{- $n2 := len $authors_param }}
+  {{- if gt $n2 $max_display }}
+    {{- range $i, $a := first $trunc_display $authors_param }}
+      {{- if gt $i 0 }}, {{ end -}}
+      <span>{{ $a | markdownify | plainify }}</span>
+    {{- end -}}
+    <span>, et al.</span>
+  {{- else }}
+    {{- range $i, $a := $authors_param }}
+      {{- if gt $i 0 }}, {{ end -}}
+      <span>{{ $a | markdownify | plainify }}</span>
+    {{- end }}
+  {{- end }}
+{{- end }}
