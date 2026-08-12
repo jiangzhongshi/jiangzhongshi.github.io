@@ -101,3 +101,8 @@ disableAliases = true  # Disable aliases when `redirects` is added to the `outpu
     path = "github.com/wowchemy/wowchemy-hugo-modules/wowchemy-cms"
   [[module.imports]]
     path = "github.com/wowchemy/wowchemy-hugo-modules/wowchemy"
+
+# Security whitelist required for Wowchemy on Hugo >=0.93
+[security]
+  [security.funcs]
+    getenv = ['^WC_', '^HUGO_', '^PATH$']
