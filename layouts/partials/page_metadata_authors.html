@@ -5,11 +5,6 @@
 {{- if in .Title "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}
 {{- if in (.Params.title | default "") "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}
 
-{{- $isMe := false }}
-{{- $checkMe := func -}}
-{{- /* helper inline: check if string is me */ -}}
-{{- end }}
-
 {{- if .Param $taxonomy }}
   {{- $terms := .GetTerms $taxonomy }}
   {{- $n := len $terms }}
