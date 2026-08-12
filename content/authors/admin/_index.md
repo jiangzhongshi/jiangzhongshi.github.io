@@ -28,12 +28,12 @@ interests:
 # Education to show in About widget
 education:
   courses:
-  - course: Ph.D. in Computer Science
-    institution: New York University
-    year: 2022
-  - course: BSc in Mathematics and Applied Mathematics
+  - course: Ph.D. in Computer Science — Dissertation: Synergistic Geometry Processing: from Robust Shape Modeling to Scalable Physical Simulation — Advisor: Prof. Daniele Panozzo
+    institution: New York University, Courant Institute
+    year: 2022 (Sep 2022, Honors: Adobe Research Fellowship 2018, Geometry Processing Dataset Award 2019)
+  - course: B.Sc. in Mathematics and Applied Mathematics — School of Gifted Young
     institution: University of Science and Technology of China
-    year: 2016
+    year: 2016 (Jun 2016)
 
 # Social/Academic Networking
 social:
