@@ -13,7 +13,7 @@ projects = []
 tags = ["digital humans","clothing","simulation"]
 url_pdf = "https://arxiv.org/abs/2603.27013"
 url_preprint = "https://arxiv.org/abs/2603.27013"
-url_code = ""
+url_code = "https://github.com/peterzs/physkin"
 math = false
 highlight = true
 +++

@@ -12,7 +12,7 @@ selected = true
 tags = ["avatar","reconstruction","CVPR"]
 url_pdf = "https://arxiv.org/abs/2503.19207"
 url_preprint = "https://arxiv.org/abs/2503.19207"
-url_code = ""
+url_code = "https://github.com/rongakowang/FRESA"
 math = false
 highlight = true
 +++
