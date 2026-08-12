@@ -60,11 +60,11 @@ email: "zhongshi@cims.nyu.edu"
 highlight_name: false
 ---
 
-I am a Senior Research Scientist at Meta within the Reality Labs division [source](https://theorg.com/org/meta/org-chart/zhongshi-jiang), working in Human AI on digital humans - facial reconstruction, shape and motion, clothing and hair - for next generation of communication [source](https://github.com/jiangzhongshi).
+I am a Staff Research Scientist at Meta Reality Labs. I work on digital humans for next-generation communication, with a focus on facial reconstruction, body shape and motion, and clothing and hair.
 
-I finished my Ph.D. degree in Computer Science at New York University in September 2022 [source](https://cs.nyu.edu/media/publications/Zhongshi_Jiang-compressed.pdf), advised by Prof. Daniele Panozzo, with research on robust discrete geometry processing tools for machine learning, digital fabrication and scientific computing [source](https://github.com/jiangzhongshi). 
+I received my Ph.D. in Computer Science from NYU Courant in 2022, advised by Prof. Daniele Panozzo. I build robust tools for geometry processing, simulation, and learning-based modeling, with contributions spanning mesh generation, bijective mapping, large-scale avatar systems, and garment simulation.
 
-Previously I was a Research Assistant at the Courant Institute of Mathematical Sciences, a Geometry Software Engineer intern at nTopology, and a Research Scientist Intern at Adobe [source](https://theorg.com/org/meta/org-chart/zhongshi-jiang). My PhD research develops robust tools to build the synergistic link between different geometry representations, with applications in mesh generation, robust simulation, scientific computing, and digital fabrication. My research has been recognized by [Adobe Research Fellowship 2018](https://research.adobe.com/fellowship/previous-fellowship-award-winners/), [Geometry Processing Dataset Award 2019](https://sgp2019.di.unimi.it/awards/SGP2019_dataset_award_scroll.pdf), and [Jacob T. Schwartz PhD Fellowship 2020](https://cims.nyu.edu/academics/student_recognition.html).
+My work has been recognized by Adobe Research Fellowship 2018, SGP Dataset Award 2019, and Jacob T. Schwartz Fellowship 2020.
 
 {{< icon name="envelope" pack="fas" >}} **Email**: zhongshi@cims.nyu.edu           
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "/files/Zhongshi_Jiang.pdf" "newtab" >}}Resume{{< /staticref >}}
