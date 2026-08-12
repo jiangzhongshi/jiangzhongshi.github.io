@@ -5,13 +5,13 @@ draft = false
 
 authors = ["Junxuan Li","Rawal Khirodkar","Chengan He","**Zhongshi Jiang**","Giljoo Nam","Lingchen Yang","Jihyun Lee","Egor Zakharov","Zhaoen Su","Rinat Abdrashitov","Yuan Dong","Julieta Martinez","Kai Li","Qingyang Tan","Takaaki Shiratori","Matthew Hu","Peihong Guo","Xuhua Huang","Ariyan Zarei","Marco Pesavento","Yichen Xu","He Wen","Teng Deng","Wyatt Borsos","Anjali Thakrar","Jean-Charles Bazin","Carsten Stoll","Ginés Hidalgo","James Booth","Lucy Wang","Xiaowen Ma","Yu Rong","Sairanjith Thalanki","Chen Cao","Christian Häne","Abhishek Kar","Sofien Bouaziz","Jason Saragih","Yaser Sheikh","Shunsuke Saito"]
 
-publication_types = ["3"]
+publication_types = ["1"]
 
-publication = "arXiv preprint arXiv:2604.02320"
-publication_short = "arXiv:2604.02320, 2026"
+publication = "CVPR 2026"
+publication_short = "CVPR 2026"
 
 abstract = "High-quality 3D avatar modeling faces a critical trade-off between fidelity and generalization. We present Large-Scale Codec Avatars (LCA), a high-fidelity, full-body 3D avatar model that generalizes to world-scale populations in a feedforward manner. Inspired by LLMs and vision foundation models, we present a pre/post-training paradigm: pretrain on 1M in-the-wild videos to learn broad priors over appearance and geometry, then post-train on high-quality curated data to enhance expressivity and fidelity. LCA generalizes across hair styles, clothing, and demographics while providing precise facial expressions and finger-level articulation control."
-summary = "Large-Scale Codec Avatars (LCA) — high-fidelity full-body 3D avatars that generalize via pretraining on 1M in-the-wild videos then post-training on curated studio data. Work done at Meta Reality Labs / Human AI."
+summary = "Large-Scale Codec Avatars (LCA) — high-fidelity full-body 3D avatars that generalize via pretraining on 1M in-the-wild videos then post-training on curated studio data. Meta Reality Labs / Human AI. CVPR 2026."
 
 image_preview = ""
 selected = true
