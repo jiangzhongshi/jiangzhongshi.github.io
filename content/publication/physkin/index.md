@@ -11,6 +11,7 @@ summary = "PhySkin — physics-based bone-driven neural garment simulation. Meta
 selected = true
 projects = []
 tags = ["digital humans","clothing","simulation"]
+url_project = "https://github.com/peterzs/physkin"
 url_pdf = "https://arxiv.org/abs/2603.27013"
 url_preprint = "https://arxiv.org/abs/2603.27013"
 url_code = "https://github.com/peterzs/physkin"
