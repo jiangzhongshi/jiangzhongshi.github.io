@@ -60,9 +60,11 @@ email: "zhongshi@cims.nyu.edu"
 highlight_name: false
 ---
 
-I am a Staff Research Scientist at Meta Reality Labs, where I work on digital humans for next-generation communication, focusing on facial reconstruction, body shape and motion, and clothing and hair.
+I am a Staff Research Scientist at Meta Reality Labs. I work on digital humans for next-generation communication, with a focus on facial reconstruction, body shape and motion, and clothing and hair.
 
-I received my Ph.D. in Computer Science from NYU Courant in 2022 advised by Prof. Daniele Panozzo, and I build robust tools for geometry processing, simulation, and learning-based modeling, with contributions spanning mesh generation and bijective mapping to large-scale avatar systems and garment simulation. My work has been recognized with the Adobe Research Fellowship, the SGP Dataset Award, and the Jacob T. Schwartz Fellowship.
+I received my Ph.D. in Computer Science from NYU Courant in 2022, advised by Prof. Daniele Panozzo. I build robust tools for geometry processing, simulation, and learning-based modeling, with contributions spanning mesh generation, bijective mapping, large-scale avatar systems, and garment simulation.
+
+My work has been recognized by Adobe Research Fellowship 2018, SGP Dataset Award 2019, and Jacob T. Schwartz Fellowship 2020.
 
 {{< icon name="envelope" pack="fas" >}} **Email**: zhongshi@cims.nyu.edu           
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "/files/Zhongshi_Jiang.pdf" "newtab" >}}Resume{{< /staticref >}}
