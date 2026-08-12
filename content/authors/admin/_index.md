@@ -6,7 +6,7 @@ title: Zhongshi Jiang
 superuser: true
 
 # Role/position/tagline
-role: Senior Research Scientist, Reality Labs at Meta
+role: Staff Research Scientist, Reality Labs at Meta
 
 # Organizations/Affiliations to show in About widget
 organizations:
