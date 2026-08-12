@@ -1,69 +1,52 @@
-{{/* Display author list - truncated when too many authors */}}
+{{/* Display author list. Only truncate for LCA (too many authors), keep others full */}}
 {{- $taxonomy := "authors" }}
-{{- $authors_param := .Params.authors }}
-{{- $max_display := 6 }}
-{{- $trunc_display := 3 }}
+{{- $isLCA := false }}
+{{- if .File }}
+  {{- if in .File.Path "large-scale-codec-avatars" }}{{- $isLCA = true }}{{- end }}
+{{- end }}
+{{- if in .Title "Large-scale Codec Avatars" }}{{- $isLCA = true }}{{- end }}
+{{- if in (.Params.title | default "") "Large-scale Codec Avatars" }}{{- $isLCA = true }}{{- end }}
 
-{{/* If using taxonomy terms (preferred Wowchemy way) */}}
 {{- if .Param $taxonomy }}
   {{- $terms := .GetTerms $taxonomy }}
   {{- $n := len $terms }}
-  {{- if gt $n 0 }}
-    {{- if gt $n $max_display }}
-      {{- range $i, $author := first $trunc_display $terms }}
-        {{- $highlight_name := .Page.Params.highlight_name | default false -}}
-        {{- if gt $i 0 }}, {{ end -}}
-        <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
-          {{- if .RelPermalink -}}
-            <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
-          {{- else -}}
-            {{ .LinkTitle }}
-          {{- end -}}
-        </span>
+  {{- if and $isLCA (gt $n 6) }}
+    {{- /* LCA special: show first 3 + et al. */}}
+    {{- range $i, $author := first 3 $terms }}
+      {{- $highlight_name := .Page.Params.highlight_name | default false -}}
+      {{- if gt $i 0 }}, {{ end -}}
+      <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
+        {{- if .RelPermalink -}}<a href="{{.RelPermalink}}">{{.LinkTitle}}</a>{{- else -}}{{ .LinkTitle }}{{- end -}}
+      </span>
+    {{- end -}}
+    <span>, et al.</span>
+  {{- else if gt $n 0 }}
+    {{- range $index, $value := $terms }}
+      {{- $highlight_name := .Page.Params.highlight_name | default false -}}
+      {{- if gt $index 0 }}, {{ end -}}
+      <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
+        {{- if .RelPermalink -}}<a href="{{.RelPermalink}}">{{.LinkTitle}}</a>{{- else -}}{{ .LinkTitle }}{{- end -}}
+      </span>
+      {{- if isset $.Params "author_notes" -}}
+        {{- with (index $.Params.author_notes $index) -}}<i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{.}}"></i>{{- end -}}
       {{- end -}}
-      <span>, et al.</span>
-    {{- else }}
-      {{- range $index, $value := $terms }}
-        {{- $highlight_name := .Page.Params.highlight_name | default false -}}
-        {{- if gt $index 0 }}, {{ end -}}
-        <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
-          {{- if .RelPermalink -}}
-            <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
-          {{- else -}}
-            {{ .LinkTitle }}
-          {{- end -}}
-        </span>
-      {{- end }}
-    {{- end }}
-  {{- else if $authors_param }}
-    {{/* Fallback to raw authors param when taxonomy not resolved (e.g., ** markdown) */}}
-    {{- $n2 := len $authors_param }}
-    {{- if gt $n2 $max_display }}
-      {{- range $i, $a := first $trunc_display $authors_param }}
-        {{- if gt $i 0 }}, {{ end -}}
-        <span>{{ $a | markdownify | plainify }}</span>
-      {{- end -}}
-      <span>, et al.</span>
-    {{- else }}
-      {{- range $i, $a := $authors_param }}
-        {{- if gt $i 0 }}, {{ end -}}
-        <span>{{ $a | markdownify | plainify }}</span>
+    {{- end -}}
+  {{- else }}
+    {{/* fallback to raw authors param when terms empty */}}
+    {{- with .Params.authors }}
+      {{- $n2 := len . }}
+      {{- if and $isLCA (gt $n2 6) }}
+        {{- range $i, $a := first 3 . }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}<span>, et al.</span>
+      {{- else }}
+        {{- range $i, $a := . }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}
       {{- end }}
     {{- end }}
   {{- end }}
-{{- else if $authors_param }}
-  {{/* No taxonomy, use param directly */}}
-  {{- $n2 := len $authors_param }}
-  {{- if gt $n2 $max_display }}
-    {{- range $i, $a := first $trunc_display $authors_param }}
-      {{- if gt $i 0 }}, {{ end -}}
-      <span>{{ $a | markdownify | plainify }}</span>
-    {{- end -}}
-    <span>, et al.</span>
+{{- else if .Params.authors }}
+  {{- $n2 := len .Params.authors }}
+  {{- if and $isLCA (gt $n2 6) }}
+    {{- range $i, $a := first 3 .Params.authors }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}<span>, et al.</span>
   {{- else }}
-    {{- range $i, $a := $authors_param }}
-      {{- if gt $i 0 }}, {{ end -}}
-      <span>{{ $a | markdownify | plainify }}</span>
-    {{- end }}
+    {{- range $i, $a := .Params.authors }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}
   {{- end }}
 {{- end }}
