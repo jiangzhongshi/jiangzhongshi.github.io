@@ -1,49 +1,87 @@
-{{/* Display author list. Only truncate for LCA, keep others full, underscore (underline) self */}}
+{{/* Author list with special handling: LCA up to me + et al., MHR first XX + et al. + me, underline self */}}
 {{- $taxonomy := "authors" }}
-{{- $isLCA := false }}
-{{- if .File }}{{ if in .File.Path "large-scale-codec-avatars" }}{{ $isLCA = true }}{{ end }}{{ end }}
-{{- if in .Title "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}
-{{- if in (.Params.title | default "") "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}
+{{- $isLCA := false }}{{ if .File }}{{ if in .File.Path "large-scale-codec-avatars" }}{{ $isLCA = true }}{{ end }}{{ end }}{{ if in .Title "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}{{ if in (.Params.title | default "") "Large-scale Codec Avatars" }}{{ $isLCA = true }}{{ end }}
+{{- $isMHR := false }}{{ if .File }}{{ if in .File.Path "/mhr" }}{{ $isMHR = true }}{{ end }}{{ end }}{{ if in .Title "Momentum Human Rig" }}{{ $isMHR = true }}{{ end }}{{ if in (.Params.title | default "") "Momentum Human Rig" }}{{ $isMHR = true }}{{ end }}
 
 {{- if .Param $taxonomy }}
   {{- $terms := .GetTerms $taxonomy }}
   {{- $n := len $terms }}
-  {{- if and $isLCA (gt $n 6) }}
-    {{- range $i, $author := first 3 $terms }}
-      {{- $highlight_name := .Page.Params.highlight_name | default false }}
-      {{- $name := .LinkTitle }}
-      {{- $isMeTerm := in $name "Zhongshi" }}
-      {{- if gt $i 0 }}, {{ end }}
-      <span {{ if $highlight_name }}class="author-highlighted"{{ end }} {{ if $isMeTerm }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>
-        {{- if .RelPermalink }}<a href="{{.RelPermalink}}" {{ if $isMeTerm }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>{{.LinkTitle}}</a>{{- else }}{{ if $isMeTerm }}<u>{{.LinkTitle}}</u>{{ else }}{{.LinkTitle}}{{ end }}{{- end }}
-      </span>
-    {{- end }}<span>, et al.</span>
+
+  {{- if $isLCA }}
+    {{- /* Find Zhongshi position */}}
+    {{- $mePos := -1 }}
+    {{- range $i, $v := $terms }}{{ if in .LinkTitle "Zhongshi" }}{{ $mePos = $i }}{{ end }}{{ end }}
+    {{- if ge $mePos 0 }}
+      {{- range $i, $author := $terms }}
+        {{- if gt $i $mePos }}{{ break }}{{ end }}
+        {{- $hl := .Page.Params.highlight_name | default false }}
+        {{- $name := .LinkTitle }}
+        {{- $isMe := in $name "Zhongshi" }}
+        {{- if gt $i 0 }}, {{ end }}
+        <span {{ if $hl }}class="author-highlighted"{{ end }} {{ if $isMe }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>
+          {{- if .RelPermalink }}<a href="{{.RelPermalink}}" {{ if $isMe }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>{{ $name }}</a>{{- else }}{{ if $isMe }}<u>{{ $name }}</u>{{ else }}{{ $name }}{{ end }}{{- end }}
+        </span>
+      {{- end }}<span>, et al.</span>
+    {{- else }}
+      {{- /* fallback: first until me not found -> first 4 then et al */}}
+      {{- range $i, $author := first 4 $terms }}{{ if gt $i 0 }}, {{ end }}<span>{{ .LinkTitle }}</span>{{ end }}<span>, et al.</span>
+    {{- end }}
+
+  {{- else if $isMHR }}
+    {{- /* MHR: first 2 + et al. + me (last) */}}
+    {{- if gt $n 3 }}
+      {{- range $i, $author := first 2 $terms }}
+        {{- if gt $i 0 }}, {{ end }}<span><a href="{{.RelPermalink}}">{{ .LinkTitle }}</a></span>
+      {{- end }}<span>, et al., </span>
+      {{- $last := index $terms (sub $n 1) }}
+      <span style="text-decoration: underline; text-underline-offset: 3px;"><a href="{{ $last.RelPermalink }}" style="text-decoration: underline; text-underline-offset: 3px;">{{ $last.LinkTitle }}</a></span>
+    {{- else }}
+      {{- range $i, $author := $terms }}{{ if gt $i 0 }}, {{ end }}<span>{{ .LinkTitle }}</span>{{ end }}
+    {{- end }}
+
   {{- else if gt $n 0 }}
     {{- range $index, $value := $terms }}
-      {{- $highlight_name := .Page.Params.highlight_name | default false }}
+      {{- $hl := .Page.Params.highlight_name | default false }}
       {{- $name := .LinkTitle }}
-      {{- $isMeTerm := in $name "Zhongshi" }}
+      {{- $isMe := in $name "Zhongshi" }}
       {{- if gt $index 0 }}, {{ end }}
-      <span {{ if $highlight_name }}class="author-highlighted"{{ end }} {{ if $isMeTerm }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>
-        {{- if .RelPermalink }}<a href="{{.RelPermalink}}" {{ if $isMeTerm }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>{{ $name }}</a>{{- else }}{{ if $isMeTerm }}<u>{{ $name }}</u>{{ else }}{{ $name }}{{ end }}{{- end }}
+      <span {{ if $hl }}class="author-highlighted"{{ end }} {{ if $isMe }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>
+        {{- if .RelPermalink }}<a href="{{.RelPermalink}}" {{ if $isMe }}style="text-decoration: underline; text-underline-offset: 3px;"{{ end }}>{{ $name }}</a>{{- else }}{{ if $isMe }}<u>{{ $name }}</u>{{ else }}{{ $name }}{{ end }}{{- end }}
       </span>
       {{- if isset $.Params "author_notes" }}{{ with (index $.Params.author_notes $index) }}<i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{.}}"></i>{{ end }}{{ end }}
     {{- end }}
   {{- else }}
     {{- with .Params.authors }}
-      {{- $n2 := len . }}
-      {{- if and $isLCA (gt $n2 6) }}
-        {{- range $i, $a := first 3 . }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}<span>, et al.</span>
-      {{- else }}
-        {{- range $i, $a := . }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}
-      {{- end }}
+      {{- range $i, $a := . }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}
     {{- end }}
   {{- end }}
+
 {{- else if .Params.authors }}
-  {{- $n2 := len .Params.authors }}
-  {{- if and $isLCA (gt $n2 6) }}
-    {{- range $i, $a := first 3 .Params.authors }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}<span>, et al.</span>
+  {{- $raw := .Params.authors }}
+  {{- $n2 := len $raw }}
+
+  {{- if $isLCA }}
+    {{- /* raw: find me position */}}
+    {{- $mePos2 := -1 }}
+    {{- range $i, $a := $raw }}{{ if in $a "Zhongshi" }}{{ $mePos2 = $i }}{{ end }}{{ end }}
+    {{- if ge $mePos2 0 }}
+      {{- range $i, $a := $raw }}{{ if gt $i $mePos2 }}{{ break }}{{ end }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}<span>, et al.</span>
+    {{- else }}
+      {{- range $i, $a := first 4 $raw }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}<span>, et al.</span>
+    {{- end }}
+
+  {{- else if $isMHR }}
+    {{- if gt $n2 3 }}
+      {{- range $i, $a := first 2 $raw }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}<span>, et al., </span>
+      {{- $lastIdx := sub $n2 1 }}
+      {{- $lastA := index $raw $lastIdx }}
+      <span style="text-decoration:underline; text-underline-offset:3px;"><u>{{ $lastA | markdownify | plainify }}</u></span>
+    {{- else }}
+      {{- range $i, $a := $raw }}{{ if gt $i 0 }}, {{ end }}<span>{{ $a | markdownify | plainify }}</span>{{ end }}
+    {{- end }}
+
   {{- else }}
-    {{- range $i, $a := .Params.authors }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}
+    {{- range $i, $a := $raw }}{{ $isMeA := in $a "Zhongshi" }}{{ if gt $i 0 }}, {{ end }}<span {{ if $isMeA }}style="text-decoration:underline; text-underline-offset:3px;"{{ end }}>{{ if $isMeA }}<u>{{ $a | markdownify | plainify }}</u>{{ else }}{{ $a | markdownify | plainify }}{{ end }}</span>{{ end }}
   {{- end }}
+
 {{- end }}
