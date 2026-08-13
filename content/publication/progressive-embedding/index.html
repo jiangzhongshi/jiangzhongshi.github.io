@@ -183,7 +183,7 @@ nerfies = true
       <div class="column is-10 has-text-centered">
         <figure>
         <img src="method.jpg" alt="Method – collapse then grow valid – Step 1 collapse" style="max-width:100%; width:100%; height:auto; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); margin-top:1rem; object-fit:contain;"/>
-        <figcaption class="is-size-7 has-text-grey has-text-centered" style="margin-top:0.4rem;"><strong>Method Step 1 – Collapse onto valid coarse.</strong> Invalid Tutte (red flips) → priority queue by area distortion → link-condition edge collapses → coarse valid mesh. 1800×1125 → Nerfies hero width 100%, centered, rounded corners.</figcaption>
+        <figcaption class="is-size-7 has-text-grey has-text-centered" style="margin-top:0.4rem;"><strong>Method Step 1 – Collapse onto valid coarse.</strong> Invalid Tutte (red flips) → priority queue by area distortion → link-condition edge collapses → coarse valid mesh. 1800×1125 → hero width 100%, centered, rounded corners.</figcaption>
         </figure>
       </div>
     </div>
@@ -204,7 +204,7 @@ $$\tilde{A}_t = A_t + \epsilon_{\text{round}}\cdot \kappa(L), \quad \kappa(L)>10
           <p>When $\tilde{A}_t$ flips sign, the whole algorithm tangles — a single flipped triangle invalidates downstream MiQ / parameterizations.</p>
           <figure>
           <img src="method_overview.png" alt="Method overview – feasible polygon insertion – Step 2 feasible" style="max-width:100%; width:100%; height:auto; margin:1rem 0; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.10); object-fit:contain;"/>
-          <figcaption class="is-size-7 has-text-grey has-text-centered"><strong>Method Step 2 – Feasible Polygon.</strong> For uninserted vertex, convex feasible polygon = intersection half-planes (green). Chebyshev center insertion maintains $area>10^{-8}$. 2400×800 ultra-wide scaled 100% width Nerfies style, no stretch, rounded.</figcaption>
+          <figcaption class="is-size-7 has-text-grey has-text-centered"><strong>Method Step 2 – Feasible Polygon.</strong> For uninserted vertex, convex feasible polygon = intersection half-planes (green). Chebyshev center insertion maintains $area>10^{-8}$. 2400×800 ultra-wide scaled 100% width , no stretch, rounded.</figcaption>
           </figure>
           <p><b>Core idea:</b> If initial embedding is invalid, simplify until valid, then grow. Validity is not repaired post-hoc; it is a <em>hard invariant</em> through every insertion.</p>
         </div>
@@ -362,11 +362,11 @@ make -j  # untangle_bin, genus_zero_tutte_bin, random_init_bin, matchmaker_bin
   year    = {2019},
   doi     = {10.1145/3306346.3323012}
 }</code></pre>
-        <p class="is-size-7 has-text-grey">Page built from NYU GCL &amp; paper sources, repo assets <code>teaser.jpg 333KB, method.jpg 231KB, method_overview.png 87KB, matchmaker.png 68KB, validity.png 58KB, results_comparison.png 55KB, results1/2 630/491KB</code> – all valid PNG/JPG &lt;1.5MB. Nerfies.template hero + Bulma, reusing deep equations &amp; impl notes from prior rich page.</p>
+        <p class="is-size-7 has-text-grey">Page built from NYU GCL &amp; paper sources, repo assets <code>teaser.jpg 333KB, method.jpg 231KB, method_overview.png 87KB, matchmaker.png 68KB, validity.png 58KB, results_comparison.png 55KB, results1/2 630/491KB</code> – all valid PNG/JPG &lt;1.5MB. project template hero + Bulma, reusing deep equations &amp; impl notes from prior rich page.</p>
       </div>
     </div>
 
   </div>
 </section>
 
-
+<div class="container is-max-desktop" style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid #eee;"><p class="is-size-7 has-text-grey">Website template based on the <a href="https://nerfies.github.io/">Nerfies project page</a>. If you reuse their source code, please credit them appropriately.</p></div>
