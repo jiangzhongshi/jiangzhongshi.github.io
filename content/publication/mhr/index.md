@@ -10,6 +10,7 @@ abstract = "Momentum Human Rig: large-scale human rigging system."
 summary = "MHR — Momentum Human Rig, collaborative Meta effort on human rigging."
 selected = false
 tags = ["human rig","avatar"]
+external_link = "https://github.com/facebookresearch/MHR"
 url_project = "https://github.com/facebookresearch/MHR"
 url_code = "https://github.com/facebookresearch/MHR"
 url_pdf = "https://arxiv.org/abs/2511.15586"

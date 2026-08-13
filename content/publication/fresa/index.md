@@ -10,6 +10,7 @@ abstract = "Feedforward reconstruction of personalized skinned avatars from few 
 summary = "FRESA — feedforward personalized skinned avatar reconstruction from few images. CVPR 2025."
 selected = true
 tags = ["avatar","reconstruction","CVPR"]
+external_link = "https://rongakowang.github.io/fresa/fresa.html"
 url_project = "https://rongakowang.github.io/fresa/fresa.html"
 url_pdf = "https://arxiv.org/abs/2503.19207"
 url_code = "https://github.com/rongakowang/FRESA"

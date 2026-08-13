@@ -11,6 +11,7 @@ summary = "RCAD — retrieval from counterfactually augmented data to test video
 selected = false
 tags = ["video-text","foundation models"]
 url_pdf = "https://arxiv.org/abs/2407.13094"
+external_link = "https://feint6k.github.io"
 url_project = "https://feint6k.github.io"
 url_code = "https://github.com/jbluv/feint6k"
 url_dataset = "https://feint6k.github.io"

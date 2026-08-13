@@ -1,5 +1,12 @@
 {{- define "main" -}}
-{{ if .Params.nerfies }}
+{{ if .Params.external_link }}
+  <div class="universal-wrapper" style="padding-top:3rem;">
+    <h1>{{ .Title }}</h1>
+    <p>Redirecting to external project page... <a href="{{ .Params.external_link }}">{{ .Params.external_link }}</a></p>
+    <meta http-equiv="refresh" content="0; url={{ .Params.external_link }}">
+    <script>window.location.href="{{ .Params.external_link }}";</script>
+  </div>
+{{ else if .Params.nerfies }}
 <script>
   window.MathJax = {
     tex: {
