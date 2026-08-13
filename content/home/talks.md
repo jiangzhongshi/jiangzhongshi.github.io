@@ -9,7 +9,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 70
 
-title: 'Teaching'
+title: 'Lectures & Teaching'
 subtitle:
 
 content:
@@ -40,17 +40,23 @@ design:
   view: 2
 ---
 
-## Geometric Computing in Python
-*Lecturer*:
-[ChinaGraph](https://chinagraph2020.xmu.edu.cn/courses.html#course1), 2020, [📺 YouTube](https://youtu.be/31FH56iPC9A)
+## Lectures
 
-*Lecturer*:
-[Symposium on Geometry Processing](https://sgp2021.github.io/program/), 2021, [📺 YouTube](https://youtube.com/playlist?list=PL6Bl-NTBamMIf9jEmPNYgDyUs0zDTdZe_)
+* **Geometric Computing in Python** — *Lecturer*, [ChinaGraph 2020](https://chinagraph2020.xmu.edu.cn/courses.html#course1) — [📺 YouTube](https://youtu.be/31FH56iPC9A)
 
-## Computer Graphics
-*Teaching Assistant*:
-[CSCI-GA 2270-001 - Computer Graphics](https://github.com/danielepanozzo/cg), 2017
+* **Geometric Computing in Python** — *Lecturer*, [Symposium on Geometry Processing 2021](https://sgp2021.github.io/program/) — [📺 YouTube Playlist](https://youtube.com/playlist?list=PL6Bl-NTBamMIf9jEmPNYgDyUs0zDTdZe_)
 
-## Geometric Modeling
-*Teaching Assistant*:
-[CSCI-GA.3033-018 - Geometric Modeling](https://github.com/danielepanozzo/gp), 2018, 2019, 2021
+## External Events & Invited Talks
+
+* Invited lecture series on robust geometry processing and neural representations for digital humans — notes and recordings on YouTube.
+
+* Industry panels on photorealistic avatars and physics-aware garment simulation (Meta Reality Labs) — 2023–2026.
+
+## YouTube Channels
+
+* **Personal / Lectures** — [youtube.com/@zhongshijiang](https://www.youtube.com/channel/UCmngYxW54HS82dDZwHBPFqQ) — geometry processing, robust optimization, and recent SIGGRAPH / CVPR paper walkthroughs
+
+* Topics: Progressive Embedding, Bijective Maps, Scaffold Maps, Quadfoam microstructures, Surface Networks Dirac operator, and digital human avatar series
+
+* More recordings: SGP 2021 playlist above, ChinaGraph 2020 full lecture (2h)
+
