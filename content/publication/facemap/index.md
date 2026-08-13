@@ -169,8 +169,8 @@ highlight = true
           <div class="columns is-centered">
             <div class="column is-10">
               <figure class="image">
-                <img src="teaser.png" alt="Stimuli 10 bases x distortion levels" style="border-radius:10px;" loading="lazy"/>
-                <figcaption class="has-text-centered is-size-7">Suppl Fig.14 – Stimuli: 10 bases (rows) × distortion levels (cols), FaceMap left vs uniform right vertical split. 10×5×6×3 views decomposing to ~48K patch pairs.</figcaption>
+                <img src="teaser_portrait.png" alt="Stimuli 10 bases x distortion levels portrait backup" style="border-radius:10px;" loading="lazy"/>
+                <figcaption class="has-text-centered is-size-7">Suppl Fig.14 – Stimuli (portrait backup 814×900): 10 bases (rows) × distortion levels (cols), FaceMap left vs uniform right vertical split. Wide hero uses teaser_wide.png 1400×700.</figcaption>
               </figure>
             </div>
           </div>
