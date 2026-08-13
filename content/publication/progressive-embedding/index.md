@@ -26,7 +26,7 @@ abstract = "Tutte embedding is one of the most common building blocks in geometr
 summary = "A numerically stable, and provably correct replacement for Tutte's embedding. Avoid exponential area change and serve as a robust building block for locally injective maps with hard constraints, in quad meshing."
 
 # Featured image thumbnail (optional)
-image_preview = "PE-2019.png"
+image_preview = "featured.jpg"
 
 # Is this a selected publication? (true/false)
 selected = true
@@ -57,7 +57,7 @@ url_source = ""
 # url_custom = [{name = "Custom Link", url = "http://example.org"}]
 
 # Does this page contain LaTeX math? (true/false)
-math = false
+math = true
 
 # Does this page require source code highlighting? (true/false)
 highlight = true
