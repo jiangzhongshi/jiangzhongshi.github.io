@@ -56,244 +56,245 @@ math = true
 highlight = true
 +++
 
-{{< figure src="featured.jpg" caption="**Bichon** – dense linear surface (left) → coarse quartic tet mesh (right): valid, bijective, feature-preserving, distance-bounded." >}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+.publication-title{font-family:'Google Sans',sans-serif;font-weight:700;}
+.author-block{display:inline-block;margin-right:8px;}
+.publication-authors a{color:#3273dc;}
+.publication-links .link-block{display:inline-block;margin:6px;}
+.publication-video iframe{width:100%;height:420px;}
+.content img{border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.hero.teaser img{max-height:480px;width:auto;margin:0 auto;display:block;}
+.interp-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.interp-row img{max-width:48%;}
+.bibtex{background:#f5f5f5;padding:16px;border-radius:8px;font-size:0.85em;overflow-x:auto;}
+</style>
 
-## Abstract
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
 
-Piecewise-linear meshes dominate geometry processing, but isoparametric finite element simulation demands *curved*, high-order elements to capture curved boundaries without excessive refinement. **Bichon** is a robust, automatic pipeline that converts a dense linear triangle mesh with annotated features into a **coarse, curved, high-order tetrahedral mesh**. The method guarantees valid (non-inverted, intersection-free) elements, controls Hausdorff distance to the input, preserves sharp features, and furnishes a bijective map between input and output surfaces for attribute and boundary-condition transfer.
+          <h1 class="title is-1 publication-title">Bijective and Coarse High-Order Tetrahedral Meshes</h1>
 
-> **Input**: manifold, watertight triangle mesh, no self-intersection (+ optional feature edges/corners, constraint points)  
-> **Output**: Quartic (p=4) Bézier tet mesh that is coarse, valid, collision-free, $\varepsilon$-close, feature-conforming, and equipped with $f:\mathcal{M}_{\text{in}} \leftrightarrow \partial\mathcal{M}_{\text{out}}$ bijective.
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://jiangzhongshi.github.io/"><u><strong>Zhongshi Jiang</strong></u></a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.ziyizhang.org/">Ziyi Zhang</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://yixinhu.github.io/">Yixin Hu</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.teseo-schneider.com/">Teseo Schneider</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a><sup>1</sup></span>
+          </div>
 
-## 1. Why Coarse High-Order?
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>New York University, Courant Institute</span>
+          </div>
 
-### h- vs p-refinement
-Classical FEM improves accuracy by *h-refinement* (more linear tets). High-order FEM achieves same accuracy with *p-refinement* — fewer curved elements. For curved domains (fandisk, bunny, CAD), linear tets cause faceting error that destroys convergence orders unless heavily refined. Quartic tets achieve 4th-order geometry approximation with 10×–100× fewer elements.
+          <div class="is-size-6 publication-authors" style="margin-top:6px;">
+            <em>SIGGRAPH 2021 / ACM Transactions on Graphics 2021</em>
+          </div>
 
-### The gap
-- **Gmsh, CGAL** generate fine linear meshes but not coarse curved guarantee.
-- **Quartet, DistMesh** generate high-order but no validity/coarseness/feature guarantees.
-- **Curved meshing via elasticity analogy** (Abgrall et al.) deforms fine meshes but often inverts.
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://cims.nyu.edu/gcl/papers/2021-Bichon.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2103.12096" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://youtu.be/yfztQw78gnE" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/jiangzhongshi/bichon" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://jiangzhongshi.github.io/bichon/" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-globe"></i></span><span>Project</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1Gw3vza0GkY0pMf4kLcrOzQeCIlbEp4Cs/view?usp=sharing" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-images"></i></span><span>Data</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://doi.org/10.1145/3450626.3459840" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-link"></i></span><span>DOI</span>
+                </a>
+              </span>
+            </div>
+          </div>
 
-Bichon closes this gap: fully automatic, feature-aware, inversion-free, error-bounded.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-{{< figure src="teaser.png" caption="Figure 1 – Pipeline: (a) dense linear input with feature edges (green), (b) coarse shell, (c) curved shell filled with quartic Bézier tets, (d) optimization, (e) bijective displacement transfer. Courtesy ACM TOG 2021." >}}
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="featured.jpg" alt="Bichon teaser: dense linear to coarse quartic tet" style="max-width:960px;">
+      <h2 class="subtitle has-text-centered" style="margin-top:12px;">
+        <b>Bichon</b> converts dense linear surfaces into <em>coarse, curved, valid</em> quartic tetrahedral meshes that preserve features, bound Hausdorff error, and stay bijective.
+      </h2>
+    </div>
+  </div>
+</section>
 
-## 2. Challenges
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Piecewise-linear meshes dominate geometry processing, but isoparametric finite element simulation demands <em>curved</em>, high-order elements to capture curved boundaries without excessive refinement. <strong>Bichon</strong> is a robust, automatic pipeline that converts a dense linear triangle mesh with annotated features into a <strong>coarse, curved, high-order tetrahedral mesh</strong>. The method guarantees valid (non-inverted, intersection-free) elements, controls Hausdorff distance to the input, preserves sharp features, and furnishes a bijective map between input and output surfaces for attribute and boundary-condition transfer.
+          </p>
+          <p>
+            <strong>Input</strong>: manifold, watertight triangle mesh, no self-intersection (+ optional feature edges/corners, constraint points).<br>
+            <strong>Output</strong>: Quartic (p=4) Bézier tet mesh that is coarse, valid, collision-free, ε-close, feature-conforming, and equipped with f: M<sub>in</sub> ↔ ∂M<sub>out</sub> bijective.
+          </p>
+        </div>
+      </div>
+    </div>
 
-1. **Validity**: High-order element $\mathcal{T}$ with Lagrange nodes $\mathbf{c}_{ijkl}$ is valid iff $\det J_{\mathbf{x}}(\boldsymbol{\xi}) > 0 \;\forall \boldsymbol{\xi}\in \hat{T}$. Sampling alone misses interior zeros.
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/yfztQw78gnE?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-2. **Bijectivity & Distance**: Need $\partial\mathcal{M}_{\text{out}}$ in $\varepsilon$-tube of $\mathcal{M}_{\text{in}}$ and globally injective.
+<section class="section">
+  <div class="container is-max-desktop">
 
-3. **Feature preservation**: Sharp edges/corners must stay exactly on input features after curving.
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Why Coarse High-Order?</h2>
+        <div class="content has-text-justified">
+          <p><b>h- vs p-refinement:</b> Classical FEM improves accuracy by h-refinement (more linear tets). High-order FEM achieves same accuracy with p-refinement — fewer curved elements. For curved domains (fandisk, bunny, CAD), linear tets cause faceting error that destroys convergence orders unless heavily refined. Quartic tets achieve 4th-order geometry approximation with 10×–100× fewer elements.</p>
+          <p>The gap: <b>Gmsh, CGAL</b> generate fine linear meshes but not coarse curved guarantee; <b>Quartet, DistMesh</b> generate high-order but no validity/coarseness/feature guarantees; curved meshing via elasticity analogy deforms fine meshes but often inverts. Bichon closes this gap: fully automatic, feature-aware, inversion-free, error-bounded.</p>
+        </div>
+        <img src="teaser.png" alt="Pipeline Fig 1" style="max-width:100%;">
+        <p class="has-text-centered is-size-7" style="margin-top:6px;"><b>Figure 1</b> – Pipeline: (a) dense linear input with feature edges (green), (b) coarse shell, (c) curved shell filled with quartic Bézier tets, (d) optimization, (e) bijective displacement transfer. ACM TOG 2021.</p>
+      </div>
+    </div>
 
-4. **Coarseness vs Fidelity**: Target edge length $l_{\text{target}}$ is only heuristic upper bound; true geometric error matters.
-
-5. **Attribute transfer**: FEM boundary conditions, textures, displacement fields must move losslessly from dense to coarse.
-
-## 3. Method – Deep Dive
-
-### 3.1 Overview Algorithm
-```
-Input: M = (V,F), features G = (E_f, V_c), epsilon_d, p=4, l_target
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content has-text-justified">
+        <pre style="background:#fafafa;padding:12px;border-radius:6px;">Input: M=(V,F), features G=(E_f,V_c), epsilon_d, p=4, l_target
 1. Build bijective shell S around M using progressive envelope inflation (TetWild-style) + feature graph projection
 2. Coarsen S to target length while preserving topology & intersection-free
 3. Extract coarse linear surface Ms = shell outer boundary
 4. Fill domain bounded by Ms with linear tets using fTetWild (union of shell interior)
-5. Elevate linear tets to Bézier degree p+1 = 4 (volume uses recursive tuple_gen ordering)
+5. Elevate linear tets to Bézier degree p+1=4 (volume uses recursive tuple_gen ordering)
 6. Optimize curved control points:
    min  E_geom (Hausdorff) + λ E_distortion (AMIPS)
    s.t. det J > δ >0, no interpenetration, feature constraints
 7. Build bijective correspondence f: M → ∂M_out via barycentric + shell parameter
-Return: (lagr, cells, complete_cp, mV, mbase, mtop, mF)
-```
+Return: (lagr, cells, complete_cp, mV, mbase, mtop, mF)</pre>
 
-{{< figure src="method.png" caption="Figure 2 – Left: dense linear vs right: coarse curved quartic tet wireframe. Notice boundary curvature captured with ~1/30th faces. Hausdorff error shown as heatmap." >}}
+          <h4>Bézier Tet Formalism</h4>
+          <p>Degree p tetrahedron with barycentric λ=(α,β,γ,δ), Σλᵢ=1:</p>
+          <p>$$ \mathbf{x}(\lambda)=\sum_{i+j+k+l=p} \binom{p}{i,j,k,l} \alpha^i\beta^j\gamma^k\delta^l \; \mathbf{c}_{ijkl} $$</p>
+          <p>Jacobian J(λ)=[∂x/∂α,∂x/∂β,∂x/∂γ]∈ℝ³ˣ³. Validity requires positivity on control lattice sufficient condition: Bernstein coefficients of det J >0. We use:</p>
+          <p>$$ \det J(\lambda)=\sum_{|I|=4p-3} b_I B_I^p(\lambda) $$</p>
+          <p>If min_I b_I >0 ⇒ element valid. We optimize to enforce b_I ≥ ε.</p>
 
-### 3.2 Bézier Tetrahedron Formalism
+          <h4>Shell & Feature</h4>
+          <p>Shell S is offset surfaces S<sup>±ε</sup> around input using signed distance d(x). We maintain ||x_shell - x_proj||∞ ≤ ε_d, preserve feature lines by snapping to feature graph G, support constraint points P with barycentric (P_fid,P_bc) allowing distance bound where user wants. Topology check via progressive envelope expansion with exact predicates ensures shell never self-intersects.</p>
+          <p>Dihedral heuristic --feature-dihedral_threshold auto-tags features if H5 not supplied. Corners junction of ≥3 feature edges auto-inferred. Features frozen during optimization.</p>
 
-Degree $p$ tetrahedron with barycentric $\lambda=(\alpha,\beta,\gamma,\delta), \sum\lambda_i=1$:
+          <h4>Curved Optimization</h4>
+          <p>$$ E = w_d\,E_{distance}+w_q\,E_{AMIPS}+w_b\,E_{barrier} $$</p>
+          <p>E_distance = Σ_q||x(q)-π_M(x(q))||² where Q sampled Gauss-Lobatto points; π_M closest point onto input. E_AMIPS = Σ_T ∫_{T̂} ||J||²_F/(det J)^{2/3}. E_barrier = Σ_I -log(b_I-ε) pushes Bernstein coeff of det J away from zero → no inversion, no self-intersection. Solver: Newton with line search, backtracking ensures positivity monotonic.</p>
 
-$$
-\mathbf{x}(\lambda) = \sum_{i+j+k+l=p} \binom{p}{i,j,k,l} \alpha^i \beta^j \gamma^k \delta^l \; \mathbf{c}_{ijkl}
-$$
+          <h4>Bijective Map & Transfer</h4>
+          <p>Shell gives correspondence: any p∈M maps to q∈∂M_out via normal shoot within tube. Because outer/inner are disjoint and offset valid, correspondence is bijective locally and globally after checking orientation via mbase,mtop,mF. Enables texture UV transfer, Dirichlet data pullback, displacement fields (teaser shows elasticity simulation on coarse tet matches dense surface visually).</p>
+        </div>
+        <img src="method.png" alt="method comparison" style="max-width:100%;">
+        <p class="has-text-centered is-size-7"><b>Figure 2</b> – Left: dense linear vs right: coarse curved quartic wireframe. Hausdorff error heatmap. Boundary curvature captured with ~1/30th faces.</p>
+      </div>
+    </div>
 
-Jacobian $J(\lambda) = [\partial \mathbf{x}/\partial \alpha, \partial \mathbf{x}/\partial \beta, \partial \mathbf{x}/\partial \gamma] \in \mathbb{R}^{3\times3}$. Validity requires positivity on *control lattice* sufficient condition: Bernstein coefficients of $\det J$ >0 (convex hull property). We use:
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Theoretical Guarantees</h2>
+        <div class="content">
+          <p><b>Theorem 1 (Validity).</b> If optimizer terminates with min_I b_I ≥ δ>0 and BVH reports no triangle-triangle intersection on ∂M_out, then every tet T has det J_T(λ)>0 ∀λ∈T̂ and mesh intersection-free.</p>
+          <p><em>Proof sketch.</em> Bernstein convex hull: det J(λ)=Σ b_I B_I(λ), B_I≥0, ΣB_I=1. So det J(λ)≥ min_I b_I >0.</p>
+          <p><b>Theorem 2 (Hausdorff).</b> Let ε_d user threshold, and Q cover surface with density δ_Q s.t. projection error Lipschitz bound L. Then Hausdorff(∂M_out,M_in) ≤ ε_d + Lδ_Q.</p>
+          <p><b>Theorem 3 (Feature exactness).</b> If feature edges tagged, control points on those edges remain on input piecewise-linear feature polyline up to 1e-9 tolerance, preserving sharpness.</p>
+        </div>
+      </div>
+    </div>
 
-$$
-\det J(\lambda) = \sum_{|I|=4p-3} b_I B_I^p(\lambda)
-$$
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results & Applications</h2>
+        <div class="content has-text-justified">
+          <p><b>Thingi10K subset</b> (1000 manifold watertight meshes): 98.7% success to quartic within 10 min. CAD ABC 50 models, organic 30 high-genus.</p>
+          <table class="table is-bordered is-striped is-narrow is-fullwidth" style="font-size:0.9em;">
+            <thead><tr><th>Input |F|</th><th>Output |F_coarse|</th><th>|T|</th><th>Ratio</th><th>ε (bb %)</th><th>Valid %</th></tr></thead>
+            <tbody>
+              <tr><td>Bunny 69k</td><td>2.1k</td><td>5.4k</td><td>32×</td><td>0.008</td><td>100</td></tr>
+              <tr><td>Fertility 480k</td><td>12k</td><td>18k</td><td>40×</td><td>0.01</td><td>100</td></tr>
+              <tr><td>Fandisk 12.9k</td><td>0.6k</td><td>1.2k</td><td>21×</td><td>0.005</td><td>100</td></tr>
+              <tr><td>Armadillo 346k</td><td>9.5k</td><td>22k</td><td>36×</td><td>0.012</td><td>100</td></tr>
+            </tbody>
+          </table>
+          <p>Average ~30× surface reduction, ~20× tet reduction vs linear fTetWild same Hausdorff. Timing: Shell 45% (exact predicates), Tet fill 20%, Curved opt 30%, overall 2–8 min on 16-core for 100k face input.</p>
+          <p><b>FEM</b>: quartic coarse (5k tet) matches dense linear (200k tet) stress error &lt;2% while 5× faster assembly+solve. Comparison: Gmsh high-order often inverted on concave features, no distance bound; Quartet curved but no validity guarantee (~12% inverted on Thingi10K); ours 0 inverted by construction.</p>
+          <p>Applications: simulation coarse proxy, isogeometric analysis (Bézier tets as shape functions), shape optimization bijective pullback, neural fields occupancy training.</p>
+        </div>
 
-If $\min_I b_I > 0 \Rightarrow$ element valid. We optimize to enforce $b_I \ge \varepsilon$.
+        <div class="interp-row" style="margin-top:12px;">
+          <img src="featured.jpg" alt="dense vs coarse">
+          <img src="method.png" alt="heatmap">
+        </div>
+      </div>
+    </div>
 
-Storage convention: our `lagr` is $|l|\times3$ volume Lagrange points, ordering via recursive `tuple_gen`. Surface Bézier `complete_cp` is $|F|\times n_p \times3$ with duplicates for adjacency; conversion to Gmsh `tetra35`, `triangle15` manually coded in `format_utils.py`.
-
-### 3.3 Coarse Shell Construction
-
-Shell $S$ is offset surfaces $\mathcal{S}^{\pm\varepsilon}$ around input using distance field $d(\mathbf{x}) = \text{signed distance to }M$. We march to maintain:
-
-- $||\mathbf{x}_{\text{shell}} - \mathbf{x}_{\text{proj}}||_\infty \le \varepsilon_d$ (curve-distance_threshold flag)
-- Feature lines preserved by snapping shell vertices to feature graph $G$: constrained Delaunay-ish retraction.
-- Constraint points $\mathcal{P}$ with barycentric $(P_{\text{fid}}, P_{bc})$ allow distance bound *where user wants* — e.g., on texturing seam.
-
-Topology check: Progressive envelope expansion with exact predicates (CGAL) ensures shell never self-intersects and stays manifold.
-
-### 3.4 Feature Preservation
-
-Dihedral angle heuristic `--feature-dihedral_threshold` auto-tags features if $H5$ not supplied. For corners: junction of $\ge3$ feature edges auto-inferred; 2-feature corners need explicit $V$ list (otherwise smooth). Features are *frozen* during optimization: Lagrange points on feature remain on exact input feature line/curve up to machine precision.
-
-### 3.5 Curved Optimization – Validity & Intersection Freedom
-
-Energy:
-
-$$
-E = w_d\, E_{\text{distance}} + w_q\, E_{\text{AMIPS}} + w_b\, E_{\text{barrier}}
-$$
-
-- $E_{\text{distance}} = \sum_{q\in\mathcal{Q}} ||\mathbf{x}(q)-\pi_M(\mathbf{x}(q))||^2$, where $\mathcal{Q}$ sampled Gauss-Lobatto points (default all vertices, tunable via `--curve-distance_threshold`). $\pi_M$ is closest point projection onto input.
-- $E_{\text{AMIPS}} = \sum_T \int_{\hat{T}} \frac{||J||_F^2}{(\det J)^{2/3}}$, modified to Bézier Jacobian.
-- $E_{\text{barrier}} = \sum_I -\log(b_I - \varepsilon)$ pushes Bernstein coeff of $\det J$ away from zero → no inversion, no self-intersection (sufficient + intersection test via BVH).
-
-Solver: Newton with line search, backtracking ensures positivity monotonic. Fallback: edge-split heuristic if barrier infeasible (rare).
-
-### 3.6 Bijective Map & Attribute Transfer
-
-Shell gives correspondence: any point $\mathbf{p}\in M$ maps to $\mathbf{q}\in\partial M_{\text{out}}$ via normal shoot within tube. Because shell outer/inner are disjoint and offset valid, this correspondence is bijective locally and globally after checking orientation via `mbase, mtop, mF`.
-
-Thus:
-- Textures: UV transfer without resampling distortion
-- Boundary conditions: Dirichlet data on $M$ → on quartic boundary exactly
-- Displacement fields: in teaser, transferred displacement shows elasticity simulation on coarse tet matches dense surface visually
-
-### 3.7 Data Structures (Output)
-
-Output `.h5` fields:
-- `lagr` : $|L|\times3$ volume Lagrange points (degree 4)
-- `cells` : $|T|\times n_p$ ($n_p=35$ for quartic) connectivity
-- `complete_cp` : $|F|\times15\times3$ surface Bézier CP (tri15 duplication)
-- `mV,mbase,mtop,mF` : shell internal mapping for bijectivity queries
-
-Conversion to Gmsh `.msh` via `python/format_utils.py`:
-
-```bash
-pip install meshio h5py numpy
-python ../python/format_utils.py bunny.off.h5 bunny.msh
-# open in gmsh – choose high-order visualization
-```
-
-## 4. Theorems & Guarantees
-
-**Theorem 1 (Validity).** If optimizer terminates with $\min_I b_I \ge \delta >0$ and BVH reports no triangle-triangle intersection on $\partial M_{\text{out}}$, then every tetrahedron $T\in\mathcal{T}$ has $\det J_T(\lambda)>0\ \forall\lambda\in\hat{T}$ and mesh is intersection-free.
-
-*Proof sketch.* Bernstein convex hull: $\det J(\lambda) = \sum b_I B_I(\lambda)$, $B_I\ge0$, $\sum B_I=1$. So $\det J(\lambda) \ge \min_I b_I >0$.
-
-**Theorem 2 (Hausdorff bound).** Let $\varepsilon_d$ be user distance threshold, and $\mathcal{Q}$ cover surface with density $\delta_{\mathcal{Q}}$ such that projection error Lipschitz bound $L$. Then $\text{Hausdorff}(\partial M_{\text{out}}, M_{\text{in}}) \le \varepsilon_d + L\delta_{\mathcal{Q}}$.
-
-In practice, sampling all vertices suffices for <0.01 bounding box diagonal on typical Thingi10k models.
-
-**Theorem 3 (Feature exactness).** If feature edges tagged, control points on those edges remain on input piecewise-linear feature polyline up to $10^{-9}$ tolerance, preserving sharpness.
-
-## 5. Results
-
-### Datasets
-- **Thingi10K subset** (Zhou et al.): 1,000 manifold watertight meshes after filtering; 98.7% success to quartic within 10 min.
-- **CAD**: ABC-Dataset subset 50 models.
-- **Organic**: 30 high-genus.
-
-### Coarsening Ratio
-| Input $|F|$ | Output $|F_{\text{coarse}}|$ | $|T|$ | Ratio | ε (bb %) | Valid % |
-|---|---|---|---|---|---|
-| Bunny 69k | 2.1k | 5.4k | 32× | 0.008 | 100 |
-| Fertility  480k | 12k | 18k | 40× | 0.01 | 100 |
-| Fandisk 12.9k | 0.6k | 1.2k | 21× | 0.005 | 100 |
-| Armadillo 346k | 9.5k | 22k | 36× | 0.012 | 100 |
-
-Average: ~30× surface reduction, ~20× tet reduction vs linear fTetWild with same Hausdorff.
-
-### Timing
-- Shell: 45% (exact predicates)
-- Tet fill: 20% (fTetWild)
-- Curved opt: 30%
-- Overall: 2–8 min on 16-core for 100k face input (Quartic). Parallelizable via TBB.
-
-### Illustrative Outcomes
-
-#### Visual
-The quartic surface captures fillets, sharp creases (feature green) with curved patches where linear would need many triangles.
-
-#### FEM Application
-We tested linear vs cubic vs quartic elasticity with displacement transfer: quartic coarse (5k tet) matches dense linear (200k tet) stress error <2% while 5× faster assembly+solve.
-
-#### Comparison vs baselines
-- **Gmsh high-order**: Often inverted on concave features, no distance bound.
-- **Quartet**: Curved but no validity guarantee; ~12% inverted on Thingi10K.
-- **Ours**: 0 inverted by construction (barrier).
-
-## 6. Applications
-
-- **Simulation**: Replace dense linear with coarse quartic → faster FEM with high geometric fidelity.
-- **Isogeometric analysis**: Direct use of Bézier tets as shape functions.
-- **Shape optimization**: Bijective map enables boundary condition pullback for sensitivity.
-- **Neural fields**: Coarse proxy for occupancy network training (less memory).
-
-## 7. System Details
-
-### Installation
-Tested Linux (GCC-9, Clang-12), macOS, Windows (MSVC). Dependencies: CGAL (GPLv3), Eigen, TBB, HDF5. See `cmake.yml`.
-
-```bash
-git clone --recursive https://github.com/jiangzhongshi/bichon
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">System & Implementation</h2>
+        <div class="content">
+          <p><b>Output .h5 fields</b>: lagr |L|×3 volume Lagrange points (deg4), cells |T|×35 connectivity, complete_cp |F|×15×3 surface Bézier CP tri15 duplication, mV,mbase,mtop,mF shell mapping for bijectivity queries.</p>
+          <pre><code>git clone --recursive https://github.com/jiangzhongshi/bichon
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j4
-```
+./cumin_bin -i bunny.off -o out/
+python ../python/format_utils.py bunny.off.h5 bunny.msh</code></pre>
+          <p>Flags: -i/--input mesh .obj/.off/.ply/.stl, -g/--graph feature HDF5, --curve-distance_threshold, --curve-order, --feature-dihedral_threshold, --shell-target_edge_length.</p>
+          <p>Limitations: requires manifold watertight no self-intersection (precondition via TetWild), thin features &lt; ε cause shell self-intersection → exit 2, degree ≤4 tested, feature tagging manual for complex CAD.</p>
+        </div>
+      </div>
+    </div>
 
-### Flags
-- `-i/--input` mesh `.obj/.off/.ply/.stl`
-- `-g/--graph` feature HDF5
-- `-o/--output` dir
-- `--curve-distance_threshold` (default all vertices)
-- `--curve-order` (surface order; volume order = +1)
-- `--feature-dihedral_threshold`
-- `--shell-target_edge_length`
-
-### Visualize
-Python scripts in `python/`. Conversion to Gmsh done via `meshio`+`h5py`.
-
-## 8. Limitations & Future
-
-- Requires manifold watertight, no self-intersection (precondition via TetWild pipeline).
-- Thin features < ε cause shell self-intersection → auto-refine fails gracefully (exit code 2).
-- Feature tagging manual for complex CAD; auto dihedral imperfect on smooth but high-curvature (e.g., ear).
-- Degree limited to ≤4 (quartic) tested; higher deg needs larger stencils.
-- Future: anisotropic shell, implicit features, direct SDF input, parallel Newton via GPU.
-
-## 9. Deep Links & Artifacts
-
-- 📄 **Paper**: [CIMS NYU PDF](https://cims.nyu.edu/gcl/papers/2021-Bichon.pdf) | [DOI](https://doi.org/10.1145/3450626.3459840)
-- 🌐 **Project**: [jiangzhongshi.github.io/bichon](https://jiangzhongshi.github.io/bichon/)
-- 💾 **Dataset**: [Drive – Quartic .msh](https://drive.google.com/file/d/1Gw3vza0GkY0pMf4kLcrOzQeCIlbEp4Cs/view?usp=sharing) (100+ models)
-- 💻 **Code**: [GitHub bichon](https://github.com/jiangzhongshi/bichon) (MIT, CGAL GPLv3 inherited)
-- 🎥 **Talk**: [YouTube 18min](https://youtu.be/yfztQw78gnE)
-- 🧪 **Examples**: `examples/bunny.off` → `bunny.off.h5` via `./cumin_bin -i`
-- Related successor: [Bijective Projection in a Shell]({{< ref bijective-projection-shell >}}) – shell theory foundations
-
-## 10. Related Work Context
-
-Bichon builds on:
-- **Bijective Projection in a Shell** (Jiang et al. TOG 2020) – proves bijective shell existence via distance field gradient flow.
-- **TetWild** (Hu et al.) – robust linear tetrahedrization inside shell.
-- **High-order meshing via elasticity** (Abgrall et al.) – but without guarantees.
-- Influenced later: **3D Bézier Guarding** (Khanteimouri et al. TOG 2023) cites Bichon validity condition; **High-order shape interpolation** uses Bichon metric blend.
-
-## 11. Implementation Notes from Author
-
-> Developing Bichon taught us: *validity checking via Bernstein hull is cheap but sufficient* – many false positives w/ sampling, missing interior determinant dips. Use recursion `tuple_gen` for node ordering to stay Gmsh-compatible. The trickiest bug: `complete_cp` duplication leads to 2× memory but needed for per-face adjacency visualization; don't deduplicate early or you break feature freezing. Hausdorff weight schedule: start large, anneal – otherwise barrier overshoots. Feature tagging as $E|F\times2$ sparse: we exploit `h5py` int64. The name **Bichon** – small curly dog, like small curly mesh!
-
-## 12. BibTeX
-
-```bibtex
-@article{jiang2021bichon,
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">BibTeX</h2>
+        <pre class="bibtex">@article{jiang2021bichon,
   title={Bijective and Coarse High-Order Tetrahedral Meshes},
   author={Jiang, Zhongshi and Zhang, Ziyi and Hu, Yixin and Schneider, Teseo and Zorin, Denis and Panozzo, Daniele},
   journal={ACM Transactions on Graphics},
@@ -304,16 +305,20 @@ Bichon builds on:
   publisher={ACM},
   doi={10.1145/3450626.3459840},
   url={https://cims.nyu.edu/gcl/papers/2021-Bichon.pdf},
-  note={SIGGRAPH 2021, code \url{https://github.com/jiangzhongshi/bichon}}
-}
+  note={SIGGRAPH 2021, code https://github.com/jiangzhongshi/bichon}
+}</pre>
+      </div>
+    </div>
 
-@inproceedings{jiang2021talk,
-  title={Bichon – Talk},
-  howpublished={\url{https://youtu.be/yfztQw78gnE}},
-  year={2021}
-}
-```
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified" style="font-size:0.9em;">
+          <p>NYU Courant GCL, NSF award, ERC, NSERC. Based on Bijective Projection in a Shell (TOG 2020) & TetWild. Influenced later Guarding, high-order interpolation. Name Bichon – small curly dog, like small curly mesh! Thanks to readers of <a href="https://cims.nyu.edu/gcl/papers/2021-Bichon.pdf">paper</a> and <a href="https://github.com/jiangzhongshi/bichon">code</a> community.</p>
+        </div>
+      </div>
+    </div>
 
----
+  </div>
+</section>
 
-*Page built from SIGGRAPH 2021 material, project README, and original CIMS PDF. Images are local `featured.jpg`, `teaser.png`, `method.png` under same folder. Additional figures referenced in paper Fig.2–6 are available via Drive dataset.*
