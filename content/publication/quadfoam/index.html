@@ -182,7 +182,7 @@ nerfies = true
             <li><b>Mechanical justification:</b> Orthotropic homogenized properties naturally align with rhombic skew – shear mode decouples, allowing independent control $E_x$, $E_y$, $\nu$ even at skewed $\theta$. Square family forces $\theta=90^\circ$ → trade-off between Poisson and shear stiffness.</li>
             <li><b>Fabrication:</b> Rhombic beams stay extruded along $z$, same as 2.5D printing pipeline (FDM/SLS). No overhang change vs squares.</li>
           </ul>
-          <p>Key insight: <em>don't invent new quad layout</em> – start from standard quadrilateral mesh (QuadWild, MiQ), then <b>rhombification</b> optimization: minimize $| |\mathbf{e}|-\bar\ell|^2 + w_\theta (\theta-90^\circ)^2_{\text{clamped}}$ while snapping boundary vertices to target surface via projection. 3–5 Gauss-Newton iterations give near-rhombic mesh with boundary conformity error $<0.5\%$ bbox.</p>
+          <p>Key insight: <em>don't invent new quad layout</em> – start from standard quadrilateral mesh (QuadWild, MiQ), then <b>rhombification</b> optimization: minimize $| |\mathbf{e}|-\bar\ell|^2 + w_\theta (\theta-90^\circ)^2_{\text{clamped}}$ while snapping boundary vertices to target surface via projection. 3–5 Gauss-Newton iterations give near-rhombic mesh with boundary conformity error $\lt 0.5\%$ bbox.</p>
         </div>
       </div>
     </div>
@@ -292,7 +292,7 @@ Optional: Fabricate (FDM PLA, SLS PA12) and test under Instron</pre>
             <li><b>Programmable deformation:</b> By combining spatial $\theta$ variation + $\nu$ auxetic, we encode bending-twist coupling without external mechanisms – demonstrated in gripper that closes under uniaxial load.</li>
             <li><b>Computational fabrication:</b> The spline map $\mathcal{S}$ is end-to-end differentiable → can hook into continuous material optimization loop, enabling gradient-based co-design of tiling + microstructure geometry (future work gradient took 1 line JAX via autodiff of B-spline).</li>
           </ul>
-          <p>Limitations we discuss openly: period assumption breaks at extreme $\theta<30^\circ$ (self-intersect beams, caught by check); homogenization assumes infinite tiling, boundary cells have edge effects (mitigated by adding rim beam $w_{rim}=0.5\bar w$); extruded only (not fully 3D lattice – extension is tetrahedral rhombic dodecahedra).</p>
+          <p>Limitations we discuss openly: period assumption breaks at extreme $\theta\lt 30^\circ$ (self-intersect beams, caught by check); homogenization assumes infinite tiling, boundary cells have edge effects (mitigated by adding rim beam $w_{rim}=0.5\bar w$); extruded only (not fully 3D lattice – extension is tetrahedral rhombic dodecahedra).</p>
         </div>
 
         <h2 class="title is-3" style="margin-top:1rem;">Video (5 min)</h2>

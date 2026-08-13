@@ -183,7 +183,7 @@ We introduce an algorithm to convert a self-intersection free, orientable, and m
     <div class="content has-text-justified">
 
 <p>
-<b>Def 2.1 (Prism).</b> For $t=(v_0,v_1,v_2)\in T$, choose $h_{min}(v_i)<0<h_{max}(v_i)$ and unit direction $D_i$ (vertex normal or user LBS direction). Prism:
+<b>Def 2.1 (Prism).</b> For $t=(v_0,v_1,v_2)\in T$, choose $h_{min}(v_i)\lt 0\lt h_{max}(v_i)$ and unit direction $D_i$ (vertex normal or user LBS direction). Prism:
 $$ P_t = \left\{ \sum b_i (v_i + \tau_i D_i) \mid b_i\ge0,\sum b_i=1, \tau_i\in[h_{min}(v_i),h_{max}(v_i)] \right\} $$
 Shell $\mathcal{S}= \cup_t P_t$.
 </p>
@@ -294,7 +294,7 @@ for p in T samples:
       <h4 class="title is-5">Applications (one page each in paper)</h4>
       <ol>
         <li><b>PDE Transport</b> – $\Delta_T u_T = f$, $u_S = u_T\circ\Phi^{-1}$. 100× faster than solving on S directly.</li>
-        <li><b>Displacement</b> – clamp $|d|<H_{max}$, $n_T\cdot n_S>0$ prevents inverted displacement → robust bark/scale synthesis.</li>
+        <li><b>Displacement</b> – clamp $|d|\lt H_{max}$, $n_T\cdot n_S>0$ prevents inverted displacement → robust bark/scale synthesis.</li>
         <li><b>Booleans</b> – shell narrow-band classifier → keep UVs outside band.</li>
         <li><b>Tet Meshing</b> – region $T_{out}\setminus S$ intersection-free → feed to fTetWild.</li>
         <li><b>Nested Cages</b> – optimize cage $C$ inside shell via barrier $E_{dist}+\infty\,\mathbf{1}_{outside}$ → MVC weights positive, no LBS artifacts.</li>
