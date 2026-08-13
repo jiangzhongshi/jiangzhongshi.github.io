@@ -1,6 +1,17 @@
 {{- define "main" -}}
 {{ if .Params.nerfies }}
-  {{ .Content | safeHTML }}
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{{ .Content | safeHTML }}
 {{ else }}
 {{ $pub_types := partial "functions/get_pub_types" $ }}
 {{ $pub_type_param := .Params.publication_types | default (slice 0) }}
