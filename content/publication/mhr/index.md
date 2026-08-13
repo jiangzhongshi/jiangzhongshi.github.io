@@ -14,6 +14,7 @@ url_project = "https://github.com/facebookresearch/MHR"
 url_code = "https://github.com/facebookresearch/MHR"
 url_pdf = "https://arxiv.org/abs/2511.15586"
 url_preprint = "https://arxiv.org/abs/2511.15586"
+url_custom = [{name = "HuggingFace", url = "https://huggingface.co/papers/2511.15586"}, {name = "GitHub", url = "https://github.com/facebookresearch/MHR"}]
 math = false
 highlight = true
 +++
