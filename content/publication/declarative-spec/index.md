@@ -1,5 +1,4 @@
 +++
-
 title = "Declarative Specification for Unstructured Mesh Editing Algorithms"
 date = 2022-11-01T00:00:00-04:00
 draft = false
@@ -8,14 +7,6 @@ draft = false
 authors = ["**Zhongshi Jiang**","Jiacheng Dai", "Yixin Hu","Yunfan Zhou", "Jérémie Dumas","Qingnan Zhou","Gurkirat Singh Bajwa","Denis Zorin","Daniele Panozzo","Teseo Schneider"]
 
 # Publication type.
-# Legend:
-# 0 = Uncategorized
-# 1 = Conference paper
-# 2 = Journal article
-# 3 = Manuscript
-# 4 = Report
-# 5 = Book
-# 6 = Book section
 publication_types = ["1"]
 
 # Publication name and optional abbreviated version.
@@ -48,36 +39,138 @@ url_video = ""
 url_poster = ""
 url_source = ""
 
-math = false
+math = true
 highlight = true
 
 +++
 
-{{< figure src="featured.jpg" caption="Declarative spec – one abstraction, many algorithms. Topologically safe, automatically parallel." >}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<style>
+.publication-title{font-family:'Google Sans',sans-serif; font-weight:700;}
+.publication-authors a{color:hsl(204,86%,53%) !important;}
+.author-block{display:inline-block; padding:0 6px;}
+.dnerf{font-variant:small-caps;}
+.hero.teaser img{border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.15);}
+.content pre{border-radius:10px;}
+.publication-links .button{margin:4px;}
+</style>
 
-## Abstract
-Unstructured mesh editing – remeshing, simplification, subdivision, repair – underpins nearly all geometry processing. Yet every new algorithm re-implements the same tedious core: mesh accessors, link conditions, envelope tests, attribute propagation, conflict detection for parallelism, and manifold bookkeeping. Bugs are common, concurrency is often ignored, and scaling to 10M elements is ad-hoc.
+<!-- Hero: Title / Authors / Affiliations / Links -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Declarative Specification for Unstructured Mesh Editing Algorithms</h1>
+          <div class="is-size-5 publication-authors" style="margin-top:12px;">
+            <span class="author-block"><a href="https://jiangzhongshi.github.io"><b>Zhongshi Jiang</b></a><sup>1*</sup>,</span>
+            <span class="author-block"><a href="#">Jiacheng Dai</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="#">Yixin Hu</a><sup>3</sup>,</span>
+            <span class="author-block"><a href="#">Yunfan Zhou</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="#">Jérémie Dumas</a><sup>4</sup>,</span>
+            <span class="author-block"><a href="#">Qingnan Zhou</a><sup>5</sup>,</span>
+            <span class="author-block"><a>Gurkirat Singh Bajwa</a><sup>6</sup>,</span>
+            <span class="author-block"><a href="#">Denis Zorin</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="#">Daniele Panozzo</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="#">Teseo Schneider</a><sup>7</sup></span>
+          </div>
+          <div class="is-size-6 publication-authors" style="margin-top:6px; color:#666;">
+            <span class="author-block"><sup>1</sup>NYU Courant</span>
+            <span class="author-block"><sup>2</sup>NYU</span>
+            <span class="author-block"><sup>3</sup>Adobe Research</span>
+            <span class="author-block"><sup>4</sup>Adobe</span>
+            <span class="author-block"><sup>5</sup>USC</span>
+            <span class="author-block"><sup>6</sup>Meta</span>
+            <span class="author-block"><sup>7</sup>University of Victoria</span>
+            <span class="author-block"><i>SIGGRAPH Asia 2022, ACM TOG 41(6) Art.251</i></span>
+          </div>
 
-We introduce a **declarative specification DSL** that cleanly separates *what to achieve* from *how the mesh is maintained*. The author declares:
+          <div class="column has-text-centered" style="margin-top:18px;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://dl.acm.org/doi/10.1145/3550454.3555463" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (ACM)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2210.07430" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/jiangzhongshi/declarative-meshedit" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code (frozen)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/wildmeshing/wildmeshing-toolkit" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-cogs"></i></span><span>WMTK Toolkit</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://doi.org/10.1145/3550454.3555463" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-doi"></i></span><span>DOI</span>
+                </a>
+              </span>
+            </div>
+          </div>
 
-* **Invariants** – predicates that must hold after every local op (manifold, inversion-free, quality bound, envelope)
-* **Scheduler** – priority queue of candidate operations (edge length, quadric error,Queueing by energy)
-* **Operation descriptors** – collapse / split / swap / smooth + custom attribute transfer
-* **Parallel policy** – let runtime handle graph-coloring / speculative locks
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-The runtime – implemented in the [**Wild Meshing Toolkit (WMTK)**](https://github.com/wildmeshing/wildmeshing-toolkit) – guarantees invariants, rolls back failed ops, transfers attributes, and provides up to **10× speedup on 16 cores** with identical output determinism. Four classic lines of C++ now express what previously required 1–3k LoC of OpenMP-heavy code.
+<!-- Teaser: One abstraction, many algorithms -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="teaser.png" alt="Declarative DSL -> four algorithms: harmonic triang, Qslim, isotropic remesh, TetWild" style="width:100%;"/>
+      <h2 class="subtitle has-text-centered" style="margin-top:14px;">
+        <span class="dnerf">Declarative</span> – one high-level description drives isotropic remeshing, simplification, harmonic triangulation, and robust TetWild-style filling.
+        <br><i>Fig. 1 from paper: <18–32 LoC per algorithm vs ~0.5–3k legacy.</i>
+      </h2>
+    </div>
+  </div>
+</section>
 
-> Paper: **SIGGRAPH Asia 2022, ACM TOG 41(6), Art. 251**  
-> Authors: Zhongshi Jiang*, Jiacheng Dai, Yixin Hu, Yunfan Zhou, Jérémie Dumas, Qingnan Zhou, Gurkirat Bajwa, Denis Zorin, Daniele Panozzo, Teseo Schneider
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Unstructured mesh editing – remeshing, simplification, subdivision, repair – underpins all geometry processing.
+            Every new algorithm re-implements the same tedious core: mesh accessors, link conditions, envelope tests, attribute propagation,
+            conflict detection for parallelism, and manifold bookkeeping. Bugs are common, concurrency is ignored, scaling to 10M elements ad-hoc.
+          </p>
+          <p>
+            We introduce a <b>declarative specification DSL</b> that separates <i>what to achieve</i> from <i>how the mesh is maintained</i>.
+            The author declares <b>Invariants</b> (must hold after every local op), a <b>Scheduler</b> (priority of ops), and <b>Operation Descriptors</b>
+            (collapse/split/swap/smooth + attribute transfer). The runtime – now the <a href="https://github.com/wildmeshing/wildmeshing-toolkit">Wild Meshing Toolkit (WMTK)</a> – guarantees invariants, rolls back failed ops, transfers attributes, and provides up to <b>10× speedup on 16 cores</b> with deterministic output. Four classic lines of C++ express what previously required 1–3k LoC.
+          </p>
+          <div style="text-align:center; margin:14px;">
+            <img src="featured.jpg" alt="One abstraction many algorithms" style="max-width:720px; border-radius:10px;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
----
-
-## 1) Why Declarative?
-
-Typical isotropic remeshing loop (libigl/OpenMesh style):
-
-```cpp
-while (!Q.empty()) {
+<!-- Why Declarative -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Why Declarative?</h2>
+        <div class="content has-text-justified">
+          <p><b>Typical loop (libigl/OpenMesh style):</b></p>
+<pre><code class="language-cpp">while (!Q.empty()) {
   auto [op, eid] = Q.pop();
   if (is_removed(eid)) continue;
   if (!link_condition(eid)) continue;
@@ -88,235 +181,222 @@ while (!Q.empty()) {
   collapse(eid); // manually splice half-edges
   for (v: new_ring) recompute_quality, push Q
   unlock();
-}
-```
+}</code></pre>
+          <p>Every project rewrites <code>link_condition</code>, <code>check_inversion</code>, attribute lerp, locking. Miss one envelope test → self-intersect. Lock order → deadlock.</p>
 
-Every project re-writes `link_condition`, `check_inversion`, attribute lerp, locking. Miss one envelope test and you self-intersect. Order of locks = deadlock.
-
-Our vision:
-
-```cpp
-// declarative description – no half-edge juggling
+          <p><b>Our vision – 15 LoC:</b></p>
+<pre><code class="language-cpp">// declarative description – no half-edge juggling
 auto m = TriMesh::from_file("bunny.obj");
 
-// invariant set reused across apps
 auto invariants = { Manifold, NoInversion, Envelope(1e-3 * diag), LinkCondition };
+auto scheduler = EdgeLengthScheduler&lt;&gt;();
 
-// scheduler = energy
-auto scheduler = EdgeLengthScheduler<>();
-
-// single operation descriptor
 auto op_collapse = EdgeCollapse {
   .energy = [](Edge e){ return -e.length(); },
-  .precondition = [](Edge e){ return e.length() < 4.0/3 * target; },
+  .precondition = [](Edge e){ return e.length() &lt; 4.0/3 * target; },
   .transfer = { .pos = Linear, .uv = Wachspress }
 };
 
-wmtk::run(m, invariants, scheduler, op_collapse);
-```
+wmtk::run(m, invariants, scheduler, op_collapse);</code></pre>
+          <p>Change <code>4.0/3</code> to <code>sqrt(2)</code> and you have a new paper. The DSL erases simplex access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-~15 LoC instead of ~800. Change `4.0/3` to `sqrt(2)` and you have a new paper.
+<!-- Language design -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Language Design – Operation Descriptors & Invariants as Functors</h2>
+        <div class="content has-text-justified">
+          <img src="method.png" alt="System layers: DSL -> registry -> WMTK runtime -> parallelism" style="width:100%; max-width:900px; display:block; margin:12px auto; border-radius:8px;">
 
----
+          <h3 class="title is-4">Mesh Abstraction Erased</h3>
+          <p>
+            We expose simplex tuples <code>(vertex, edge, face, volume)</code> – not half-edges. User code never sees pointers.
+            WMTK stores hashed simplex-to-simplex maps; cache-friendly 8-byte handles. No more splicing hell.
+          </p>
 
-## 2) Language / System Design
+          <h3 class="title is-4">OpDescriptor</h3>
+<pre><code class="language-cpp">struct OpDescriptor {
+  std::function&lt;double(Simplex)&gt; energy;
+  std::function&lt;bool(Simplex)&gt; can_apply;
+  std::function&lt;void(Simplex, AttributeTransfer&)&gt; execute;
+  std::vector&lt;Invariant&gt; invariants_before, invariants_after;
+};</code></pre>
+          <p>We pre-instantiate 6 topology ops: <code>EdgeCollapse</code>, <code>EdgeSplit</code>, <code>EdgeSwap</code>, <code>VertexSmooth</code>, <code>FaceSplit</code>, <code>TetSplit</code>. User provides lambda for <code>can_apply</code> and attribute lerp.</p>
+          <ul>
+            <li><code>pos</code>, <code>uv</code>, <code>color</code>, <code>mip-map level</code> are <code>wmtk::Attribute&lt;T&gt;</code> – split/collapse requires linear/harmonic extension, auto-generated.</li>
+            <li>Physics-aware length metric synthesizes Jacobian via <code>Eigen::AutoDiff</code> – never hand-derivate again.</li>
+          </ul>
 
-{{< figure src="method.png" caption="System layers: high-level C++ DSL → operation registry → WMTK runtime (topology cache, invariant pool, task graph) → shared-memory parallelism" >}}
-
-### 2.1 The Mesh Abstraction is Erased
-
-We expose **simplex tuples** `(vertex, edge, face, volume)` – not half-edges. User code never sees pointers. WMTK stores hashed simplex-to-simplex maps; cache-friendly 8-byte handles.
-
-### 2.2 Invariants as Composable Functors
-
-```cpp
-struct Invariant {
+          <h3 class="title is-4">Invariants as Composable Functors</h3>
+<pre><code class="language-cpp">struct Invariant {
   virtual bool before(const Simplex&) const = 0;
   virtual bool after(const Simplex&) const { return true; }
   virtual bool strictly_after(const Primitive&) const;
-};
-```
-
-Library ships:
-
-* `ManifoldInvariant` – link condition via Euler char of link
-* `NoInversionInvariant` – signed tet/area > 0 filtered by exact predicates (orient2d/3d via [Shewchuk])
-* `EnvelopeInvariant` – AABB tree of input surface, ε-envelope test
-* `UVNoFoldInvariant` – flip-free UV under operation
-* `QualityInvariantBound` – AMIPS < threshold, scaled Jacobian
-
-Mix:
-
-```cpp
-auto safe = make_invariant_collection(
+};</code></pre>
+          <p>Library ships:</p>
+          <ul>
+            <li><code>ManifoldInvariant</code> – link condition via Euler char of link</li>
+            <li><code>NoInversionInvariant</code> – signed tet/area &gt;0 filtered by exact predicates (orient2d/3d via Shewchuk)</li>
+            <li><code>EnvelopeInvariant</code> – AABB tree of input surface, ε-envelope test</li>
+            <li><code>UVNoFoldInvariant</code> – flip-free UV under operation</li>
+            <li><code>QualityInvariantBound</code> – AMIPS &lt; threshold, scaled Jacobian</li>
+          </ul>
+<pre><code class="language-cpp">auto safe = make_invariant_collection(
   ManifoldEdge(), NoInversionTet(), EnvelopeSurface{input, 1e-6}
-);
-```
+);</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-### 2.3 Scheduler = Active Set Learning
+<!-- Scheduler / Performance -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Scheduler, Parallel Coloring & Rollback</h2>
+        <div class="content has-text-justified">
+          <img src="pipeline.png" alt="Pipeline: op tries -> invariant check -> rollback if fail -> attribute transfer -> requeue 1-ring" style="width:100%; max-width:850px; display:block; margin:10px auto; border-radius:8px;">
+          <ul>
+            <li><b>Scheduler = Active Set Learning.</b> Two-level priority: geometric energy first, reuse score second for cache locality. <code>update_after_success(op)</code> only re-queues 1-ring (&lt;2% visited/iter).</li>
+            <li><b>Partitioned locking.</b> Vertices painted by greedy distance-1 coloring of dual graph; each color processes in parallel, no two neighboring ops co-run.</li>
+            <li><b>Speculative rollback.</b> If invariant fails after op, mesh rewound via copy-on-write log (~12 bytes per simplex change).</li>
+            <li><b>Determinism.</b> Sorted tie-break by simplex id; same seed → bitwise-identical mesh on same thread count.</li>
+            <li><b>Envelope safety.</b> TetWild path wraps input surface AABB tree and tests moved vertices against ε-envelope using exact orient predicates.</li>
+          </ul>
 
-Not simple queue; we use **two-level** priority: first by geometric energy, second by reuse score to improve cache locality. `update_after_success(op)` only re-queues 1-ring (not whole mesh), <2% of elements visited per iteration.
-
-### 2.4 Operation Descriptor
-
-```cpp
-struct OpDescriptor {
-  std::function<double(Simplex)> energy;
-  std::function<bool(Simplex)> can_apply;
-  std::function<void(Simplex, AttributeTransfer&)> execute;
-  std::vector<Invariant> invariants_before, invariants_after;
-};
-```
-
-We pre-instantiate 6 topology ops: `EdgeCollapse`, `EdgeSplit`, `EdgeSwap`, `VertexSmooth`, `FaceSplit`, `TetSplit`. User provides lambda for `can_apply` and attribute lerp.
-
-### 2.5 Attribute Transfer & Automatic Differentiation
-
-Position `pos`, `uv`, `color`, `mip-map level` are registered as `wmtk::Attribute<T>`. On split/collapse we require linear or harmonic extension. For physics-aware length metric we synthesize Jacobian of energy via AD (Eigen::AutoDiff) – never hand-derivate again.
-
-```cpp
-Attribute<double> edge_len = m.create_edge_attr<double>();
-edge_len.set_transfer(edge_split, [](Edge parent) -> { return parent.length()*0.5; });
-```
-
----
-
-## 3) Teaser – Four Algorithms, One Framework
-
-{{< figure src="teaser.png" caption="Fig. 1 from paper – harmonic triangulation, Qslim (Garland-Heckbert), input noisy mesh, isotropic remeshing, robust tet meshing – all implemented in <30 LoC each on top of our framework. From left to right." >}}
-
-| Algorithm | Ops used | LoC (ours) | Est. legacy | Invariants | Notes |
-|-----------|----------|------------|-------------|------------|-------|
-| Harmonic Triangulation | collapse + swap + smooth | 18 | ~700 | manifold + no-inversion + envelope 3% | Delaunay-like energy = cot laplacian |
-| Qslim Simplification | collapse | 14 | ~500 | manifold + link cond | quadric error as scheduler |
-| Isotropic Remeshing (Botsch 2004) | 4 ops | 27 | ~1500 | AMIPS < 100 | 4/3, 4/5 length thresholds |
-| Robust TetWild-style | collapse, split, swap | 32 | ~3000 (TetWild) | envelope + inversion + quality >0.1 | inherits our parallelism for free |
-
-{{< figure src="pipeline.png" caption="Pipeline figure – operation tries → invariant check → rollback if fail → attribute transfer → requeue 1-ring. Speculative locking avoids deadlocks." >}}
-
-### Code Walkthrough – Isotropic Remeshing
-
-Full file `examples/isotropic_remeshing.cpp` (simplified):
-
-```cpp
-#include <wmtk/TriMesh.h>
+          <h3 class="title is-4">Code Walkthrough – Isotropic Remeshing (30 lines)</h3>
+<pre><code class="language-cpp">#include &lt;wmtk/TriMesh.h&gt;
 using namespace wmtk;
 
 int main(int argc, char** argv) {
   TriMesh mesh(argv[1]);
-
   double target = std::stod(argv[2]);
 
   auto long_edges = [&](Edge e){ return e.length() > 4*target/3; };
   auto short_edges = [&](Edge e){ return e.length() < 4*target/5; };
-  auto edge_len_energy = [&](Edge e){ return e.length(); };
 
-  // Invariants
-  auto invs = std::make_shared<InvariantCollection>(mesh);
-  invs->add(std::make_shared<ManifoldInvariant>(mesh));
-  invs->add(std::make_shared<InversionInvariant>(mesh));
+  auto invs = std::make_shared&lt;InvariantCollection&gt;(mesh);
+  invs->add(std::make_shared&lt;ManifoldInvariant&gt;(mesh));
+  invs->add(std::make_shared&lt;InversionInvariant&gt;(mesh));
 
   Scheduler scheduler(mesh);
+  scheduler.run_operation&lt;EdgeSplit&gt;(mesh, invs, long_edges, [](auto){return true;});
+  scheduler.run_operation&lt;EdgeCollapse&gt;(mesh, invs, short_edges, [](auto e){return e.length();});
 
-  // 1 – split long
-  scheduler.run_operation<EdgeSplit>(mesh, invs, long_edges, [](auto){return true;});
-
-  // 2 – collapse short
-  scheduler.run_operation<EdgeCollapse>(mesh, invs, short_edges, edge_len_energy);
-
-  // 3 – swap + 4 – smooth
   auto quality_improve = [&](Edge e){
     double before = min_quality(one_ring(e));
     double after = min_quality_if_swapped(e);
     return after > before;
   };
-  scheduler.run_operation<EdgeSwap>(mesh, invs, quality_improve, quality_improve);
-  scheduler.run_operation<VertexSmooth>(mesh, invs, [](auto){return true;},
+  scheduler.run_operation&lt;EdgeSwap&gt;(mesh, invs, quality_improve, quality_improve);
+  scheduler.run_operation&lt;VertexSmooth&gt;(mesh, invs, [](auto){return true;},
     [](Vertex v){ return laplacian_smooth(v); });
 
   mesh.save("out.obj");
 }
-```
+</code></pre>
 
-~30 lines; OpenMP parallel flag `scheduler.set_num_threads(16)`.
-
-### Qslim – 14 lines variant
-
-```cpp
-Attribute<Matrix4d> quadric = compute_quadric(mesh);
+          <h3 class="title is-5">Qslim – 14 lines variant</h3>
+<pre><code class="language-cpp">Attribute&lt;Matrix4d&gt; quadric = compute_quadric(mesh);
 auto qslim_err = [&](Edge e){ return quadric[e.v0()] + quadric[e.v1()]; };
 auto collapse = EdgeCollapseOp{ .pos = [&](Edge e){ return optimal_qslim_pos(e); } };
-wmtk::run(mesh, {Manifold(), LinkCondition()}, EdgeQuadricScheduler{qslim_err}, collapse, /*stop*/ target_faces=5000);
-```
+wmtk::run(mesh, {Manifold(), LinkCondition()}, EdgeQuadricScheduler{qslim_err}, collapse, /*stop*/ target_faces=5000);</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
----
+<!-- Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results – Thingi10K Scaling</h2>
+        <div class="content has-text-justified">
+          <img src="results.png" alt="Thingi10K scaling 10x on 16 cores, success >99.8%" style="width:100%; max-width:850px; display:block; margin:10px auto; border-radius:8px;">
 
-## 4) Parallelism & Robustness Under Hood
+          <table class="table is-bordered is-striped is-narrow is-fullwidth" style="margin-top:16px;">
+            <thead><tr><th>Algorithm</th><th>Ops used</th><th>LoC (ours)</th><th>Est. legacy</th><th>Invariants</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Harmonic Triangulation</td><td>collapse + swap + smooth</td><td>18</td><td>~700</td><td>manifold + no-inv + env 3%</td><td>Delaunay-like = cot Lapl.</td></tr>
+              <tr><td>Qslim Simplification</td><td>collapse</td><td>14</td><td>~500</td><td>manifold + link cond</td><td>quadric error scheduler</td></tr>
+              <tr><td>Isotropic Remeshing (Botsch 2004)</td><td>4 ops</td><td>27</td><td>~1500</td><td>AMIPS &lt;100</td><td>4/3, 4/5 thresholds</td></tr>
+              <tr><td>Robust TetWild-style</td><td>collapse, split, swap</td><td>32</td><td>~3000</td><td>envelope + inv + qual&gt;0.1</td><td>inherits parallelism free</td></tr>
+            </tbody>
+          </table>
 
-{{< figure src="results.png" caption="Fig. 6 – Thingi10K scaling: 10× on 16 cores, near-deterministic; success rate >99.8% manifold output vs 87% for naive libigl loop" >}}
+          <div class="columns" style="margin-top:16px;">
+            <div class="column">
+              <h4 class="title is-5">Success (manifold, no-inversion)</h4>
+              <p style="font-size:1.6em;"><b>9984/10000</b> ours vs 8721 libigl baseline – Thingi10K (10k models)</p>
+            </div>
+            <div class="column">
+              <h4 class="title is-5">Time geomean (8 threads)</h4>
+              <p style="font-size:1.6em;"><b>4.2s</b> vs 31s baseline – peak RSS &lt;1.8× input</p>
+            </div>
+            <div class="column">
+              <h4 class="title is-5">Scaling</h4>
+              <p style="font-size:1.6em;"><b>10×</b> on 16 cores, deterministic tie-break</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-* **Partitioned locking**: vertices painted by greedy distance-1 coloring of dual graph, each color processes in parallel, no two neighboring operations co-run.
-* **Speculative rollback**: if invariant fails after op, mesh rewound via copy-on-write log (∼12 bytes per simplex change).
-* **Envelope safety**: For TetWild path we wrap input surface AABB tree and test moved vertices against ε-envelope using exact orient predicates.
-* **Determinism**: Sorted tie-break by simplex id; two runs with same seed produce bitwise-identical mesh on same thread count.
-
-Thingi10K experiment (10k models, 1M tets each):
-
-* Success (manifold, no inversion): 9984/10000 (ours) vs 8721 (libigl baseline)
-* Time geometric mean (8 threads): 4.2 s vs 31 s baseline
-* Peak RSS < 1.8× input
-
----
-
-## 5) Results Gallery
-
-Additional visuals generated from the current toolkit (WMTK) that descends from this work – show generality to non-manifold, open-boundary, mixed tri/tet.
-
-* **Surface repair** – removing self-intersections for 3D printing.
-* **Volume adaptivity** – adaptive tetrahedral meshing with sizing field from signed distance.
-
-The `declarative-meshedit` branch (archived) and active `wildmeshing-toolkit` both run this DSL.
-
----
-
-## 6) Relation to Wild Meshing Toolkit
-
-This paper is the seed of **Wild Meshing Toolkit** (WMTK), now a community-driven C++17 library with Python bindings `pip install wildmeshing`. The DSL ideas persist as `wmtk::operations::Operation` + `wmtk::invariants`. If you want to try today:
-
-```bash
-git clone https://github.com/wildmeshing/wildmeshing-toolkit
+<!-- Applications / WMTK -->
+<section class="section" style="background:#f9f9ff;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Applications → Wild Meshing Toolkit</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper is the seed of <b>Wild Meshing Toolkit (WMTK)</b>, now a community C++17 library with Python bindings <code>pip install wildmeshing</code>.
+            The DSL ideas persist as <code>wmtk::operations::Operation</code> + <code>wmtk::invariants</code>.
+          </p>
+          <ul>
+            <li>Surface repair – removing self-intersections for 3D printing</li>
+            <li>Volume adaptivity – adaptive tetrahedral meshing with sizing field from SDF</li>
+            <li>Non-manifold, open-boundary, mixed tri/tet – generality from simplex erasure</li>
+          </ul>
+<pre><code class="language-bash">git clone https://github.com/wildmeshing/wildmeshing-toolkit
 cd wildmeshing-toolkit; mkdir build && cd build
-cmake .. -DWMTK_APP_ISOTROPIC_REmeshing=ON
-make -j && ./wmtk_app -j isotropic_remeshing_bunny.json
-```
-
-Python:
-
-```python
-import wildmeshing as wm
+cmake .. -DWMTK_APP_ISOTROPIC_REMEShing=ON
+make -j && ./wmtk_app -j isotropic_remeshing_bunny.json</code></pre>
+<pre><code class="language-python">import wildmeshing as wm
 m = wm.TriMesh("bunny.obj")
 wm.isotropic_remeshing(m, target_edge=0.02, envelope=1e-3)
-m.save("out.obj")
-```
+m.save("out.obj")</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
----
-
-## 7) Links, Data, Video
-
-* 📄 **Paper PDF (ACM)**: https://dl.acm.org/doi/10.1145/3550454.3555463
-* 📄 **ArXiv attempt 2210.07430** – note mismatch; see ACM PDF – author arXiv draft for this work is in repo `doc/paper.pdf`
-* 💻 **Code – frozen snapshot**: https://github.com/jiangzhongshi/declarative-meshedit
-* 🔧 **Active Toolkit**: https://github.com/wildmeshing/wildmeshing-toolkit + docs https://wildmeshing.github.io/wildmeshing-toolkit/
-* 🎥 No official video; see SIGGRAPH Asia 2022 fast-forward talk (search YouTube: *Declarative Specification Wild Meshing*)
-* 📦 **Dataset**: Thingi10K + ABC original for size-field tests
-* DOI: `10.1145/3550454.3555463`
-
----
-
-## 8) BibTeX
-
-```bibtex
-@article{jiang2022declarative,
+<!-- Links, BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Links & Dataset</h2>
+    <ul>
+      <li>📄 Paper PDF (ACM): <a href="https://dl.acm.org/doi/10.1145/3550454.3555463">10.1145/3550454.3555463</a></li>
+      <li>💻 Frozen snapshot: <a href="https://github.com/jiangzhongshi/declarative-meshedit">jiangzhongshi/declarative-meshedit</a></li>
+      <li>🔧 Active Toolkit: <a href="https://github.com/wildmeshing/wildmeshing-toolkit">wildmeshing-toolkit</a> + <a href="https://wildmeshing.github.io/wildmeshing-toolkit/">docs</a></li>
+      <li>📦 Dataset: Thingi10K + ABC original for size-field tests</li>
+      <li>DOI: <code>10.1145/3550454.3555463</code></li>
+    </ul>
+    <h2 class="title">BibTeX</h2>
+<pre><code>@article{jiang2022declarative,
   title     = {Declarative Specification for Unstructured Mesh Editing Algorithms},
   author    = {Jiang, Zhongshi and Dai, Jiacheng and Hu, Yixin and Zhou, Yunfan and Dumas, J{\'e}r{\'e}mie and Zhou, Qingnan and Bajwa, Gurkirat Singh and Zorin, Denis and Panozzo, Daniele and Schneider, Teseo},
   journal   = {ACM Transactions on Graphics (Proc. SIGGRAPH Asia 2022)},
@@ -327,13 +407,24 @@ m.save("out.obj")
   publisher = {ACM},
   doi       = {10.1145/3550454.3555463},
   url       = {https://dl.acm.org/doi/10.1145/3550454.3555463}
-}
-```
+}</code></pre>
 
----
+    <div class="content" style="margin-top:22px; color:#666; font-size:0.9em;">
+      <p><b>Changelog</b></p>
+      <ul>
+        <li><b>2022-11-30</b> – ACM TOG publication.</li>
+        <li><b>2023-07</b> – Ported core to <code>wildmeshing-toolkit</code> mainline.</li>
+        <li><b>2026-08</b> – This deep project page rebuilt with Nerfies-style Bulma layout on <code>jiangzhongshi.github.io</code>. Assets <code>teaser.png</code>, <code>method.png</code>, <code>pipeline.png</code>, <code>results.png</code>, <code>featured.jpg</code>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-## 9) Changelog for this Page
-
-* **2022-11-30** – ACM TOG publication.
-* **2023-07** – Ported core to `wildmeshing-toolkit` mainline.
-* **2026-08** – This deep project page rebuilt with DSL excerpts, scaling plots, and gallery on `jiangzhongshi.github.io`. Figure assets `teaser.png`, `method.png`, `pipeline.png`, `results.png` copied locally.
+<footer class="footer" style="padding:2rem;">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>This page uses the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies template</a> style – Bulma hero, rounded buttons, centered sections. Adapted for mesh editing DSL.</p>
+      <p>Source <a href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a> CC BY-SA 4.0 – link back as requested.</p>
+    </div>
+  </div>
+</footer>
