@@ -112,7 +112,7 @@ nerfies = true
               <span class="link-block">
                 <a href="https://github.com/jiangzhongshi/Scaffold-Map" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
-                </a>
+                </a><span class="tag is-light is-small" style="margin-left:6px; vertical-align:middle;" title="License from GitHub">No license</span>
               </span>
               <span class="link-block">
                 <a href="https://github.com/libigl/libigl/blob/master/tutorial/710_SCAF" class="external-link button is-normal is-rounded is-dark">
@@ -211,7 +211,7 @@ nerfies = true
           </ol>
           <h4>2. Weighted Barrier</h4>
           <p>Local injectivity maintained via log/barrier:</p>
-          <p>$$E_{barrier}(f)=\\sum_{t\\in D} \\begin{cases}E_{distort}(t) & \\det>0\\\\ +\\infty & \\text{otherwise}\\end{cases}+\\lambda E_{scaffold}$$</p>
+          <p>$$E_{barrier}(f)=\sum_{t\in D} \begin{cases}E_{distort}(t) & \det>0\\ +\infty & \text{otherwise}\end{cases}+\lambda E_{scaffold}$$</p>
           <p>Symmetric Dirichlet: σ₁²+σ₁⁻²+σ₂²+σ₂⁻², ARAP ‖F-R‖², LSCM, MIPS. Scaffold weight w<sub>S</sub>=0.1·area(S)/area(D) — soft, allows large stretch so distortion focuses on P. Hardening ε:1e-3→1e-5, Newton line-search ensures det>ε.</p>
           <h4>3. Covering Argument</h4>
           <p>Locally-injective PL map on complex that tessellates convex domain is a covering map onto its image (invariance of domain). Convex codomain + ∂D fixed ⇒ covering number 1 ⇒ homeomorphism. Extension to free boundary: ∂D slides along □, still injective.</p>
