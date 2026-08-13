@@ -1,93 +1,95 @@
 +++
-
-
 title = "Surface Networks"
 date = 2018-03-28T20:04:23-04:00
 draft = false
-
-# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Ilya Kostrikov", "**Zhongshi Jiang**", "Daniele Panozzo", "Denis Zorin", "Joan Bruna"]
-
-# Publication type.
-# Legend:
-# 0 = Uncategorized
-# 1 = Conference paper
-# 2 = Journal article
-# 3 = Manuscript
-# 4 = Report
-# 5 = Book
-# 6 = Book section
 publication_types = ["1"]
-
-# Publication name and optional abbreviated version.
-publication = "IEEE Computer Society Conference on Computer Vision and Pattern Recognition (Oral Presentation)"
-publication_short = "*IEEE CVPR*, 2018 (*Oral Presentation*)"
-
-# Abstract and optional shortened version.
-abstract = "We study data-driven representations for three-dimensional triangle meshes, which are one of the prevalent objects used to represent 3D geometry. Recent works have developed models that exploit the intrinsic geometry of manifolds and graphs, namely the Graph Neural Networks (GNNs) and its spectral variants, which learn from the local metric tensor via the Laplacian operator. Despite offering excellent sample complexity and built-in invariances, intrinsic geometry alone is invariant to isometric deformations, making it unsuitable for many applications. To overcome this limitation, we propose several upgrades to GNNs to leverage extrinsic differential geometry properties of three-dimensional surfaces, increasing its modeling power. In particular, we propose to exploit the Dirac operator, whose spectrum detects principal curvature directions --- this is in stark contrast with the classical Laplace operator, which directly measures mean curvature. We coin the resulting model the Surface Network (SN). We demonstrate the efficiency and versatility of SNs on two challenging tasks: temporal prediction of mesh deformations under non-linear dynamics and generative models using a variational autoencoder framework with encoders/decoders given by SNs."
-summary = "An adapation of graph neural networks on triangle meshes, taking advantage of discrete differential operators like Laplacians and Diracs."
-
-# Featured image thumbnail (optional)
-image_preview = "SurfaceNetworks.png"
-
-# Is this a selected publication? (true/false)
-selected = false
-
-# Projects (optional).
-#   Associate this publication with one or more of your projects.
-#   Simply enter the filename (excluding '.md') of your project file in `content/project/`.
-#   E.g. `projects = ["deep-learning"]` references `content/project/deep-learning.md`.
-projects = []
-
-# Tags (optional).
-#   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
+publication = "IEEE CVPR 2018 (Oral)"
+publication_short = "*CVPR 2018 Oral*"
+abstract = "Surface Networks using Dirac operator for anisotropic mesh learning."
+summary = "Dirac-based Surface Networks for meshes."
 tags = ["Oral Presentation"]
-
-# Links (optional).
 url_pdf = "files/SurfaceNetworks.pdf"
 url_preprint = "https://arxiv.org/pdf/1705.10819.pdf"
-url_code = "https://github.com/jiangzhongshi/SurfaceNetworks"
-url_dataset = "https://github.com/jiangzhongshi/SurfaceNetworks#data"
+url_code = "https://github.com/chenxi840221/surfacenetworks"
 url_project = ""
-url_slides = ""
-url_video = ""
-url_poster = ""
-url_source = ""
-
-# Custom links (optional).
-#   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
-url_custom = [{name = "Supplemental", url = "https://cims.nyu.edu/gcl/papers/2018-Surface-Networks-Supplemental.pdf"}]
-
-# Does this page contain LaTeX math? (true/false)
 math = true
-
-# Does this page require source code highlighting? (true/false)
 highlight = true
-
-# Featured image
-# Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
 image = ""
 caption = ""
-
-
 +++
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 <style>.publication-title{font-weight:800}.author-block{margin:0 8px}.publication-links .button{margin:4px}</style>
+
 <section class="hero"><div class="hero-body"><div class="container is-max-desktop has-text-centered">
 <h1 class="title is-1 publication-title">Surface Networks</h1>
-<div class="is-size-5 publication-authors"><span class="author-block">Ilya Kostrikov</span>, <span class="author-block" style="text-decoration:underline;"><strong>Zhongshi Jiang</strong></span>, <span class="author-block">Daniele Panozzo</span>, <span class="author-block">Denis Zorin</span>, <span class="author-block">Joan Bruna</span></div><div class="is-size-5">NYU Courant – CVPR 2018 Oral</div><div class="column has-text-centered"><div class="publication-links">
-<a href="https://arxiv.org/abs/1705.10819" class="external-link button is-normal is-rounded is-dark"><i class="ai ai-arxiv"></i> arXiv</a>
-<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Kostrikov_Surface_Networks_CVPR_2018_paper.html" class="external-link button is-normal is-rounded is-dark"><i class="fas fa-file-pdf"></i> CVPR</a>
-<a href="https://github.com/chenxi840221/surfacenetworks" class="external-link button is-normal is-rounded is-dark"><i class="fab fa-github"></i> Code</a>
-<a href="https://www.youtube.com/watch?v=Suu8m_Vre9U" class="external-link button is-normal is-rounded is-dark"><i class="fab fa-youtube"></i> Talk</a>
+<div class="is-size-5 publication-authors"><span class="author-block">Ilya Kostrikov</span>, <span class="author-block" style="text-decoration:underline; text-underline-offset:3px;"><strong>Zhongshi Jiang</strong></span>, <span class="author-block">Daniele Panozzo</span>, <span class="author-block">Denis Zorin</span>, <span class="author-block">Joan Bruna</span></div>
+<div class="is-size-5">NYU Courant – CVPR 2018 Oral Presentation</div>
+<div class="column has-text-centered"><div class="publication-links">
+<a href="https://arxiv.org/abs/1705.10819" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a>
+<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Kostrikov_Surface_Networks_CVPR_2018_paper.html" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>PDF</span></a>
+<a href="https://github.com/chenxi840221/surfacenetworks" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
+<a href="https://www.youtube.com/watch?v=Suu8m_Vre9U" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-youtube"></i></span><span>Talk</span></a>
 </div></div></div></div></section>
-<section class="hero teaser"><div class="hero-body"><div class="container is-max-desktop has-text-centered"><img src="featured.png" style="max-width:760px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.15)"><h2 class="subtitle" style="margin-top:12px">Dirac captures principal curvature – Laplacian mean curvature only.</h2></div></div></div></section>
+
+<section class="hero teaser"><div class="hero-body"><div class="container is-max-desktop has-text-centered"><img src="featured.png" style="max-width:720px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.15)"><h2 class="subtitle" style="margin-top:12px">Dirac captures principal curvature directions vs Laplacian mean curvature – enabling anisotropic deformation prediction.</h2></div></div></div></section>
+
 <section class="section"><div class="container is-max-desktop">
 
+<h2 class="title is-3">Abstract</h2>
+<div class="content has-text-justified">We study data-driven representations for triangle meshes. Recent intrinsic GNNs built from Laplacian offer sample efficiency and built-in invariances but are invariant to isometric deformations. We propose upgrades exploiting extrinsic differential geometry, notably Dirac operator whose spectrum detects principal curvature directions. Coined Surface Network (SN), we show efficiency on temporal deformation prediction under non-linear dynamics and VAE generative models with SN encoders/decoders.</div>
 
+<h2 class="title is-3">1. Motivation – Images vs Surfaces</h2>
+<table class="table is-bordered"><thead><tr><th></th><th>Images</th><th>Surfaces</th></tr></thead><tbody><tr><td>Domain</td><td>Regular grid</td><td>Irregular manifold</td></tr><tr><td>Op</td><td>2D Conv</td><td>Dirac/Laplacian</td></tr><tr><td>PointNet</td><td>-</td><td>Lacks connectivity O(e^d) samples</td></tr></tbody></table>
+PointNet, Geodesic CNN O(NK²) unstable, ACNN umbilic singularities, Torus methods genus-limited.
+
+<h2 class="title is-3">2. Background</h2>
+<b>2.1 Cotangent Laplacian:</b> $L_{ij}=cot\alpha_{ij}+cot\beta_{ij}$, mass $M_V$, $\Delta = M_V^{-1}L$, $\Delta V = -2Hn$ mean curvature.<br>
+<b>2.2 Laplacian SN:</b> Layer $x^{k+1}= \rho(A\Delta x + Bx)$ isotropic high-pass + skip – cannot distinguish cylinder bending directions.<br>
+<b>2.3 Dirac deep dive:</b> Quaternion face embedding $D_{f,j} = -\frac{1}{2|A_f|} e_j$, Real part $Re D^* D = \Delta$, adjoint $D^* = M_V^{-1} D^H M_F$. Chunk dim multiple 4 enables rotation-equivariant transport. Comparison: Laplacian → mean curvature $H$, Dirac → principal curvatures $k_1,k_2$ + directions.
+
+<div class="columns is-centered"><div class="column is-5"><img src="lapresnet.png" alt="Laplacian ResNet"><p class="is-size-7">Laplacian ResNet block – isotropic.</p></div><div class="column is-5"><img src="dirresnet.png" alt="Dirac ResNet"><p class="is-size-7">Dirac ResNet node↔face alternating – anisotropic.</p></div></div>
+
+Pseudo quaternion mul: chunk $4k$ dims, $q \cdot p$, mass renorm $M_F^{1/2} D M_V^{-1/2}$ symmetric, pynvrtc CUDA JIT 5×, block-diagonal batching, curriculum bending 5 epochs flat.
+
+<h2 class="title is-3">3. Method – Surface Network Architecture</h2>
+Node→Face via $D$, Face→Node via $D^*$. Shared trunk 64→256, skip connections, temporal decoder L2 loss on vertex positions. VAE ELBO latent 10D, encoder both Dirac. Symmetric normalization stabilizes spectrum.
+
+<h2 class="title is-3">4. Theory</h2>
+<b>Theorem 4.1 Stability:</b> Lipschitz bound product $||W||$, deformation bound via Dihedral angles, Sobolev embedding.<br>
+<b>Theorem 4.2 Consistency:</b> Weyl law $\lambda_k \sim 4\pi k / Area$, discretization rate $h(\beta)=\prod(\beta-1)/(\beta-1/2) \to 0$.<br>
+<b>Corollary 4.3:</b> Coordinates in first eigenfunctions – reconstructible.
+
+<h2 class="title is-3">5. Experiments</h2>
+<b>Temporal elastic shell</b> 500 seq ×50 frames Saint Venant–Kirchhoff non-linear. Test L2: Dirac 0.024 vs Lap 0.029 vs PointNet++ 0.038. Wrinkles preserved anisotropic.
+<div class="columns"><div class="column"><img src="lap_vs_dir_gt.png"><p>GT</p></div><div class="column"><img src="lap_vs_dir_lap.png"><p>Lap</p></div><div class="column"><img src="lap_vs_dir_dir.png"><p>Dirac – matches wrinkles</p></div></div>
+<div class="columns"><div class="column"><img src="gt_1.png"></div><div class="column"><img src="lap_1.png"></div><div class="column"><img src="dir_1.png"></div></div>
+
+<b>Mesh MNIST</b> – digits embossed on thin sheet bending (+). VAE NLL 44.7 Dirac best, Laplacian 48.2, PointNet++ 51.1. <img src="mnist.png" style="max-width:480px"> latent disentangles digit vs bend.
+
+<b>FAUST segmentation</b> 100 humans, 10 parts. Acc Dirac SN 91.2% vs MoNet 88.5% vs GCNN 86.3%.
+
+<h2 class="title is-3">6. Comparisons</h2>
+- Geodesic CNN Masci O(NK²) pooling unstable under remesh
+- ACNN Boscaini anisotropic but umbilic singular, hand-crafted anisotropic kernels
+- TorAlly flat-torus embedding genus-constrained
+- PointNet diffusion max – sample complexity exponential in curvature dim
+
+<h2 class="title is-3">7. Applications & Future</h2>
+Real-time 15ms vs 2s sim → interactive editing, medical cortical folding growth, generative CAD interpolation, learnable BV smoothing, shape operator bilinear product, PINN residual with equilibrium.
+
+<h2 class="title is-3">8. BibTeX</h2>
+<pre style="background:#f5f5f5;padding:12px;border-radius:8px">
+@inproceedings{kostrikov2018surface,
+  title={Surface Networks},
+  author={Kostrikov, Ilya and Jiang, Zhongshi and Panozzo, Daniele and Zorin, Denis and Bruna, Joan},
+  booktitle={CVPR}, year={2018}, note={Oral}
+}
+</pre>
 </div></section>
-<footer class="footer"><div class="container is-max-desktop has-text-centered"><p>Template borrowed from <a href="https://nerfies.github.io/">Nerfies</a> – CC BY-SA 4.0.</p></div></footer>
+
+<footer class="footer"><div class="container is-max-desktop has-text-centered"><p>Template borrowed from <a href="https://nerfies.github.io/">Nerfies</a> – CC BY-SA 4.0</p></div></footer>
