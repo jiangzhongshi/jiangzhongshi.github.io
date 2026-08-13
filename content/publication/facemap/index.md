@@ -96,26 +96,31 @@ highlight = true
   </div>
 </section>
 
-<!-- TEASER HERO – single female head + rotating placeholder -->
+<!-- TEASER HERO – wide 16:9 hero + rotating video row -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body has-text-centered">
-      <div class="columns is-vcentered is-centered">
-        <div class="column is-5">
-          <img src="featured.jpg" alt="FaceMap single female head saliency thumb" class="teaser-img" loading="lazy"/>
-          <p class="is-size-7 has-text-grey" style="margin-top:0.4rem;">Single female head – predicted saliency (warm = high sensitivity). 814×900 aesthetic thumb per site spec.</p>
-        </div>
-        <div class="column is-7">
+    <div class="hero-body has-text-centered" style="padding-top:1rem;">
+      <img src="teaser_wide.png" alt="FaceMap wide hero – single female head plus distortion sensitivity map eyes to cheeks" class="teaser-img" style="max-height:none; width:100%; max-width:1120px; aspect-ratio:2/1; object-fit:cover;" loading="eager"/>
+      <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">Wide hero 1400×700 (2:1) – left: single female head thumb (814×900 portrait kept as featured.jpg for site list) – right: perceptually-weighted allocation eyes&gt;wrinkles&gt;mouth&gt;cheeks. Teaser backup portrait: teaser_portrait.png.</p>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+        <strong>FaceMap</strong> learns where humans notice distortion and reallocates polys / texels / splats there – SROCC 0.82.
+      </h2>
+      <div class="columns is-centered" style="margin-top:0.8rem;">
+        <div class="column is-6">
           <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#f5f5f5;">
             <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; border:2px dashed #bbb;">
-              <i class="fas fa-play-circle" style="font-size:3rem; color:#888;"></i>
+              <i class="fas fa-play-circle" style="font-size:2.5rem; color:#888;"></i>
               <p class="is-size-6" style="margin-top:8px;">Rotating face compare – FaceMap vs uniform (5s loop)</p>
-              <p class="is-size-7 has-text-grey">Front → +45° → Front @65K Gaussians – front teaser renders in suppl Fig. 14-15</p>
+              <p class="is-size-7 has-text-grey">Front → +45° → Front @65K Gaussians – suppl Fig. 14-15 – wide hero keeps thumb clean</p>
             </div>
           </div>
-          <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
-            <strong>FaceMap</strong> learns where humans notice distortion and reallocates polys / texels / splats there.
-          </h2>
+        </div>
+        <div class="column is-6 is-flex is-align-items-center">
+          <div class="has-text-left">
+            <p class="is-size-6"><strong>Featured thumb preserved:</strong> <code>featured.jpg</code> 814×900 portrait single female head – used by Wowchemy project list for aesthetic &lt;3-subject rule.</p>
+            <p class="is-size-7 has-text-grey" style="margin-top:6px;">Portrait teaser backup: <code>teaser_portrait.png</code> 814×900 – stimuli 10×5×6 grid (original).</p>
+            <p class="is-size-7" style="margin-top:8px;"><span class="tag is-info">16:9 wide</span> <span class="tag is-success">1400×700</span> <span class="tag is-light">252KB</span> hero – no stretching of portrait thumb.</p>
+          </div>
         </div>
       </div>
     </div>
