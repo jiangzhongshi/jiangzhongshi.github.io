@@ -224,7 +224,7 @@ wmtk::run(m,invariants,scheduler,op_collapse);</code></pre>
       <div class="column is-full-width">
         <h2 class="title is-3">Language Design – Operation Descriptors & Invariants as Functors</h2>
         <div class="content has-text-justified">
-          <img src="method.png" alt="System layers: DSL -> registry -> WMTK runtime -> parallelism" style="width:100%; max-width:900px; display:block; margin:12px auto; border-radius:8px;">
+          <img src="method.png" alt="System layers: DSL -> registry -> WMTK runtime -> parallelism" style="width:100%; max-width:900px; height:auto; display:block; margin:12px auto; border-radius:8px; background:#fff; object-fit:contain;" class="img-fluid">
 
           <h3 class="title is-4">Mesh Abstraction Erased</h3>
           <p>
@@ -275,7 +275,7 @@ wmtk::run(m,invariants,scheduler,op_collapse);</code></pre>
       <div class="column is-full-width">
         <h2 class="title is-3">Scheduler, Parallel Coloring & Rollback</h2>
         <div class="content has-text-justified">
-          <img src="pipeline.png" alt="Pipeline: op tries -> invariant check -> rollback if fail -> attribute transfer -> requeue 1-ring" style="width:100%; max-width:850px; display:block; margin:10px auto; border-radius:8px;">
+          <img src="pipeline.png" alt="Pipeline: op tries -> invariant check -> rollback if fail -> attribute transfer -> requeue 1-ring – flowchart text readable" style="width:100%; max-width:900px; height:auto; display:block; margin:10px auto; border-radius:8px; background:#fff; object-fit:contain;" class="img-fluid is-fullwidth" loading="lazy">
           <ul>
             <li><b>Scheduler = Active Set Learning.</b> Two-level priority: geometric energy first, reuse score second for cache locality. <code>update_after_success(op)</code> only re-queues 1-ring (&lt;2% visited/iter).</li>
             <li><b>Partitioned locking.</b> Vertices painted by greedy distance-1 coloring of dual graph; each color processes in parallel, no two neighboring ops co-run.</li>
@@ -334,7 +334,7 @@ wmtk::run(mesh, {Manifold(), LinkCondition()}, EdgeQuadricScheduler{qslim_err}, 
       <div class="column is-full-width">
         <h2 class="title is-3">Results – Thingi10K Scaling</h2>
         <div class="content has-text-justified">
-          <img src="results.png" alt="Thingi10K scaling 10x on 16 cores, success >99.8%" style="width:100%; max-width:850px; display:block; margin:10px auto; border-radius:8px;">
+          <img src="results.png" alt="Thingi10K scaling 10x on 16 cores, success >99.8% – white bg true composite" style="width:100%; max-width:900px; height:auto; display:block; margin:10px auto; border-radius:8px; background:#fff; object-fit:contain;" class="img-fluid">
 
           <table class="table is-bordered is-striped is-narrow is-fullwidth" style="margin-top:16px;">
             <thead><tr><th>Algorithm</th><th>Ops used</th><th>LoC (ours)</th><th>Est. legacy</th><th>Invariants</th><th>Notes</th></tr></thead>
