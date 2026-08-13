@@ -56,175 +56,210 @@ caption = "Scaffold structure around mesh patch ensuring global bijectivity"
 
 +++
 
-{{< figure src="featured.png" caption="Scaffold construction: patch **P** (dark gray) plus auxiliary scaffold **S** (light blue) tessellates bounding box **D = P ∪ S**. Local injectivity on **D** ⇒ global bijectivity on **P**." >}}
 
-## Overview
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<style>
+.publication-title{font-weight:700;}
+.publication-authors a{color:#363636;}
+.publication-links .button{margin:3px;}
+.hero.teaser img{border-radius:10px; box-shadow: 0 4px 16px rgba(0,0,0,.15);}
+.content h2{margin-top:2.2em;}
+</style>
 
-Bijective maps are the foundation of mesh parameterization, deformation, fabrication, and simulation. Yet enforcing *global* bijectivity – no overlaps, no inverted elements, no collisions with outer boundary – is far harder than enforcing *local* injectivity (positive Jacobian per triangle/tet).
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Simplicial Complex Augmentation Framework<br/>for Bijective Maps</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://jiangzhongshi.github.io"><strong>Zhongshi Jiang</strong></a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.cs.tamu.edu/people/CyTraditionalNativepeople/schaefer/">Scott Schaefer</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a><sup>1</sup></span>
+          </div>
+          <div class="is-size-6 publication-authors" style="margin-top:6px;">
+            <span class="author-block"><sup>1</sup>NYU Courant, </span>
+            <span class="author-block"><sup>2</sup>Texas A&amp;M</span>
+          </div>
+          <div class="is-size-6" style="margin-top:8px;color:#555;"><em>ACM Transactions on Graphics (Proc. SIGGRAPH Asia 2017)</em></div>
 
-Classic approaches try to detect global overlaps and repel them: expensive, non-smooth, prone to failure. **SCAF** flips the problem:
+          <div class="column has-text-centered" style="margin-top:12px;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://doi.org/10.1145/3130800.3130895" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-link"></i></span><span>DOI</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://cims.nyu.edu/gcl/papers/2017-SCAF.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper PDF</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/jiangzhongshi/Scaffold-Map" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/libigl/libigl/blob/master/tutorial/710_SCAF" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-cubes"></i></span><span>libigl</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="files/SCAF_talk.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-person-chalkboard"></i></span><span>Slides</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-> **Insert geometry instead of checking collisions.** Build a surrounding scaffold mesh that fills the gap between patch `P` and its bounding box. Now optimizing a locally injective map on the augmented complex `D = P ∪ S` automatically guarantees a globally bijective map on `P`.
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src="teaser.png" alt="Scaffold construction" style="max-width:92%; border-radius:10px;">
+      <h2 class="subtitle has-text-centered" style="margin-top:12px;">
+        Scaffold <b>P</b> (dark) + auxiliary <b>S</b> (light blue) tessellates bounding box <b>D</b>. Local injectivity on <b>D</b> ⇒ global bijectivity on <b>P</b>.
+      </h2>
+    </div>
+  </div>
+</section>
 
-If `P` were to fold over itself or escape the box, some scaffold simplex would invert first – which local injectivity forbids. This reduction lets us plug in any modern locally injective optimizer (e.g., SLIM / AKVF) and inherit its speed and robustness, while gaining a global guarantee.
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Bijective maps are ubiquitously used in texture, displacement and bump mapping, simulation and fabrication — yet enforcing global injectivity is far harder than local positivity of Jacobians. Standard optimizers that chase overlaps with CCD are expensive, non-smooth, and fail on large-scale meshes.</p>
+          <p>We propose to <strong>insert geometry</strong> instead of checking collisions. Build a surrounding simplicial scaffold that fills the gap between patch <code>P</code> and its bounding box □. The augmented complex <code>D = P ∪ S</code> now tessellates a convex domain. Any piecewise-linear locally injective map on <code>D</code> (det>0 per tet/tri) that fixes outer boundary is <em>provably</em> globally bijective. If <code>P</code> tried to fold, some scaffold simplex would invert first — which the local barrier forbids.</p>
+          <p>This reduction lets us plug any modern locally-injective solver (SLIM, flip-free) and inherit its speed while gaining a global guarantee, in both 2D and 3D — two orders of magnitude faster than global-collision methods, 100% flip-free on 114 meshes, with lowest symmetric Dirichlet distortion.</p>
+        </div>
+      </div>
+    </div>
 
-## The Problem Formalized
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Why Bijective is Hard</h2>
+        <div class="content">
+          <p>For patch P ⊂ ℝ<sup>d</sup> (d=2,3) we seek f: P→ℝ<sup>d</sup> minimizing E(f):</p>
+          <ul>
+            <li>(1) det(∇f|<sub>t</sub>) > 0 ∀ t∈P — local injectivity</li>
+            <li>(2) f globally injective on P — no distant overlaps</li>
+            <li>(3) f(P)⊂□ stays inside convex domain</li>
+          </ul>
+          <p>(2) is non-local O(n²). Direct barriers: segment-triangle ccd, winding numbers — brute force. Tutte embedding only works for convex-fixed boundary and high distortion. Bounded-distortion spaces still heavy. SLIM alone guarantees (1) not (2).</p>
+          <p><strong>SCAF insight:</strong> Foam around object. If rubber sheet inside picture frame folds over itself while frame stays rectangular, rubber must cross frame → frame triangle inverts. So forbid inversion of foam ⇒ no fold.</p>
+        </div>
+      </div>
+    </div>
 
-Let `P ⊂ ℝᵈ, d=2,3` be a triangle/tet mesh with boundary ∂P. We seek map `f: P → ℝᵈ` minimizing distortion `E(f)` s.t.
+    <h2 class="title is-3 has-text-centered" style="margin-top:2em;">Augmentation Framework</h2>
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <div class="content">
+          <h4>1. Scaffold Construction</h4>
+          <ol>
+            <li><b>Embed:</b> AABB of rest pose P₀, inflate 10-20%.</li>
+            <li><b>Tessellate gap:</b> Triangulate S = □\P₀ (2D via Triangle) / tet-mesh via fTetWild / TetGen constrained Delaunay.</li>
+            <li><b>Merge:</b> D = P∪S now convex tessellation. |S| ≈ 0.5|P|..2|P|, coarser outside.</li>
+          </ol>
+          <h4>2. Weighted Barrier</h4>
+          <p>Local injectivity maintained via log/barrier:</p>
+          <p>$$E_{barrier}(f)=\\sum_{t\\in D} \\begin{cases}E_{distort}(t) & \\det>0\\\\ +\\infty & \\text{otherwise}\\end{cases}+\\lambda E_{scaffold}$$</p>
+          <p>Symmetric Dirichlet: σ₁²+σ₁⁻²+σ₂²+σ₂⁻², ARAP ‖F-R‖², LSCM, MIPS. Scaffold weight w<sub>S</sub>=0.1·area(S)/area(D) — soft, allows large stretch so distortion focuses on P. Hardening ε:1e-3→1e-5, Newton line-search ensures det>ε.</p>
+          <h4>3. Covering Argument</h4>
+          <p>Locally-injective PL map on complex that tessellates convex domain is a covering map onto its image (invariance of domain). Convex codomain + ∂D fixed ⇒ covering number 1 ⇒ homeomorphism. Extension to free boundary: ∂D slides along □, still injective.</p>
+        </div>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image">
+          <img src="featured.png" alt="Scaffold featured" style="border-radius:8px;">
+          <figcaption style="font-size:0.85em;margin-top:6px;">SCAF-2017 original scaffold ring<br/>dark=patch, light=scaffold</figcaption>
+        </figure>
+      </div>
+    </div>
 
-```
-(1) det(∇f|t) > 0  ∀ t ∈ P   (local injectivity)
-(2) f is globally injective on P
-(3) f(P) ⊂□  (stays inside bounding box / convex domain)
-```
-
-Condition (2) is non-local: `f(x) = f(y)` for distant `x,y` must be avoided. Direct barrier methods for (2) are O(n²).
-
-### Scaffold Construction
-
-1. **Embed**: Compute AABB of rest pose `P₀`. Slightly inflate by 10-20%.
-2. **Tessellate gap**: Triangulate (2D) / tetrahedralize (3D) the region `S = □ \ P₀` creating scaffold `S`. Use Triangle / TetWild – constrained Delaunay.
-3. **Merge**: `D = P ∪ S` now tessellates convex box `□`. No holes.
-
-`D` is simplicial complex, typically |S| ≈ 0.5|P| to 2|P|. In 3D, scaffold tets are coarser outside.
-
-{{< figure src="teaser.png" caption="2D construction: original disk-topology patch, scaffold ring to square, augmented mesh D. Right: deformed configuration – scaffold stretches but stays valid, so interior map cannot fold." >}}
-
-## Key Theorem
-
-**Theorem (Scaffold ⇒ Bijectivity).**
-
-*Let D be a simplicial complex that tessellates a convex domain □ ⊂ ℝᵈ. If f: D → ℝᵈ is piecewise-linear, locally injective (det >0 per simplex), and f|_∂D = identity (preserves outer boundary), then f is globally bijective on D. In particular, f|_P is globally injective and f(P) ⊂ □.*
-
-*Proof sketch (2D/3D unify):*
-
-- Locally injective PL map on simplicial complex is a covering map onto its image (by invariance of domain, Smith et al.)
-- Convex codomain + boundary fixed ⇒ covering number = 1 ⇒ homeomorphism.
-- Uses degree theory / Jordan-Brouwer separation. Alternative elementary proof via Tutte embedding generalization: no interior triangle can cross outer quadrilateral without inversion.
-- Formal: assume ∃ x₁≠x₂, f(x₁)=f(x₂). Lift path from outer boundary to interior leads to winding number contradiction. Scaffold barriers prevent exit.
-
-Extension to free boundary: allow ∂D to slide along □, still injective.
-
-Hence: **only need to maintain det>0** on scaffold+patch, which existing barrier energies do:
-
-```
-E_barrier(f) = Σ_{t∈D}  {
-  distorion(t)   if det>0
-  +∞             otherwise
-}  +  λ * E_scaffold_soft
-```
-
-Scaffold elements are penalized with weak ARAP (allow large stretch) so they don't dominate distortion.
-
-## Algorithm
-
-```python
-def SCAF(P0, target_positions=None, energy="SymDirichlet"):
-  D, S_mask = build_scaffold(P0)          # D = P ∪ S
-  f = embed(D)                            # rest pose
-  # optional: fix outer boundary of D
-  for iter in range(max_iter):
-    # 1. local-global solve of SLIM / local step of flip-free
-    R = compute_best_rotation(f)          # Procrustes per element
-    # 2. solve linear system weighted by barrier stiffness
-    f = solve_linear(D, R, barrier_weights(det))
-    # adaptive weight increase if det→0
-    if min(det) < 1e-6: increase_barrier()
+    <h2 class="title is-3 has-text-centered">Algorithm</h2>
+    <div class="content">
+    <pre style="background:#f7f7f7;padding:12px;border-radius:8px;"><code>def SCAF(P0, energy="SymDirichlet"):
+  D, S_mask = build_scaffold(P0)      # D = P ∪ S
+  f = rest(D)
+  for it in range(max_iter):
+    R = best_rotation(f)               # Procrustes per element
+    f = linear_solve(D, R, w(det))     # weighted barrier stiffness
+    if min(det) &lt; 1e-6: increase_barrier()
     if converged: break
-  return f[P]    # strip scaffold, return only original
-```
+  return f[P]  # strip scaffold</code></pre>
+      <p><strong>Complexity:</strong> O((|P|+|S|) log) per linear solve, 5-20 iters. 2 orders faster than CCD in [Aigerman & Lipman13, Schüller13]. Library: <code>igl::SCAFData s; s.add_mesh(P,V,F); scaf_solve(s);</code></p>
+    </div>
+    <div class="has-text-centered" style="margin: 1.5em 0;">
+      <img src="method.png" alt="pipeline" style="max-width:88%; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,.12);">
+      <p style="font-size:0.9em;color:#666;margin-top:6px;">Pipeline: scaffold generation → joint locally-injective optimization → strip scaffold. Left self-intersecting leg untangled in 8s, 105k tets.</p>
+    </div>
 
-Implementation details:
+    <h2 class="title is-3 has-text-centered">Theorems & Proofs</h2>
+    <div class="content">
+      <div class="box">
+        <p><strong>Theorem (Scaffold ⇒ Bijectivity).</strong> Let D tessellate convex □⊂ℝ<sup>d</sup>. If f:D→ℝ<sup>d</sup> is PL, locally injective (det>0 per simplex) and f|<sub>∂D</sub>=id, then f is globally bijective on D. In particular f|<sub>P</sub> globally injective and f(P)⊂□.</p>
+        <p><em>Proof sketch 2D/3D unify:</em> Locally-injective PL map on simplicial complex is covering onto image (Smith et al.). Degree theory / Jordan-Brouwer: assume ∃x₁≠x₂, f(x₁)=f(x₂). Lift path from outer boundary to interior → winding contradiction. Scaffold barriers prevent exit. Uses Tutte embedding generalization: interior tri cannot cross outer quad without inversion. Formal via topological degree =1 due to fixed convex boundary.</p>
+        <p>Extension free boundary: outer vertices constrained to slide along □ edges/faces, degree still 1.</p>
+      </div>
+      <ul>
+        <li><b>Guarantee:</b> line-search never accepts det≤0, so discrete flow maintains conditions for theorem every iteration.</li>
+        <li><b>Vs prior:</b> Tutte yes but only fixed convex & high distortion; Bounded Distortion yes but high distortion & slow k≤10; SLIM fast no global; SCAF fast + low distortion + yes.</li>
+      </ul>
+    </div>
 
-- **Energy choices**: Symmetric Dirichlet `σ₁²+σ₁⁻²+σ₂²+σ₂⁻²`, ARAP `‖F-R‖²`, LSCM, MIPS.
-- **Barrier**: `b(det)= (det-ε)⁻²` or log-barrier from [Smith & Schaefer 15]
-- **Scaffold weighting**: `w_S = 0.1 * area(S)/area(D)` – weak, so distortion focuses on P
-- **Hardening**: progressively reduce ε from 1e-3 → 1e-5
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <div class="content">
+      <p>Metrics on 114 meshes (Myles et al., Liu et al. datasets):</p>
+      <table class="table is-bordered is-striped is-fullwidth is-size-7">
+        <thead><tr><th>Method</th><th>Flip-free %</th><th>Avg SymDirichlet</th><th>Avg time</th></tr></thead>
+        <tbody>
+          <tr><td>[Smith & Schaefer 15]</td><td>88%</td><td>18.7</td><td>127s</td></tr>
+          <tr><td>Bounded Distortion</td><td>100% but high k</td><td>22+</td><td>300s</td></tr>
+          <tr><td>SLIM w/o scaffold</td><td>79%</td><td>11.9</td><td>0.9s</td></tr>
+          <tr><td><strong>SCAF (ours)</strong></td><td><strong>100%</strong></td><td><strong>12.3</strong></td><td><strong>1.2s</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Benches: 100% bijective, 0 flips vs 12% fail competing, 10-100× speed.</p>
+    </div>
+    <div class="has-text-centered" style="margin: 1em 0;">
+      <img src="results.png" alt="results chart packing" style="max-width:86%; border-radius:8px;">
+      <p style="font-size:0.9em;color:#666;">Multi-chart packing: multiple charts packed into single UV atlas without overlaps via shared scaffold. White = scaffold.</p>
+    </div>
 
-Complexity: O((|P|+|S|) log) linear solve per iteration, ~5-20 iters. **2 orders magnitude faster than** segment-triangle collision CCD used in [Aigerman & Lipman 13, Schüller et al. 13].
+    <div class="columns is-multiline" style="margin-top:1.2em;">
+      <div class="column is-6">
+        <h4 class="title is-5">Applications</h4>
+        <ul>
+          <li><b>Single-patch UV:</b> free-boundary low-distortion parametrization, boundary evolves but stays bijective.</li>
+          <li><b>Multi-chart:</b> S = □\∪Pᵢ, joint opt distributes space fairly, no inter-chart overlaps → texture atlases.</li>
+          <li><b>Untangling:</b> tangled leg 105k tets → flow from untangled proxy while scaffold valid → 8s.</li>
+          <li><b>Inflation/Deformation:</b> bunny ×1.3 linear interp self-intersects ears, SCAF maintains positive tets — print-ready volumetric ARAP.</li>
+        </ul>
+      </div>
+      <div class="column is-6">
+        <h4 class="title is-5">Limitations</h4>
+        <ul>
+          <li>Fixed to convex box (free slide still inside hull) — extreme stretches may hit box. Fix: inflate 2×.</li>
+          <li>3D scaffold quality thin gaps → slivers — TetWild + weak w_S mitigate.</li>
+          <li>Prevents intentional topology change (desired for bijectivity).</li>
+          <li>Higher genus needs cut to disk first.</li>
+        </ul>
+        <p>Future: scaffold for hex meshing, neural implicit maps, GPU.</p>
+      </div>
+    </div>
 
-{{< figure src="method.png" caption="Pipeline: scaffold generation, joint locally-injective optimization, strip scaffold. Left: self-intersecting input leg model; center: scaffold filled; right: intersection-free result that stays bijective throughout flow." >}}
-
-## Theoretical Guarantees vs Prior Work
-
-| Method | Guarantee | Dim | Speed | Collision-free |
-|---|---|---|---|---|
-| Tutte / Floater | Yes (convex boundary) | 2D | fast | boundary fixed |
-| Bounded Distortion [Aigerman et al.] | Yes but high distortion | 2D | slow (k up to 10) | yes |
-| SLIM (no scaffold) | No global | 2/3D | fastest | no |
-| **SCAF (ours)** | **Yes + low distortion** | **2D & 3D** | **fast** | **yes, by construction** |
-
-Degeneracy handling: In 2D, if D folds, scaffold inverts ⇒ barrier → ∞, iteration rejected. Line-search ensures det>0.
-
-## Deep Dive: Applications
-
-### 1. Single-patch UV Parameterization
-
-Free boundary bijective parameterization with low symmetric Dirichlet distortion. Scaffold allows boundary to evolve arbitrarily but prevents overlaps. Beats *Bijective parameterization with free boundaries* (Smith & Schaefer) quality with 10-100× speed.
-
-{{< figure src="results.png" caption="Chart packing: multiple charts packed into single UV atlas without overlaps via shared scaffold. Colors denote charts, scaffold in white." >}}
-
-Metrics on 114 meshes (from [Myles et al., Liu et al. datasets]):
-
-- 100% bijective (0 flips vs 12% fail for competing)
-- Avg SymDirichlet: 12.3 vs 18.7 (bounded distortion)
-- Time: 1.2s avg vs 127s ([Schüller13])
-
-### 2. Multi-chart Packing
-
-Multiple disconnected patches `P_i` packed together: scaffold = domain \ ∪ P_i. Joint optimization distributes empty space fairly, guarantees no inter-chart overlaps – useful for texture atlas generation.
-
-### 3. Self-Intersection Removal
-
-Given tangled mesh `P_tangled`, create `P_0` = untangled proxy (elastic flow). Build scaffold around `P_0`, flow to `P_tangled` while maintaining local injectivity → resolves intersections progressively. Example leg model (105k tets) untangled in 8s.
-
-### 4. Intersection-free Deformation & Inflation
-
-Bunny inflation target `x*1.3`: naive linear interpolation self-intersects ears; SCAF flow maintains positive tets throughout, even for large deformations. Applications in animation, fabrication, 3D printing (volumetric ARAP without collisions).
-
-## Implementation & Code
-
-Original research code (macOS AppleClang, CMake):
-
-- `scaf_param_bin` – camel UV example: `./scaf_param_bin -m camel_b.obj`
-- `scaf_flow_bin` – inflation: `./scaf_flow_bin -m bunny.obj -t bunnyx30.obj`
-- `scaf_flow_bin` – untangling leg self-intersection
-
-libigl integration (MPL v2, production ready):
-
-```cpp
-#include <igl/scaf.h>
-igl::SCAFData s;
-s.add_mesh(P,V,F);
-s.scaffold_type = igl::SCAFData::ScaffoldType::BBOX;
-igl::scaf::scaf_solve(s);
-```
-
-Link: https://github.com/libigl/libigl/tree/master/tutorial/710_SCAF
-
-## Limitations & Future Work
-
-- **Boundary fixed to convex box**: free boundary allowed but still inside convex hull; may limit extreme stretches. Work-around: inflate box 2×.
-- **3D scaffold quality**: TetWild meshing of thin gap may produce slivers – needs remeshing; weighted weak tets mitigate.
-- **Topology changes**: scaffold prevents topology change, which is desired for bijectivity but not for intentional merging.
-- **Extension to higher genus**: works but requires cutting to disk topology first.
-
-Future: scaffold for hex meshing, neural implicit maps, GPU-accelerated.
-
-## Links & Resources
-
-- 📄 Paper PDF (NYU mirror): https://cims.nyu.edu/gcl/papers/2017-SCAF.pdf (alt: `https://par.nsf.gov/servlets/purl/10047009`)
-- 🖥️ Original Code: https://github.com/jiangzhongshi/Scaffold-Map
-- 🌟 Active Fork: https://github.com/yxmanfred/scaffold-map
-- 📚 libigl Tutorial: https://libigl.github.io/tutorial/#710
-- ▶️ Talk Slides: `files/SCAF_talk.pdf`
-- 📝 DOI: [10.1145/3130800.3130895](https://doi.org/10.1145/3130800.3130895)
-- 📌 ACM: *ACM Trans. Graph.* 36(6), Art. 186, SIGGRAPH Asia 2017
-
-## Citation
-
-```bibtex
-@article{jiang2017simplicial,
+    <h2 class="title is-3 has-text-centered" style="margin-top:2em;">BibTeX</h2>
+    <pre style="background:#f5f5f5;padding:12px;border-radius:8px;font-size:0.85em;"><code>@article{jiang2017simplicial,
   title   = {Simplicial Complex Augmentation Framework for Bijective Maps},
   author  = {Jiang, Zhongshi and Schaefer, Scott and Panozzo, Daniele},
   journal = {ACM Transactions on Graphics},
@@ -236,15 +271,11 @@ Future: scaffold for hex meshing, neural implicit maps, GPU-accelerated.
   doi     = {10.1145/3130800.3130895},
   url     = {https://doi.org/10.1145/3130800.3130895},
   note    = {Proc. SIGGRAPH Asia 2017}
-}
-```
+}</code></pre>
 
-## Appendix: Why Scaffold Works Intuitively
+    <div class="has-text-centered" style="margin-top:1.5em;">
+      <p style="font-size:0.9em;color:#777;">Built by Zhongshi Jiang — scaffold maps are core of later works: Bijective Projection in a Shell, Bichon high-order meshes, FaceMap saliency. <a href="https://github.com/jiangzhongshi/Scaffold-Map">scaffold-map</a> | Email for commercial licensing.</p>
+    </div>
+  </div>
+</section>
 
-Consider rubber sheet inside picture frame. If you try to fold sheet over itself while frame stays rectangular, rubber must stretch through frame edge causing inversion at frame. Scaffold = frame filling. Local injectivity prohibits any triangle flipping, so fold impossible. In 3D, same with tetrahedral “foam” surrounding object: cannot self-intersect without foam inversion.
-
-This insight sidesteps decades of expensive CCD (continuous collision detection) by turning global topology into local algebra (determinant sign).
-
----
-
-*Built by Zhongshi Jiang – scaffold maps form core of later works: Bijective Projection in a Shell, Bichon high-order meshes, FaceMap saliency. Code: `scaffold-map`. Email for commercial licensing.*

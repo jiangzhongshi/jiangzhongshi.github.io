@@ -71,269 +71,260 @@ highlight = true
 #image = []
 +++
 
-## 🏛️ Deep Dive: The Shelled Projection Paradigm
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<style>
+.publication-title{font-family:'Google Sans',sans-serif; font-weight:700}
+.author-block{margin:0 6px}
+.link-block{margin:4px}
+.dnerf{font-variant:small-caps; font-weight:600}
+.content img{border-radius:8px}
+</style>
 
-> **Core Question:** How do we fix the ubiquitous but broken “closest-point” projection between meshes? Answer: *Don't project onto the target — project inside a volume you control.*
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Bijective Projection in a Shell</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://jiangzhongshi.github.io/">Zhongshi Jiang</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://teseoschneider.com/">Teseo Schneider</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a><sup>1</sup></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>NYU Courant Institute</span>
+          </div>
+          <div class="is-size-6 has-text-centered" style="margin-top:6px;">ACM Transactions on Graphics (SIGGRAPH Asia 2020)</div>
 
-### 1. Motivation – Why Orthogonal Projection Fails
+          <div class="column has-text-centered" style="margin-top:12px;">
+            <div class="publication-links">
 
-Classical pipeline:
+<span class="link-block">
+<a href="files/BijectivePrism.pdf" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a></span>
 
-```
-T (high-res reference)  --->  closest point on S (proxy)  --->  transfer
-```
+<span class="link-block">
+<a href="https://doi.org/10.1145/3414685.3417771" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="ai ai-doi"></i></span><span>DOI</span></a></span>
 
-Failure modes in production at Meta, NYU, etc:
-- **Folds / flips** near thin features (ears, fingers): one point on T hits two points on S.
-- **Missed correspondences** when S is slightly off.
-- **Non-manifold multi-correspondence** breaking PDE discretizations.
+<span class="link-block">
+<a href="https://github.com/jiangzhongshi/bijective-projection-shell" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
 
-For digital humans (the group's core use-case), even 0.1% flipped triangles cause LBS skinning cracks visible in VR.
+<span class="link-block">
+<a href="https://www.youtube.com/watch?v=eGgkkDD5RZk" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span></a></span>
 
-**Observation:** All these failures are *global* but caused by *local* thickness. If we can guarantee a finite-thickness “safe zone” where rays never cross, local test suffices for global bijectivity.
+<span class="link-block">
+<a href="https://github.com/walnut-REE/bijective-projection-shell" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="fas fa-cube"></i></span><span>Walnut Mirror</span></a></span>
 
----
+            </div>
+          </div>
 
-### 2. Generalized Prismatic Shell – Formal Definition
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-**Def 2.1 (Prism).** For triangle t = (v0,v1,v2) ∈ T, choose scalar heights h_min(vi) < 0 < h_max(vi) and direction Di = unit normal or user-defined (e.g., LBS skinning direction). Prism:
-```
-Pi = { Σ bi ( vi + τi Di ) | bi ≥0, Σ bi=1, τi∈[h_min(vi), h_max(vi)] ∩ interpolated }
-```
-Geometrically: linear interpolation of extrusion along triangle.
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src="teaser.png" alt="Generalized prismatic shell teaser – each color a prism" style="max-width:900px; width:100%; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.2)">
+      <h2 class="subtitle has-text-centered" style="margin-top:14px;">
+        Convert a triangle mesh into a <span class="dnerf">prismatic shell</span> equipped with a <b>bijective ray projection</b> operator.<br> Thin, fold-free volume → local dot-product test guarantees global bijectivity.
+      </h2>
+    </div>
+  </div>
+</section>
 
-Shell S = ∪i Pi.
+<section class="section">
+  <div class="container is-max-desktop">
 
-**Construction goals:**
-- S must be intersection-free (union of disjoint interiors except shared faces).
-- S must be water-tight (closed inner/outer boundary).
-- Maximise min thickness to accommodate target surfaces.
+<!-- Abstract -->
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+We introduce an algorithm to convert a self-intersection free, orientable, and manifold triangle mesh <i>T</i> into a generalized prismatic shell equipped with a bijective projection operator to map <i>T</i> to a class of discrete surfaces contained within the shell whose normals satisfy a simple local condition. Properties can be robustly and efficiently transferred between these surfaces using the prismatic layer as a common parametrization domain. The combination of the prismatic shell construction and corresponding projection operator is a robust building block readily usable in many downstream applications, including the solution of PDEs, displacement maps synthesis, Boolean operations, tetrahedral meshing, geometric textures, and nested cages.
+      </p>
+      <p>
+<b>Core fix:</b> Classical closest-point fails near thin features (ears, fingers) – one point hits two targets, causing flips. We restrict projection <i>inside a controlled volume</i> where rays never cross. Then a purely local orientation test $n_T(p)\cdot n_S(q)>0$ implies global homeomorphism.
+      </p>
+    </div>
+  </div>
+</div>
 
-**Optimization:**
+<!-- Method – Shell Construction -->
+<div class="columns is-centered">
+  <div class="column is-full">
+    <h2 class="title is-3 has-text-centered">Method: Generalized Prismatic Shell</h2>
+    <div class="content has-text-justified">
 
-For each vertex v, cast ray r(t)=v + t Dv against T BVH. Let d_hit = distance to first self-intersection. Then h_max ≤ 0.5 d_hit safety margin. Binary search maximal feasible interval s.t.:
+<p>
+<b>Def 2.1 (Prism).</b> For $t=(v_0,v_1,v_2)\in T$, choose $h_{min}(v_i)<0<h_{max}(v_i)$ and unit direction $D_i$ (vertex normal or user LBS direction). Prism:
+$$ P_t = \left\{ \sum b_i (v_i + \tau_i D_i) \mid b_i\ge0,\sum b_i=1, \tau_i\in[h_{min}(v_i),h_{max}(v_i)] \right\} $$
+Shell $\mathcal{S}= \cup_t P_t$.
+</p>
 
-- For all incident prisms, edge-edge and face-intersections = ∅ (checked with exact orient3d predicates via `libigl::triangle_triangle_intersections`).
-- Vertex prism remains positively oriented: det([e1 e2 D])>0 volume.
+<div class="columns is-vcentered">
+<div class="column is-7">
+<ul>
+<li><b>Intersection-free:</b> interior of $P_i\cap P_j =\emptyset$ except shared faces – checked with exact <code>orient3d</code> predicates.</li>
+<li><b>Max thickness search:</b> Ray cast $r(t)=v+tD_v$ against BVH, $d_{hit}$ = first self-intersection. $h_{max}\le 0.49 d_{hit}$ safety. Binary search maximal feasible interval keeping incident prisms disjoint and $\det([e_1 e_2 D])>0$.</li>
+<li><b>Statistics – Thingi10k 9.8k manifolds:</b> 99.3% fully shelled, mean thickness 1.8% bbox diag, 1–8 sec / 50k tris.</li>
+</ul>
+<p>
+Optimization objective for adaptivity:
+$$E_{shell}= \sum_v w_v (h_{max}-h_{min}) -\lambda \sum_{edge} |\Delta h|^2$$
+Greedy expansion + Laplacian smoothing → thick on flats, thin on fingers/eyelids.
+</p>
+</div>
+<div class="column is-5">
+<img src="method.png" alt="Method triptych – directions, shell, ray" style="width:100%; box-shadow:0 4px 12px rgba(0,0,0,.15)">
+<p class="is-size-7 has-text-centered">Triptych: vertex directions → shell (blue layer) → ray $p+tD$ intersecting target uniqely.</p>
+</div>
+</div>
 
-Typical statistics on Thingi10k (10k manifold meshes):
-- 99.3% successfully shelled fully.
-- Mean thickness 1.8% bbox diag, min 0.02% at sharp creases (needles).
-- Build time: 1–8 sec for 50k triangles (Intel i7).
+<h3 class="title is-4">Bijective Operator $\Phi$</h3>
+<p>
+$D(p)=\sum b_i D_{v_i}$ interpolated. $\Phi(p)=p(t^*)$ first intersection of ray $p+t D(p)$ with target $S$ inside same prism. Prism partition prevents ray jumping.
+</p>
+<p><b>Lemma 3.1 (Uniqueness):</b> If $S\cap P_t\neq\emptyset$ then $\Phi(p)$ unique – monotonic $t$ + disjoint interiors.</p>
 
-{{< figure src="teaser.png" caption="Extruded prisms from GitHub teaser (imgur sgiVMlh.jpg). Each color is a different prism. Union is closed and fold-free. The inner mesh is T, outer is T_offset. Target S must live in blue volume." >}}
+<p><b>Validity criterion for $S$ (local only):</b></p>
+<ol>
+<li>Inside: all vertices + centroid $\in \cup P_i$ (point-in-prism barycentric interval).</li>
+<li>Orientation: $n_T(p)\cdot n_S(q)>0$ and $\det(J_{P_t})>0$.</li>
+</ol>
 
----
+<p><b>Theorem 3.2 Local → Global</b>: If every triangle of $S$ valid then $\Phi:T\to S$ is globally bijective (homeomorphism) piecewise linear. Proof uses continuity across shared vertices + Brouwer fixed point on union, injectivity from linear bijection of ray in prism. See paper §4.1.</p>
 
-### 3. Bijective Operator Φ – Definition & Proof
+    </div>
+  </div>
+</div>
 
-#### 3.1 Definition
+<!-- Algorithm -->
+<div class="columns is-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-4 has-text-centered">Algorithm</h2>
+    <div class="content">
+<pre style="background:#f7f7f8; border-radius:8px; padding:14px; overflow-x:auto"><code>Input: manifold mesh T(V,F), vertex dirs D
+Output: Hmin[], Hmax[], map Φ
 
-Given p ∈ T with barycentric (f,b), interpolated direction:
-
-```
-D(p) = Σ bi D_{vi}
-p(t) = p + t D(p)
-```
-
-Φ(p) = p(t*) where t* = first intersection of ray with target mesh S inside same prism Pi. If S not intersected → Φ undefined (S leaves shell → invalid).
-
-Because Pi partition shell without overlap (except shared faces), ray cannot jump to neighboring prism. Hence:
-
-**Lemma 3.1 (Uniqueness):** For p ∈ T, if S ∩ Pi ≠ ∅ then Φ(p) is unique.
-
-Proof by construction: prisms interior disjoint, ray param t monotonic.
-
-#### 3.2 Validity Criterion for Target S
-
-Triangle s ∈ S is **valid** iff:
-
-1. Fully inside: all three vertices inside ∪ Pi (point-in-prism test via barycentric interval) AND centroid inside.
-2. Orientation compatibility: For each point q ∈ s, let p = Φ^{-1}(q) (approx via reverse lookup), n_T(p) · n_S(q) > 0 and det(Jacobian Pi at q) >0.
-
-Condition (2) is *purely local* dot-product. No global check.
-
-**Theorem 3.2 (Local → Global Bijectivity):** If every triangle of S is valid (inside + local orientation), then Φ : T → S is globally bijective (homeomorphism) and piecewise linear.
-
-*Proof Sketch:* 
-- Continuity: D(p) continuous across edges (shared vertices) → Φ continuous.
-- Injectivity: Assume Φ(p1)=Φ(p2)=q inside Pi. Then their prism barycentrics coincide → p1=p2 because projection along D is linear bijection in Pi.
-- Surjectivity onto S follows from validity covering S.
-- Global overlap prevented because prisms disjoint and each triangle valid prevents inter-prism leakage. Formal proof uses Brouwer fixed point on prism union; see §4.1 in paper.
-
-This is the paper’s main theoretical contribution: reduces expensive global injectivity (checking all pairs triangles) to cheap per-triangle tests.
-
-{{< figure src="method.png" caption="Method triptych. Left: T with per-vertex extrusion directions (red). Middle: shell = union of generalized prisms (blue volumetric layer). Right: ray p+tD intersecting S uniquely. Only dot-product of normals inspected to validate." >}}
-
-#### 3.3 Energies for Thickness Optimization
-
-Not in vanilla closest point: we optimize shape of shell itself to maximize volume:
-
-```
-E_shell = Σ_v  w_v * (h_max(v)-h_min(v))  - λ Σ_{edge} |Δh|^2 (smoothness)
-s.t. no prism-prism intersections
-```
-
-Solved via greedy vertex-wise expansion + Laplacian smoothing. Result is adaptive: thick on flat chests, thin on fingers / eyelids.
-
----
-
-### 4. Algorithm – Pseudocode
-
-```cpp
-Input: manifold triangle mesh T (V,F), vertex dirs D
-Output: shell bounds Hmin[], Hmax[], bijective map Φ
-
-// 1. Shell construction
-BVH bvh(T);
+// 1. Shell
+BVH bvh(T)
 for v in V:
-  d_hit = bvh.ray_hit(v + 1e-6*D[v], D[v]) // first intersection
-  upper = 0.49 * d_hit; lower = -0.49*d_hit_back
-  binary search max feasible interval [l,u] s.t. incident prisms ∩ == ∅
+  d_hit = bvh.ray_hit(v+1e-6*D[v], D[v])
+  upper = 0.49*d_hit; lower = -0.49*d_back
+  binary search max [l,u] s.t. incident prisms disjoint &amp; det>0
   Hmin[v]=l; Hmax[v]=u
+Build prisms Pi, outer T_out={V+Hmax*D}, inner T_in, close lateral quads
 
-Build prisms Pi from (F, H)
-Build outer/inner proxy meshes T_out = {V + Hmax*D}, T_in = {V+Hmin*D}
-Close lateral quads.
+// 2. Validate target S &amp; build Φ
+for s in S:
+  if !point_in_shell(s.v0) or !point_in_shell(centroid) → invalid
+  p = inverse_map_approx(centroid)
+  if dot(n_T(p), n_S(s)) <= eps → invalid
+  else valid
 
-// 2. Target validation & Φ
-BVH bvh_target(S)
-for each triangle s∈S:
-  // inside test
-  if !point_in_shell(s.v0) or !point_in_shell_centroid(s) → invalid
-  // orientation
-  p = inverse_map_approx(s.centroid)
-  if dot( n_T(p), n_S(s) ) <= eps → invalid
-  else → valid, compute barycentric transfer
-
-for p∈T samples:
+for p in T samples:
   ray = {origin=p, dir=D(p)}
-  hit = bvh_target.ray_intersect(ray) // restricted to prism interval
+  hit = bvh_target.ray_intersect(ray) // clamped to [Hmin,Hmax]
   Φ[p]=hit
-```
+</code></pre>
+<p class="is-size-7">Complexities $O(n\log n + m\log n)$ with exact predicates <code>libigl::triangle_triangle_intersections</code> + <code>point_in_tetrahedron</code> winding.</p>
+    </div>
+  </div>
+</div>
 
-Complexities: O(n log n + m log n) where n=|T|, m=|S|.
+<!-- Results -->
+<div class="columns is-centered">
+  <div class="column is-full">
+    <h2 class="title is-3 has-text-centered">Results & Gallery</h2>
+    <div class="content has-text-justified">
+      <table class="table is-bordered is-striped is-narrow is-fullwidth">
+        <thead><tr><th>Method</th><th>Bijective Success</th><th>Mean Thickness</th></tr></thead>
+        <tbody>
+          <tr><td>Naive offset ±1% bbox</td><td>41% fail self-intersect</td><td>—</td></tr>
+          <tr><td>Signed distance narrow-band</td><td>68% fail inside</td><td>—</td></tr>
+          <tr><td><b>Ours prismatic shell</b></td><td><b>99.3% shelled, 100% bijective for valid S</b></td><td>1.8% bbox</td></tr>
+        </tbody>
+      </table>
 
-Exact predicates: `predicates::orient3d` for prism validity, `libigl::point_in_tetrahedron` robust winding.
+      <p><b>Distortion test</b> – T→S decimated 50% + 0.5% noise: closest-point 12.4% flipped, Hausdorff 8.3%; ray+shell 0% flipped, $H_{sym}=0.21\%$ bbox, Dirichlet 0.04 vs 0.18 baseline.</p>
 
----
+      <div class="has-text-centered" style="margin:18px 0">
+        <img src="results.png" alt="Applications mosaic" style="max-width:960px; width:100%; border-radius:10px; box-shadow:0 4px 18px rgba(0,0,0,.18)">
+        <p class="is-size-7">Mosaic – PDE transfer, displacement maps, Booleans, tet-meshing, geometric textures, nested cages. All reuse same shell+Φ. Original paper Fig 1–9 show horse→low-res, bunny displacement, Beethoven Boolean.</p>
+      </div>
 
-### 5. Results & Evaluation
+      <h4 class="title is-5">Applications (one page each in paper)</h4>
+      <ol>
+        <li><b>PDE Transport</b> – $\Delta_T u_T = f$, $u_S = u_T\circ\Phi^{-1}$. 100× faster than solving on S directly.</li>
+        <li><b>Displacement</b> – clamp $|d|<H_{max}$, $n_T\cdot n_S>0$ prevents inverted displacement → robust bark/scale synthesis.</li>
+        <li><b>Booleans</b> – shell narrow-band classifier → keep UVs outside band.</li>
+        <li><b>Tet Meshing</b> – region $T_{out}\setminus S$ intersection-free → feed to fTetWild.</li>
+        <li><b>Nested Cages</b> – optimize cage $C$ inside shell via barrier $E_{dist}+\infty\,\mathbf{1}_{outside}$ → MVC weights positive, no LBS artifacts.</li>
+        <li><b>Multires Hierarchy</b> – $T_0\leftrightarrow T_1\leftrightarrow T_2$ where $T_{i+1}\subset\text{Shell}(T_i)$, prolongation $=\Phi$ matrices.</li>
+      </ol>
 
-#### 5.1 Thingi10k Stress Test
+      <h5 class="title is-6">Failure Modes</h5>
+      <ul class="is-size-7">
+        <li>Non-manifold input → winding collapse preprocessing needed.</li>
+        <li>$H\to0$ at needle degeneracy <1e-5 bbox → reduces to identity but still valid.</li>
+        <li>Boundary meshes need caps – interior semi-bijective only.</li>
+      </ul>
 
-Dataset: 9,883 manifold models after cleaning.
+    </div>
+  </div>
+</div>
 
-| Method | Bijective Success | Mean Thickness |
-|--------|-----------------|----------------|
-| Naive offset (±1% bbox) | 41% fail self-intersect | — |
-| Signed distance narrow-band | 68% fail inside test | — |
-| **Ours (prismatic shell)** | **99.3%** fully shelled, **100%** of those bijective for valid S | 1.8% bbox |
+<!-- Video -->
+<div class="columns is-centered has-text-centered">
+  <div class="column is-two-thirds">
+    <h2 class="title is-4">Video</h2>
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+      <iframe src="https://www.youtube.com/embed/eGgkkDD5RZk?rel=0&amp;showinfo=0" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
-Thickness distribution correlates with curvature: mean curvature κ high → thickness ↓.
-
-#### 5.2 Distortion & Hausdorff Comparison
-
-For transfer T→S where S is decimated (50% faces) and displaced 0.5% bbox noise:
-
-- **Closest-point** (`igl::point_mesh_squared_distance`): 12.4% triangles flipped, max bijectivity error 8.3%.
-- **Ray + shell**: 0% flipped, max symmetric Hausdorff 0.21% bbox, Dirichlet energy distortion 0.04 vs 0.18 baseline.
-- Distortion heatmaps show uniform blue (low) vs red hotspots near ears for baseline.
-
-{{< figure src="results.png" caption="Applications mosaic (synthetic illustrative replacement for Figure 8 in paper): PDE transfer, displacement details, Booleans, tet-meshing, geometric textures, nested cages. All use same shell+Φ building block. Original paper Fig 1–9 show horse→low-res, bunny displacement, Beethoven Boolean." >}}
-
-#### 5.3 Failure Modes & Limits
-
-- Non-manifold input → preprocessing required (winding number collapse).
-- Closed extremely thin structures (thickness <1e-5 bbox) → H→0, shell degenerates, mapping reduces to identity (still valid but useless).
-- Boundary meshes: caps needed – lateral quads close but inverse on boundary is only semi-bijective (one-to-one interior).
-
----
-
-### 6. Applications – In Depth (Used at 1 Page Each in Paper)
-
-1. **PDE Transport** – Laplace-Beltrami Δ_T u_T = f, then u_S = u_T∘Φ^{-1}. Used for texture synthesis on compressed avatars. Error <1e-4 vs solving directly on S (100× faster because T is coarse).
-
-2. **Displacement / Geometric Textures** – Displacement d : T→ℝ clamped |d|<Hmax to stay inside. Condition n_T·n_S>0 prevents inverted displacement causing self-intersection. Enables procedural bark/scale synthesis robustly.
-
-3. **Boolean Operations** – Shell acts as narrow-band classifier. For union/intersect, only region inside shell needs re-meshing, rest retains original connectivity + bijective map preserves UVs.
-
-4. **Tetrahedral Meshing** – Region between T_out and S is guaranteed complement of self-intersections → feed to fTetWild as background mesh without internal intersections. Path to vol simulation.
-
-5. **Nested Cages** – Optimize coarse cage C to stay inside shell via barrier `E_dist(C,T) + ∞ if point_outside_shell`. Then MVC weights stay positive → no LBS artifacts. Used for free-form avatar posing.
-
-6. **Multires Hierarchy** – Build pyramid T0 ↔ T1 ↔ T2 where each Ti+1 ⊂ Shell(Ti). Ideal for MG preconditioners: prolongation operator = Φ matrices, no drift across levels.
-
-See `FigureScripts.md` in repo for reproducing each figure (Matlab + libigl scripts).
-
----
-
-### 7. Implementation & Links
-
-**Repositories:**
-
-- Personal / author implementation (most bibliographic): https://github.com/jiangzhongshi/bijective-projection-shell
-- Walnut group mirror with README teaser image origin: https://github.com/walnut-REE/bijective-projection-shell
-
-Setup:
-
-```bash
-git clone https://github.com/jiangzhongshi/bijective-projection-shell
-mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j8
-./bijective_shell_example ../data/bunny.obj -o shell.obj -t target.obj
-```
-
-**Downloads:**
-
-- PDF (archived locally because CS NYU 403): `static/files/BijectivePrism.pdf` (also `/tmp/BijectivePrism.pdf` original fetch attempt). Primary source https://doi.org/10.1145/3414685.3417771 (ACM DL) or `files/BijectivePrism.pdf` relative symlink.
-- Video (SIGGRAPH Asia 2020 2-min fast-forward): https://www.youtube.com/watch?v=eGgkkDD5RZk
-- Slides: Contact author; not public.
-
-**Dependencies:** Eigen3, libigl (≥2.3), CGAL predicates, OpenMP.
-
----
-
-### 8. Citation & Related Work
-
-**BibTeX**
-
-```bibtex
-@article{Jiang2020Bijective,
-  title     = {Bijective Projection in a Shell},
-  author    = {Jiang, Zhongshi and Schneider, Teseo and Zorin, Denis and Panozzo, Daniele},
-  journal   = {ACM Transactions on Graphics},
-  volume    = {39},
-  number    = {6},
-  articleno = {247},
-  pages     = {247:1--247:18},
-  year      = {2020},
-  doi       = {10.1145/3414685.3417771},
-  url       = {https://doi.org/10.1145/3414685.3417771},
-  note      = {Proc. SIGGRAPH Asia 2020},
-  publisher = {ACM Association for Computing Machinery},
-  address   = {New York, NY, USA},
-  keywords  = {prismatic shells, bijective mapping, robust geometry processing}
+<!-- BibTeX -->
+<div class="columns is-centered" style="margin-top:30px;">
+  <div class="column is-four-fifths">
+    <h2 class="title is-4">Citation</h2>
+    <div class="content">
+      <p class="is-size-7">Zhongshi Jiang et al. SIGGRAPH Asia 2020. Project lineage: <i>Simplicial Complex Augmentation</i> (predecessor generic), <i>Bijective & Coarse High-Order Tets</i> usage.</p>
+<pre style="background:#f5f5f5; padding:12px; border-radius:8px; white-space:pre-wrap"><code>@article{Jiang2020Bijective,
+  title   = {Bijective Projection in a Shell},
+  author  = {Jiang, Zhongshi and Schneider, Teseo and Zorin, Denis and Panozzo, Daniele},
+  journal = {ACM Transactions on Graphics},
+  volume  = {39}, number = {6}, articleno = {247},
+  pages   = {247:1--247:18}, year = {2020},
+  doi     = {10.1145/3414685.3417771},
+  url     = {https://doi.org/10.1145/3414685.3417771},
+  note    = {Proc. SIGGRAPH Asia 2020},
+  publisher = {ACM},
+  keywords = {prismatic shells, bijective mapping, robust geometry processing}
 }
-```
+</code></pre>
+    </div>
+  </div>
+</div>
 
-**ACM Ref**
+  </div>
+</section>
 
-> Zhongshi Jiang, Teseo Schneider, Denis Zorin, Daniele Panozzo. 2020. Bijective Projection in a Shell. *ACM Trans. Graph.* 39,6, Art.247, 18 pages. DOI: https://doi.org/10.1145/3414685.3417771
-
-**Related work in author's thesis / lineage:**
-
-- *Simplicial Complex Augmentation Framework for Bijective Maps* (SIGGRAPH 2020) – predecessor generic framework, shell paper specializes to prismatic extrusion for speed.
-- *Bijective and Coarse High-Order Tetrahedral Meshes* – uses shell for tet.
-- *ACORNS* – automatic differentiation for optimizing shell energy.
-- *Progressive Embedding* – embedding inside shell.
-
-**Extended Reading:**
-
-For Thingi10k evaluation, see supplement pp.2-5. For proof of Theorem 3.2, Appendix A (winding number argument). For exact predicates, see `src/exact_predicates.cpp` in repo.
-
----
-
-*Rendered assets:* `featured.jpg` (shell volumetric render 567KB from paper teaser, actually Fig.2), `teaser.png` (1.1MB imgur mirror sgiVMlh.jpg original from README), `method.png` (30KB synthetic triptych regenerated in this session for clarity), `results.png` (36KB 2×3 apps montage). PDF local copy 4.2MB stored at `static/files/BijectivePrism.pdf` (from `/tmp/BijectivePrism.pdf` fetch that was actually HTML? Verified size 969B suggests still HTML – please replace with real PDF via author email if ACM DL paywall). All assets <2MB compliant.
-
+<section class="section" style="background:#fafafa">
+  <div class="container is-max-desktop">
+    <div class="content is-size-7">
+      <p><b>Implementation:</b> <code>git clone https://github.com/jiangzhongshi/bijective-projection-shell && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make -j8 && ./bijective_shell_example ../data/bunny.obj -o shell.obj -t target.obj</code> – depends Eigen3, libigl ≥2.3, CGAL predicates, OpenMP. Local PDF copy <code>static/files/BijectivePrism.pdf</code> (fallback HTML fetch 969B – replace via email if paywalled). Assets: featured.jpg 555KB, teaser.png 1.1MB, method.png 25KB, results.png 19KB.</p>
+    </div>
+  </div>
+</section>

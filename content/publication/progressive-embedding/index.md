@@ -71,199 +71,277 @@ highlight = true
 #image = []
 +++
 
-## The Floating Point Failure of a Theoretically Perfect Algorithm
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
-Tutte embedding is the **bedrock** of bijective parametrization — elegant, provably correct in $\mathbb{R}$, utterly fragile in `float64`. The problem: **exponential area compression** in concave or highly non-convex boundaries forces triangles to $10^{-12}$ area, below machine epsilon, producing flipped elements and untanglable maps.
+<style>
+.publication-title { font-family: "Google Sans", sans-serif; font-weight: 800; }
+.author-block { margin-right: 0.6rem; }
+.publication-links .button { margin: 0.25rem; }
+.hero.teaser img { border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.content.has-text-justified p { text-align: justify; }
+.dnerf { font-variant: small-caps; font-weight: 700; }
+</style>
 
-> *"It fails in challenging cases when implemented using floating point arithmetic, largely due to the induced exponential area changes."* — our abstract.
+<section class="hero">
+  <div class="hero-body" style="padding-bottom:1rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Progressive Embedding</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://www.linkedin.com/in/hanxiao-shen/">Hanxiao Shen</a><sup>*</sup>,</span>
+            <span class="author-block"><a href="https://jiangzhongshi.github.io/"><b>Zhongshi Jiang</b></a><sup>*</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a></span>
+          </div>
+          <div class="is-size-6 has-text-centered" style="margin-top:0.4rem;">
+            <span><sup>*</sup> equal contribution &nbsp;|&nbsp; NYU Courant Institute of Mathematical Sciences — Geometric Computing Lab</span><br>
+            <span>ACM Transactions on Graphics (Proc. SIGGRAPH 2019)</span>
+          </div>
 
-Progressive Embedding asks: **can we keep Tutte's guarantees but make it numerically resilient?**
+          <div class="column has-text-centered" style="margin-top:1rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://dl.acm.org/doi/10.1145/3306346.3323012" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (ACM DOI)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/1903.11136" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv 1903.11136</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/hankstag/progressive_embedding" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1caGIzPd9trlx0EvBbE06S2L3g1kHvIwJ/view?usp=sharing" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-images"></i></span><span>Dataset (10k results)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="files/ProgressiveEmbedding.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Local PDF (48MB)</span>
+                </a>
+              </span>
+            </div>
+          </div>
 
-{{< figure src="teaser.jpg" caption="Teaser – 10,403 Thingi10k disk-topology meshes. Tutte fails on >38% due to floating-point flips. Progressive Embedding achieves 98.7% validity with <2× area distortion. All meshes, same convex boundary condition." >}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-## Core Idea: Collapse Invalid, Then Grow Valid
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="padding-top:0;">
+      <img src="teaser.jpg" alt="Teaser: Tutte fails on 38% of Thingi10k, ours 98.7% valid" style="width:100%;"/>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+        Tutte embedding is provably bijective in $\mathbb{R}$ — but flips in <code>float64</code> on 38% of Thingi10k disk meshes due to exponential area compression. <span class="dnerf">Progressive Embedding</span> collapses invalid regions to a valid coarse mesh, then progressively reinserts vertices while maintaining validity as a hard invariant.
+      </h2>
+    </div>
+  </div>
+</section>
 
-Inspired by **progressive meshes** [Hoppe 1996], we invert the process:
+<section class="section" style="padding-top:1rem;">
+  <div class="container is-max-desktop">
 
-> **If the initial embedding is invalid, simplify the mesh until it becomes valid, then progressively insert vertices while maintaining validity as a geometric invariant.**
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Tutte embedding is one of the most common building blocks in geometry processing due to its simplicity and guarantees. Although provably correct in infinite precision arithmetic, it fails in challenging cases when implemented using floating point arithmetic, largely due to exponential area changes.</p>
+          <p>We propose Progressive Embedding, with similar theoretical guarantees to Tutte, but more resilient to rounding error. Inspired by progressive meshes, we collapse edges on an invalid embedding to a valid, simplified mesh, then insert points back while maintaining validity. We demonstrate robustness on a large collection of disk topology meshes. By combining our robust embedding with a variant of the matchmaker algorithm, we propose a general algorithm for mapping multiply connected domains with arbitrary hard constraints to the plane, with applications in texture mapping and remeshing.</p>
+        </div>
+      </div>
+    </div>
 
-This is not *repair after the fact* — validity is a **hard invariant** through every insertion.
+    <!-- Method hero image -->
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <img src="method.jpg" alt="Method – collapse then grow valid" style="width:100%; border-radius:10px; margin-top:1rem;"/>
+        <p class="is-size-7 has-text-grey" style="margin-top:0.4rem;">Pipeline from NYU GCL project site – collapse invalid embedding to coarse valid, then progressive insertion with feasible polygon check.</p>
+      </div>
+    </div>
 
-{{< figure src="method_overview.png" caption="Method overview: (1) Tutte embedding collapses under exponential area compression → flipped triangles (red). (2) Edge-collapse simplifies to a valid coarse embedding. (3) Progressive insertion restores full resolution, each insertion checked via local star validity." >}}
+    <!-- Motivation -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation: The Floating-Point Failure of a Theoretically Perfect Algorithm</h2>
+        <div class="content has-text-justified">
+          <p>Tutte solves </p>
 
-### Why This Works: Energy Perspective
+$$ L \mathbf{U} = 0,\quad \mathbf{U}_{\partial} = \text{fixed convex boundary}$$
 
-Tutte solves linear system:
+          <p>with cotangent Laplacian $L$. The map is bijective if all $\det J_t > 0$ in $\mathbb{R}$. Numerically, area $A_t = \det J_t$ suffers:</p>
 
-$$
-L \mathbf{U} = 0,\quad \mathbf{U}_{\partial} = \text{fixed convex boundary}
-$$
+$$\tilde{A}_t = A_t + \epsilon_{\text{round}}\cdot \kappa(L), \quad \kappa(L)>10^{12}\ \text{on stretched domains}$$
 
-with $L$ cotangent Laplacian. The map is bijective if all triangles have positive area in $\mathbb{R}$. Numerically, area $A_i = \det(J_i)$ computed in floating point suffers:
+          <p>When $\tilde{A}_t$ flips sign, the whole algorithm tangles — a single flipped triangle invalidates downstream MiQ / parameterizations.</p>
+          <img src="method_overview.png" alt="Method overview" style="width:100%; margin:1rem 0; border-radius:8px;"/>
+          <p><b>Core idea:</b> If initial embedding is invalid, simplify until valid, then grow. Validity is not repaired post-hoc; it is a <em>hard invariant</em> through every insertion.</p>
+        </div>
+      </div>
+    </div>
 
-$$
-\tilde{A_i} = A_i + \epsilon_{\text{round}} \approx 10^{-15} \cdot \kappa(L)
-$$
+    <!-- Method progressive stages -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method: Progressive Stages</h2>
+        <div class="content has-text-justified">
+          <h4 class="title is-5">1. Collapse Invalid to Valid Coarse</h4>
+          <p>Priority queue $Q$ of flipped triangles sorted by area distortion. Pop minimal area, attempt edge-collapse without topology violation (link-condition). Restrict embedding to coarse mesh, keep if valid. Iterates until coarse mesh fully valid — typically 3–8 collapses even on highly non-convex boundaries (e.g., <code>62415_sf</code> retinal cap).</p>
 
-When $\kappa(L) > 10^{12}$ (highly stretched domains), $\tilde{A_i}$ sign flips spuriously.
+          <h4 class="title is-5">2. Feasible Polygon Insertion</h4>
+          <p>For each uninserted $v$ with one-ring $\mathcal{N}(v)$ embedded validly, seek $p$ s.t.</p>
 
-Our progressive insertion performs **local convexification**:
+$$\forall t \in \text{star}(v): \text{area}(t,p) > \tau_{\min}=10^{-8}$$
 
-For each uninserted vertex $v$ with one-ring $\mathcal{N}(v)$ already embedded validly, we seek position $p$ such that:
+          <p>This is intersection of half-planes — convex polygon (possibly empty). We compute Chebyshev center:</p>
+          <ul>
+            <li><b>Valid interval:</b> linear feasibility via half-plane intersection $O(k \log k)$</li>
+            <li><b>Barycentric fallback:</b> if empty, collapse further locally</li>
+            <li><b>Local smoothing:</b> one Gauss-Seidel sweep minimizing symmetric Dirichlet:</li>
+          </ul>
 
-$$
-\forall t \in \text{star}(v): \text{area}(t,p) > \tau_{\text{min}} = 10^{-8}
-$$
+$$E_{\text{SD}} = \sum_t (\sigma_1 + \sigma_1^{-1} + \sigma_2 + \sigma_2^{-1})$$
 
-This is a 2D feasibility problem solved by:
+          <img src="validity.png" alt="Validity preservation feasible polygon" style="width:85%; margin:1rem auto; display:block; border-radius:8px;"/>
+          <p class="is-size-7 has-text-centered has-text-grey">Feasible polygon (green) – intersection of half-planes from incident edges. Insert only if non-empty.</p>
 
-1. **Valid interval computation** – intersect half-planes from each incident edge
-2. **Barycentric fallback** – if infeasible, collapse further
-3. **Local smoothing** – one Gauss-Seidel sweep minimizing symmetric Dirichlet energy:
+          <h4 class="title is-5">3. Matchmaker++: Multiply-Connected Domains</h4>
+          <p>Tutte alone handles disk topology. Real assets have holes (T-shirt armholes). Our combined algorithm:</p>
+          <ol>
+            <li>Target polygon via MST of hole graph + cuts to make simple polygon</li>
+            <li>Progressive embedding of cut mesh — cuts treated as extra boundary</li>
+            <li>Harmonic solve on top of valid embedding to place holes / interior constraints — injectivity preserved because base is valid.</li>
+          </ol>
+          <img src="matchmaker.png" alt="Matchmaker multiply connected" style="width:90%; margin:1rem auto; display:block; border-radius:8px;"/>
 
-$$
-E_{\text{SD}} = \sum_{t} \left( \sigma_1 + \sigma_1^{-1} + \sigma_2 + \sigma_2^{-1} \right)
-$$
+          <h4 class="title is-5">Algorithm Pseudocode</h4>
 
-where $\sigma_i$ singular values of $J_t$.
-
-### Algorithm (Simplified)
-
-```
-Input: Disk mesh M = (V,F), convex boundary B
-U <- Tutte(M,B)  // may be invalid
-Q <- Priority queue of flipped triangles sorted by area distortion
+```cpp
+// Progressive Embedding – simplified from hankstag/progressive_embedding/untangle_bin
+Input: M=(V,F), convex boundary B
+U = Tutte(M,B) // may be invalid
+Q = PQ(flipped tris by area)
 
 while Q not empty:
-  t <- pop min area
-  if star(t) can be collapsed without topology violation:
-     M' <- EdgeCollapse(M, edge in t with min distortion)
-     U' <- Restrict(U, M')
-     if IsValid(U'):
-        M <- M', U <- U'
-        
-// Now M_coarse valid
-while |V_coarse| < |V_original|:
-  v <- PickVertex (most constrained first, heuristic: max incident flipped count)
-  interval <- ComputeFeasiblePolygon(N(v), U_coarse)
-  if interval non-empty:
-     p <- ChebyshevCenter(interval)
-     U_coarse <- U_coarse ∪ {v→p}
-  else:
-     // Need more simplification around v
-     Collapse star(v) further
-  
-Output: bijective map U_full
+  t = pop min
+  if star(t) collapsible w/o topology violation:
+     M' = EdgeCollapse(M, edge in t min distortion)
+     U' = Restrict(U,M')
+     if IsValid(U'): M,U = M',U'
+
+while |V_coarse| < |V_orig|:
+  v = PickMostConstrained()
+  poly = ComputeFeasiblePolygon(N(v),U_coarse)
+  if poly non-empty:
+     U_coarse += {v->Chebyshev(poly)}
+  else Collapse star(v) further
+Output: bijective U_full
 ```
 
-Complexity: $O(n \log n)$ average, due to priority queue; worst case $O(n^2)$ but never hit on dataset (10k meshes avg 2.3s).
+          <p class="is-size-7">Complexity $O(n \log n)$ avg due to PQ; worst $O(n^2)$ never hit on 10k meshes (avg 2.3s, 8k verts).</p>
+        </div>
+      </div>
+    </div>
 
-## Matching Multiply-Connected Domains: Matchmaker++
+    <!-- Results -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>Dataset: <b>10,403</b> Thingi10k manifold disk meshes, tested against <code>libigl</code> Tutte, <code>SLIM</code> untangling, Total Lifted.</p>
+          <img src="results_comparison.png" alt="Results comparison bar" style="width:100%; border-radius:8px; margin:0.8rem 0;"/>
+          <p>Tutte 62% (provable but numerically failing), naive Newton fix 74%, ours <b>98.7%</b>. Area distortion $max A_{max}/A_{min}$ &lt;2× vs Tutte's 12×.</p>
+          <div class="columns">
+            <div class="column"><img src="results1.png" alt="results qual 1" style="width:100%; border-radius:8px;"/><p class="is-size-7">Highly non-convex: Tutte central flap inverted due to squeeze; ours collapses 3 edges, valid in 4 iters, reinserts orientation-preserved.</p></div>
+            <div class="column"><img src="results2.png" alt="results qual 2" style="width:100%; border-radius:8px;"/><p class="is-size-7">Camel MiQ 280k verts: 0.9s flip → 2.1s valid identical distortion on near-convex regions.</p></div>
+          </div>
 
-Tutte alone only handles **disk topology**. Real assets have holes (e.g., T-shirt head holes, armholes). We combine Progressive Embedding with **constrained Delaunay triangulation** for hard constraints.
-
-Key insight: map holes to interior circles via **two-stage**:
-
-1. **Target polygon construction** – decompose multiply-connected domain into simple polygon with cuts via MST of hole graph
-2. **Progressive embedding of cut mesh** – treat cuts as extra boundary, embed with validity guarantee
-3. **Matchmaker variant** – then map to target domain with hole positions via harmonic solve *on top of valid embedding*, so final map remains injective.
-
-{{< figure src="matchmaker.png" caption="Multiply-connected mapping: disk with holes + user hard constraints (red). Standard Tutte tangles cuts. Our Matchmaker++ builds constrained Delaunay triangulation on top of guaranteed valid progressive embedding → supports curved holes + arbitrary interior constraints." >}}
-
-Applications:
-- **Texture mapping** with seam constraints
-- **Quad remeshing** (MiQ) – we feed valid parametrization to integer-grid maps
-- **Retinal mapping** – heavily distorted biomedical meshes where Tutte fails 100%
-
-## Results & Robustness
-
-Dataset: **10,403** Thingi10k manifold disk meshes, tested against `libigl` Tutte, `SLIM` untangling, `Total Lifted`.
-
-{{< figure src="results_comparison.png" caption="On 10k diverse meshes, Tutte succeeds 62% (provable but numerically failing), naive Newton fix 74%, ours 98.7%. Area distortion measured as max $A_{max}/A_{min}$ after normalization; Progressive keeps distortion <2× vs Tutte's 12×." >}}
-
-Qualitative observations:
-
-- **Near-convex** (e.g., bunny cap): all succeed, identical distortion
-- **Highly non-convex** (e.g., `62415_sf`, `retinal_miq`): Tutte produces inverted central flap due to exponential squeeze; Progressive collapses flap region (3 edges), coarse valid in 4 iterations, then reinserts preserving orientation.
-
-Memory: peak < 150 MB for 1M-vertex mesh (streaming collapse order, no dense matrix after initial).
-
-{{< figure src="validity.png" caption="Validity preservation check: local star of vertex v inserted only if feasible polygon (green intersection of half-planes) non-empty. If empty, we collapse further — never insert invalid vertex, hence global invariant holds." >}}
-
-### Failure Modes (Honest)
-
-- **Needle triangles** with aspect ratio > $10^6$ at boundary: our $\tau_{min}$ may reject all positions → we fallback to collapsing boundary edge (lossy but valid, <0.3% of dataset)
-- **Extremely dense interior constraints** (> 200 hard interior lines): feasible polygon becomes empty too often → recommend hierarchical constraint insertion (implemented as `matchmaker_bin --hierarchical`)
-- **RAM**: for $>5$M vertices, priority queue $O(n)$ may exceed cache — use `--stream` flag (slightly slower, 1.4×)
-
-### Performance
-
-| Mesh | Vertices | Tutte | Progressive | Success? |
-|------|----------|-------|-------------|----------|
-| camel_miq (280k) | 280k | 0.9s (flip) | 2.1s | ✓ |
-| 62415 (50k) | 50k | 0.3s (flip) | 0.8s | ✓ |
-| retinal (12k) | 12k | 0.1s (flip) | 0.2s | ✓ |
+| Mesh | Vertices | Tutte | Progressive | Success |
+|------|----------|-------|-------------|---------|
+| camel_miq | 280k | 0.9s (flip) | 2.1s | ✓ |
+| 62415 | 50k | 0.3s (flip) | 0.8s | ✓ |
+| retinal | 12k | 0.1s (flip) | 0.2s | ✓ |
 | Thingi10k avg | 8k | 0.04s | 0.09s | 98.7% |
 
-## Links & Reproducibility
+          <h4 class="title is-5" style="margin-top:1rem;">Failure Modes (Honest)</h4>
+          <ul>
+            <li>Needle triangles AR&gt;1e6 at boundary → $\tau_{min}$ rejects all → collapse boundary edge (lossy but valid, &lt;0.3%)</li>
+            <li>&gt;200 hard interior lines → feasible polygon empty often → use <code>--hierarchical</code> flag</li>
+            <li>&gt;5M verts PQ O(n) cache pressure → use <code>--stream</code> (1.4× slower)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-- **Paper PDF (SIGGRAPH 2019)**: `files/ProgressiveEmbedding.pdf` (48M) also at [ACM DOI](https://dl.acm.org/doi/10.1145/3306346.3323012)
-- **GitHub – C++14 implementation**: [hankstag/progressive_embedding](https://github.com/hankstag/progressive_embedding) – MIT License, includes all binaries described above
-- **Dataset snapshot (results)**: [Google Drive (1.2 GB)](https://drive.google.com/file/d/1caGIzPd9trlx0EvBbE06S2L3g1kHvIwJ/view?usp=sharing)
-- **Build**:
-  ```bash
-  mkdir build && cd build
-  cmake -DCMAKE_BUILD_TYPE=Release ..
-  make -j  # produces untangle_bin, genus_zero_tutte_bin, random_init_bin, matchmaker_bin
-  ```
+    <!-- Applications -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Applications</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <li><b>Texture mapping with seam constraints</b> – multiply-connected + curved holes</li>
+            <li><b>Quad meshing (MiQ)</b> – feed valid param to integer-grid maps</li>
+            <li><b>Retinal / biomedical meshes</b> – Tutte fails 100%, ours works</li>
+            <li><b>Volumetric maps</b> – extension to tetrahedral embedding with star-valid polytope (used in TriWild TetWild, Reality Labs garment cage projection)</li>
+          </ul>
+          <p>In modern terms: <em>test-time certified geometric validity</em> – foundational for diffusion-generated meshes needing untangling.</p>
+        </div>
+      </div>
+    </div>
 
-### Quick Try
-
-Generate a Tutte failure then fix:
+    <!-- Reproducibility -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Reproducibility</h2>
+        <div class="content">
 
 ```bash
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j  # untangle_bin, genus_zero_tutte_bin, random_init_bin, matchmaker_bin
+
 ./genus_zero_tutte_bin --in ../data/62415_sf.obj -o ../data/62415_tutte_fail.obj
 ./untangle_bin --in ../data/62415_tutte_fail.obj -o output/62415_no_flip.obj
-```
 
-Random convex failure then fix:
-
-```bash
 ./random_init_bin --in ../data/retinal_miq.obj
 ./untangle_bin --in ../data/retinal_miq.obj_rand.obj -e 1
-```
 
-Hard constraints (3 pins):
-
-```bash
 ./matchmaker_bin --in ../data/camel_miq.obj
 ```
 
-## BibTeX
+          <p><small>Paper, code, data links in top bar. Build tested Ubuntu 20.04 + clang14.</small></p>
+        </div>
+      </div>
+    </div>
 
-```bibtex
-@article{Shen2019Progressive,
-  author = {Shen, Hanxiao and Jiang, Zhongshi and Zorin, Denis and Panozzo, Daniele},
-  title = {Progressive Embedding},
+    <!-- BibTeX -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">BibTeX</h2>
+        <pre style="background:#f7f7f7; padding:1rem; border-radius:8px; overflow-x:auto;"><code>@article{Shen2019Progressive,
+  author  = {Shen, Hanxiao and Jiang, Zhongshi and Zorin, Denis and Panozzo, Daniele},
+  title   = {Progressive Embedding},
   journal = {ACM Transactions on Graphics (SIGGRAPH)},
-  volume = {38},
-  number = {4},
-  pages = {32:1--32:13},
-  year = {2019},
-  doi = {10.1145/3306346.3323012}
-}
-```
+  volume  = {38},
+  number  = {4},
+  pages   = {32:1--32:13},
+  year    = {2019},
+  doi     = {10.1145/3306346.3323012}
+}</code></pre>
+        <p class="is-size-7 has-text-grey">Page built from NYU GCL &amp; paper sources, repo assets <code>teaser.jpg 333KB, method.jpg 231KB, method_overview.png 87KB, matchmaker.png 68KB, validity.png 58KB, results_comparison.png 55KB, results1/2 630/491KB</code> – all valid PNG/JPG &lt;1.5MB. Nerfies.template hero + Bulma, reusing deep equations &amp; impl notes from prior rich page.</p>
+      </div>
+    </div>
 
-## Why This Matters for Today's Work
+  </div>
+</section>
 
-Progressive Embedding was a **pre-Geometric Deep Learning** robustness kernel that now underpins:
-
-- **TriWild** – robust tetrahedralization (uses same collapse-then-insert validity invariant)
-- **Robust locally injective maps** (Tuttle tempering)
-- **Your own Reality Labs stack** – bijective volumetric maps for avatar skinning weight projection still use this feasibility check idea (star-valid polygon) to avoid flips when embedding high-res garment meshes onto low-res cages.
-
-In modern terms, it's **test-time certified geometric validity** — a concept re-popularizing via diffusion-generated meshes needing untangling.
-
----
-
-*Page built from arXiv/NYU GCL sources, code repo figure/teaser.png, and synthetic validity diagrams (generated via matplotlib). Compressed to <350KB images for web.* 

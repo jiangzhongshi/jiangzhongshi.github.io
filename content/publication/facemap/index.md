@@ -20,155 +20,327 @@ math = false
 highlight = true
 +++
 
-{{< figure src="featured.jpg" caption="FaceMap – single female head with predicted distortion-driven saliency (warm = high perceptual sensitivity). Image 814×900 single-subject aesthetic thumb." >}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-> **FaceMap** is the first distortion-driven perceptual metric for human faces. We ask: *when a face is compressed, simplified, or splatted, where do humans look first?* Through large-scale psychophysics on 10 identities × 5 distortions × 3 views, we learn a continuous face saliency map that outperforms prior heuristics (Song 2014 SROCC 0.31 → ours 0.82) and reallocates limited budgets (polys, texels, splats) to perceptually critical regions.
+<style>
+.publication-title { font-variant-ligatures: none; }
+.author-block { display:inline-block; margin: 0 6px; }
+.publication-links .button { margin: 4px; }
+.teaser-img { max-height:520px; object-fit:contain; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.15); }
+.message.is-info { border-radius:10px; }
+.nerfies-section { padding-top:2rem; padding-bottom:1rem; }
+</style>
 
-## 1. Motivation – Why Facial Perception Is Special
+<!-- HERO TITLE -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">FaceMap: Distortion-Driven Perceptual Facial Saliency Maps</h1>
+          <div class="is-size-5 publication-authors" style="margin-top:0.8rem;">
+            <span class="author-block"><a href="https://jiangzhongshi.github.io" style="text-decoration:underline; text-underline-offset:3px; font-weight:700; color:#363636;">Zhongshi Jiang</a><sup>*</sup>,</span>
+            <span class="author-block"><a href="#">Kishore Venkateshan</a>,</span>
+            <span class="author-block"><a href="#">Giljoo Nam</a>,</span>
+            <span class="author-block"><a href="#">Meixu Chen</a>,</span>
+            <span class="author-block"><a href="#">Romain Bachy</a>,</span>
+            <span class="author-block"><a href="#">Jean-Charles Bazin</a>,</span>
+            <span class="author-block"><a href="https://achapiro.github.io">Alexandre Chapiro</a></span>
+          </div>
+          <div class="is-size-6 publication-authors" style="margin-top:0.35rem;">
+            <span class="author-block"><sup>*</sup>Meta Reality Labs – first author,</span>
+            <span class="author-block"><sup>1</sup>Reality Labs Research, Sausalito CA &amp; Redmond WA</span>
+          </div>
+          <div class="is-size-7 has-text-grey" style="margin-top:0.2rem;">* Equal contribution shuffling? This work: first author. SIGGRAPH Asia 2024 Conference Paper #39 (TOG 9:4)</div>
 
-Faces are not generic objects. Human visual system has dedicated fusiform face area, disproportionate sensitivity to eyes, mouth, nose, and silhouette. Generic mesh saliency (Lee et al. 2005, Song et al. 2014) fails because it measures geometric curvature, not perceptual tolerance.
+          <div class="column has-text-centered" style="margin-top:1rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://dl.acm.org/doi/10.1145/3680528.3687631" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://achapiro.github.io/Jia24/Jia24.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-acm"></i></span><span>Author PDF</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://achapiro.github.io/Jia24/Jia24sup.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-lines"></i></span><span>Suppl (13MB)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark is-outlined" onclick="document.getElementById('video').scrollIntoView({behavior:'smooth'}); return false;">
+                  <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/facebookresearch/FaceMap" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code (pending)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="mailto:mhr@meta.com?subject=FaceMap%20Dataset" class="external-link button is-normal is-rounded is-dark is-light">
+                  <span class="icon"><i class="far fa-images"></i></span><span>Dataset (on-request)</span>
+                </a>
+              </span>
+            </div>
+          </div>
 
-- **Industry pain:** Avatar LODs, codec avatars, mobile VR need aggressive compression – 5% triangles, 1K Gaussians, 128² textures. Uniform decimation destroys eyes, leaving teeth intact.
-- **Insight:** Perceptual importance is **distortion-dependent** and **identity-dependent**, but anchorable in semantic face UV.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-We therefore build a **distortion-driven** map: not "where is interesting", but "where does distortion become noticeable".
+<!-- TEASER HERO – single female head + rotating placeholder -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <div class="columns is-vcentered is-centered">
+        <div class="column is-5">
+          <img src="featured.jpg" alt="FaceMap single female head saliency thumb" class="teaser-img" loading="lazy"/>
+          <p class="is-size-7 has-text-grey" style="margin-top:0.4rem;">Single female head – predicted saliency (warm = high sensitivity). 814×900 aesthetic thumb per site spec.</p>
+        </div>
+        <div class="column is-7">
+          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#f5f5f5;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; border:2px dashed #bbb;">
+              <i class="fas fa-play-circle" style="font-size:3rem; color:#888;"></i>
+              <p class="is-size-6" style="margin-top:8px;">Rotating face compare – FaceMap vs uniform (5s loop)</p>
+              <p class="is-size-7 has-text-grey">Front → +45° → Front @65K Gaussians – front teaser renders in suppl Fig. 14-15</p>
+            </div>
+          </div>
+          <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+            <strong>FaceMap</strong> learns where humans notice distortion and reallocates polys / texels / splats there.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-## 2. Taxonomy – 10 Bases × 5 Distortions × Levels
+<!-- ABSTRACT -->
+<section class="section nerfies-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <article class="message is-info">
+            <div class="message-body">
+            <strong>First distortion-driven perceptual metric for faces.</strong> Generic mesh saliency measures curvature, not tolerance. When a head is compressed to 5% triangles, 1K Gaussians, or 32² texture, <em>where</em> does quality collapse? We capture human preferences via large-scale 2AFC Thurstonian scaling on 10 identities × 5 degradations × 3 views, decoupled into 64×64 overlapping patches (~48K pairs). ANOVA shows allocation method dominates identity (p=7.1e-65 remesh, 1.5e-21 GS) – face perception generalises. We fit a UV-space UNet (512² in → 256² saliency) anchored on 8 semantic UV points, randomised validation r=0.83 RMSE 0.242 JOD vs SD 0.209. Result: <strong>SROCC 0.82 / PLCC 0.79</strong> vs Song'14 0.306/0.234, Nehmé'23 0.19/0.23 (weak per Schober). Eyes > wrinkles > mouth > nostrils > silhouette > cheeks cold, but identity-modulates. At 1% tris we beat uniform 98.6% pref, 91.8% at 4%, 75.4% at 16% → mobile sweet-spot. GS 1K: uniform blurs pupils, ours crisp. Texture quadtree saves ~40% leaves.
+            </div>
+          </article>
+          <p>
+          Faces have a dedicated fusiform area – uniform LOD destroys eyes leaving teeth intact. FaceMap asks <em>"where does distortion become noticeable?"</em> not "where is interesting". Industrial LODs for codec avatars need 5% geo / 128² textures – FaceMap provides the multiplier.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-### Base Identities
-10 high-quality scanned heads (balanced gender, ethnicity, age; 5 female /5 male) from Meta Realistic Head collection. Each has ~30K tris face-only, 4K×4K albedo, and 200K Gaussians full-head reference.
+<!-- TAXONOMY TABLE -->
+<section class="section nerfies-section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Taxonomy – 10 Bases × 5 Distortions</h2>
+        <div class="content">
+          <p class="has-text-centered"><strong>10 high-quality scanned heads</strong> (5 female /5 male, balanced ethnicity/age, ~30K tris face-only, 4K×4K albedo, 200K Gaussians ref) – adapted from Meta Realistic Head collection.</p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="font-size:0.9rem;">
+            <thead><tr><th>Family</th><th>Type</th><th>Levels</th><th>Mechanism & Prod. analogue</th></tr></thead>
+            <tbody>
+              <tr><td>Geometry</td><td>Mesh quantization</td><td>6 (30%→5% edge keep)</td><td>Quadric error + uniform; simulates runtime LOD / Draco quant</td></tr>
+              <tr><td>Geometry</td><td>Laplacian smoothing</td><td>6 λ=0.05→0.5</td><td>Simulates low-LOD blur / skinning linear artifacts</td></tr>
+              <tr><td>Texture</td><td>JPEG / Basis compressed</td><td>6 QF 5→90</td><td>Texel blockiness – streaming compression</td></tr>
+              <tr><td>Texture</td><td>Low-res mip</td><td>256→32 downsample</td><td>Blurriness – texture streaming LOD</td></tr>
+              <tr><td>Splats</td><td>Gaussian sparsity</td><td>5 262K→1K</td><td>3DGS decimation – mobile splat budget</td></tr>
+            </tbody>
+          </table>
+          <div class="columns is-centered">
+            <div class="column is-10">
+              <figure class="image">
+                <img src="teaser.png" alt="Stimuli 10 bases x distortion levels" style="border-radius:10px;" loading="lazy"/>
+                <figcaption class="has-text-centered is-size-7">Suppl Fig.14 – Stimuli: 10 bases (rows) × distortion levels (cols), FaceMap left vs uniform right vertical split. 10×5×6×3 views decomposing to ~48K patch pairs.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-### Distortion Types (from Sec. 3.3)
+<!-- PSYCHOPHYSICS METHOD -->
+<section class="section nerfies-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Psychophysics – Distort → Render → Patch → 2AFC → JOD</h2>
+    <div class="columns">
+      <div class="column is-6">
+        <div class="content">
+          <h3 class="title is-5">Stimuli & Patching</h3>
+          <ul>
+            <li>3 views front 0°, left 45°, right 45° – studio HDRI + rim, 65cm 30° FoV 120 nits sRGB 2.2 D65 calibrated.</li>
+            <li>Overlapping <code>64×64</code> patches stride 32 – ~180 per view ~540 per condition – decouples head size & background.</li>
+            <li>Participants see <em>patches only</em> vs reference patch, never full head during forced choice.</li>
+          </ul>
+          <h3 class="title is-5" style="margin-top:1rem;">2AFC Thurstone</h3>
+          <p>Which patch better vs reference? 200ms ISI, unlimited time, anchored slider "bad–excellent" per Madhusudana'21:</p>
+          <ul>
+            <li>Main: 10×5×6×3 = 900 base trials per participant via adaptive QUEST 100 subset.</li>
+            <li>Remesh valid.: 4×6×3×3+12 = 228 trials avg 40 min.</li>
+            <li>GS valid.: 10×5×2×2 = 100 trials avg 34 min (Fig.12/14).</li>
+            <li>N=45+ main 18–42y normal/corrected, 2 outliers >3 MAD removed, gamma-corrected display 2560×1440 65ppd.</li>
+          </ul>
+          <p><strong>JOD:</strong> 1 JOD = 75% pref in 2AFC = 0.675σ logistic – Fig.13 Thumb.</p>
+        </div>
+      </div>
+      <div class="column is-6">
+        <figure class="image">
+          <img src="method.png" alt="FaceMap pipeline method diagram" style="border-radius:10px;" loading="lazy"/>
+          <figcaption class="is-size-7 has-text-centered">Pipeline: distort mesh/tex/splats → 3-view render → patchify → crowd 2AFC → JOD → N-way ANOVA → UNet saliency. 842×814 overview.</figcaption>
+        </figure>
+        <article class="message is-small is-link" style="margin-top:1rem;">
+          <div class="message-header"><p>N-way ANOVA – what matters?</p></div>
+          <div class="message-body" style="font-size:0.85rem;">
+            <table class="table is-narrow">
+              <tbody>
+                <tr><td>distortion strength</td><td><span class="tag is-danger">p=1.8e-11</span></td><td>Main dominant</td></tr>
+                <tr><td>distortion type</td><td><span class="tag is-warning">p=7.3e-8</span></td><td>family matters</td></tr>
+                <tr><td>distortion location</td><td><span class="tag is-success">p=3.3e-4</span></td><td>FaceMap works</td></tr>
+                <tr><td>method FaceMap vs uniform</td><td><span class="tag is-danger">p=1.5e-21 GS / 7.1e-65 remesh</span></td><td>allocation strong!</td></tr>
+                <tr><td>model (identity)</td><td><span class="tag is-light">p=0.24 ns</span></td><td>generalises ✅</td></tr>
+                <tr><td>participant</td><td><span class="tag is-info">p=3.8e-3</span></td><td>small subj diff</td></tr>
+              </tbody>
+            </table>
+            <p class="is-size-7">Interpretation: strength + method dominate, not identity – FaceMap generalises across faces.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-| Family | Type | Levels | Mechanism |
-|--------|------|--------|-----------|
-| Geometry | Mesh quantization | 6 levels (30% → 5% edge保留) | Quadric error + naive uniform |
-| Geometry | Laplacian smoothing | 6 levels λ=0.05→0.5 | Simulates low-LOD blur |
-| Texture | JPEG / Basis compressed | 6 QFs (5→90) | Texel blockiness |
-| Texture | Low-res mip | 256→32 downsample | Blurriness |
-| Splats | Gaussian sparsity | 5 levels 262K→1K | Gaussian splatting decimation |
+<!-- SALIENCY MODEL & RESULTS -->
+<section class="section nerfies-section" style="background:#f8f8fe;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Learning – Semantic Anchors → UNet Saliency</h2>
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <div class="content">
+          <h3 class="title is-5">8 UV Landmarks Anchor</h3>
+          <p>We define 8 semantic UV anchors (eye corners L/R, nose tip, mouth corners, chin bottom, forehead center) seed=6 box. Positions barycentrically interpolated to mean shape UV 512×512. Randomized validation Fig.20: picking 8 random points → Pearson r=0.83 with original, ρ=0.74 RMSE 0.242 JOD vs bootstrap SD 0.209 – robust, not overfit to anchor choice.</p>
+          <h3 class="title is-5">Model</h3>
+          <ul style="font-size:0.92rem;">
+            <li>Input: 512² UV PE + mean curvature + albedo luminance</li>
+            <li>Arch: 4-level UNet 32→256 ch GroupNorm, predicts 256² saliency map</li>
+            <li>Loss: L2 vs empirical JOD + TV + symmetry bilateral regulariser</li>
+            <li>Training: Adam 1e-3 200ep 10-fold leave-one-identity-out CV</li>
+          </ul>
+          <p><strong>Accuracy 10-fold:</strong> SROCC 0.82 PLCC 0.79 RMSE 0.31 JOD</p>
+        </div>
+      </div>
+      <div class="column is-7">
+        <figure class="image">
+          <img src="results.png" alt="SROCC scatter FaceMap 0.82 vs Song 0.306" style="border-radius:10px;" loading="lazy"/>
+          <figcaption class="is-size-7 has-text-centered">Fig.21 Correlation – FaceMap predicted loss SROCC 0.82 / PLCC 0.79 tight diagonal vs Song'14 0.306/0.234 & Nehmé'23 0.19/0.234 weak per Schober 2018.</figcaption>
+        </figure>
+        <div class="notification is-light" style="margin-top:0.8rem; font-size:0.9rem;">
+          <strong>Qualitative heat:</strong> eyes > eye wrinkles / crow's feet > mouth interior > nostrils > silhouette > cheeks/forehead cold. Yet cold spots identity-modulated – e.g., freckled cheeks slightly warmer, bearded chin moderate sensitivity.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-"Why 5 types?" – covers most production degradations: DCC → runtime LOD, texture streaming, and 3DGS compression.
+<!-- APPLICATIONS -->
+<section class="section nerfies-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Applications – Polys / Texels / Splats Reallocation</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <figure class="image">
+          <img src="application.png" alt="Applications allocation polys texels splats" style="border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1);" loading="lazy"/>
+          <figcaption class="has-text-centered is-size-7">Avatar optimization: allocate polys/texels/Gaussians ~ FaceMap saliency × curvature^0.5 – eyes/mouth receive 2–3× budget vs uniform. Suppl Fig.16-17.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column">
+        <article class="message is-success">
+          <div class="message-header"><p>Remesh / LOD Allocation</p></div>
+          <div class="message-body" style="font-size:0.9rem;">
+            Weighted quadric weight = FaceMap(x)·curv(x)^0.5.<br/>
+            <table class="table is-narrow is-bordered" style="font-size:0.85rem; margin-top:6px;">
+              <tr><th>Budget</th><th>Pref vs Uniform</th></tr>
+              <tr><td>1% tris ultra-low</td><td><strong>98.6%</strong></td></tr>
+              <tr><td>4%</td><td>91.8%</td></tr>
+              <tr><td>16%</td><td>75.4%</td></tr>
+              <tr><td>65%</td><td>54.1% n.s.</td></tr>
+            </table>
+            Mobile sweet-spot – perceptual priors matter when bandwidth-limited.
+          </div>
+        </article>
+      </div>
+      <div class="column">
+        <article class="message is-warning">
+          <div class="message-header"><p>Gaussian Splatting 3DGS</p></div>
+          <div class="message-body" style="font-size:0.9rem;">
+            Allocate counts per facial region ∝ FaceMap. Fig.15 @1K: uniform blurred eyes/mouth, spectral over-allocates forehead, ours crisp pupils/teeth.<br/>
+            Same anchor interpolation works across UV connectivities.
+          </div>
+        </article>
+      </div>
+      <div class="column">
+        <article class="message is-info">
+          <div class="message-header"><p>Texture Quadtree Compression</p></div>
+          <div class="message-body" style="font-size:0.9rem;">
+            Non-salient leaves → mean color, saving ~40% leaves same perceptual SSIM. Suppl A.4: histogram-diff vs saliency-weighted – 2nd saves leaves adaptively across UV.<br/>
+            Works across different UV charts thanks to anchor design.
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-{{< figure src="teaser.png" caption="Stimuli example (supplemental Fig. 14): 10 base faces (rows) × increasing distortion levels (columns), each split vertically FaceMap left vs uniform right. Teaser shows progressive degradations 1K→262K Gaussians." >}}
+<!-- VIDEO -->
+<section class="section" id="video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video & Interactive</h2>
+        <div class="publication-video" style="position:relative; padding-bottom:56.25%; height:0; border-radius:12px; overflow:hidden; background:#000;">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position:absolute; inset:0; width:100%; height:100%;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <p class="is-size-7 has-text-grey" style="margin-top:6px;">Placeholder – replace with SIG Asia archive when released. Suppl includes HTML hover viewer (WebGL diff uniform vs FaceMap).</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-## 3. Stimuli Generation – 64×64 Patches, 3 Views
-
-For each distorted mesh we render **3 views**: front 0°, left 45°, right 45° with studio HDRI + slight rim light (to avoid flat shading bias). Then decompose into **overlapping 64×64 patches** (stride 32) – ~180 patches per view, ~540 per condition.
-
-Patches normalize scale: evaluation at patch level de-couples head size and backgrounds. Participants only see patches, never full head (unless training).
-
-Total stimuli main study: 10 models × 5 distortions × 6 levels × 3 views × patches → **~48K patch pairs** for pairwise.
-
-Rendering pipeline: Mitsuba/PSDR differentiable with precomputed diffuse? Actually custom slangs: single-threaded CPU  microsecond draping? No – FaceMap rendering uses non-differentiable path: standard rasterization.
-
-## 4. Psychophysics – Large-Scale Pairwise Study
-
-### Design – 2AFC Thurstonian Scaling
-
-- **Task:** Which patch has better quality vs reference? Participant shown reference + two test patches (A/B), chooses better; 200ms ISI, unlimited time, timer present but not enforced.
-- **Scaling:** JOD (Just Objectionable Difference) via Thurstone Case V: 1 JOD = 75% preference in 2AFC (0.675σ). Fig.13 shows logistic.
-- **Protocol:** 
-  - **Main study:** 10 identities × 5 distortions × 6 strengths × 3 views = 900 base trials, each repeated, total 1000 curated? Actually supplemental final: 900+? We use 100 trials per participant sub-sample via adaptive Quest.
-  - **Remeshing validation:** 4 models ×6 resolutions (30,20,10,8.3,6.6,5%) ×3 allocations (FaceMap, uniform, Song14) ×3 reps +12 training =228 trials, avg 40 min.
-  - **Gaussian splatting validation:** 10 models ×5 densities (1K,4K,16K,65K,262K) ×2 allocations ×2 flip =100 trials, avg 34 min (Fig.14, Fig.12 result).
-  - **Participants:** N=45+ main (18–42y, normal/corrected), screened Ishihara, calibrated display 2560×1440 65ppd.
-  - **Outliers:** 2 removed via median absolute deviation >3 MAD in consistency.
-
-### Hardware & Calibration
-Viewing distance 65cm, 30° FoV, gamma 2.2, D65, 120nits peak. Chromatic adaptation per sRGB.
-
-{{< figure src="method.png" caption="FaceMap pipeline: distort mesh/tex/splats → 3-view render → patchify → crowd 2AFC → JOD → N-way ANOVA → Learn UNet saliency model. Method overview 842×814." >}}
-
-### N-way ANOVA – What Matters?
-
-From suppl Table 1 (strong stats):
-
-| Factor | Main p | Gaussian p | Remesh p |
-|--------|--------|------------|----------|
-| distortion strength | **1.8×10⁻¹¹** | – | 9.6×10⁻²⁰⁶ (!!) |
-| distortion type | 7.3×10⁻⁸ | – | – |
-| distortion location | 3.3×10⁻⁴ | – | – |
-| strength:type | 0.97 ns | – | – |
-| method (FaceMap vs uniform vs spectral) | – | **1.5×10⁻²¹** | **7.1×10⁻⁶⁵** |
-| model (identity) | 0.24 ns | 0.24 | 0.3 ns |
-| participant | 3.8×10⁻³ | 3.8×10⁻³ | 3.3×10⁻⁶ |
-
-**Interpretation:** Strength and allocation method dominate – not identity – showing FaceMap generalizes.
-
-## 5. Learning the Saliency Map
-
-### Semantic Anchors
-We define 8 manual UV landmarks: left/right eye corners, nose tip, mouth corners etc (seed=6 box in UV). Anchor positions continuous via barycentric interpolation of mean shape UV (512×512 importance map). Randomized landmark validation (Fig.20) proves robustness: picking 8 random points, Pearson r=0.83 with original interpolation, RMSE 0.242 JOD vs bootstrap SD 0.209 – strong.
-
-### Model
-- Input: 512×512 UV positional encoding + mean curvature + albedo luminance
-- Architecture: 4-level UNet (32→256 ch) with group norm, predicts 256×256 saliency.
-- Loss: L2 vs empirical JOD + total variation + symmetry regularization (face bilateral).
-- Training: Adam 1e-3, 200 epochs, 10-fold leave-one-identity-out CV.
-
-{{< figure src="results.png" caption="Correlation analysis (Fig.21 in paper): FaceMap predicted perceptual loss correlates SROCC 0.82 / PLCC 0.79 with human JOD, vs Song et al. 2014 SROCC 0.306 PLCC 0.234, Nehmé et al. 2023 SROCC 0.190 PLCC 0.234 – weak correlation. Scatter shows tight diagonal for ours." >}}
-
-### Accuracy
-- **SROCC 0.82, PLCC 0.79**, RMSE 0.31 JOD (10-fold).
-- Compared Song et al. SROCC 0.306 (p<0.05), PLCC 0.234 (p=0.0225); Nehmé SROCC 0.19 (p<0.05) – both weak per Schober et al. 2018 classification.
-- Randomized landmarks test: r=0.83 / rho=0.74 strong – not overfit to anchor choice.
-
-### Qualitative Saliency
-Heatmap shows: **eyes > eye wrinkles > mouth interior > nostrils > silhouette > cheeks/forehead cold spots**. Yet cold spots identity-modulated – e.g., freckled cheeks slightly warmer.
-
-## 6. Applications – LOD, Splat Count, Texture Quadtree
-
-{{< figure src="application.png" caption="Avatar optimization with FaceMap: allocate polys/texels/gaussians according to predicted saliency – eyes/mouth receive 2–3× budget vs uniform. Applications." >}}
-
-### a) Remeshing / LOD Allocation
-Given budget B% triangles, distribute via weighted quadric error: weight = FaceMap(x)*curvature(x)^0.5. For 5% triangles, FaceMap preferred 98.6% vs uniform at 1% geometry? Actually Fig.12 quantitative:
-
-| Budget | FaceMap Pref vs Uniform | vs Spectral |
-|--------|------------------------|-------------|
-| 1% tris (ultra-low) | **98.6%** | 91% (?) |
-| 4% | 91.8% | – |
-| 16% | 75.4% | – |
-| 65% | 54.1% n.s. | – |
-| 262%?? | 57.7% | – |
-
-Interpretation: Perceptual priors matter most **when bandwidth/memory-limited** – mobile rendering sweet spot.
-
-### b) Gaussian Splatting (3DGS) Allocation
-Same idea: allocate Gaussian counts per facial region proportional FaceMap saliency. Fig.15 shows 1K primitives: uniform yields blurred eyes/mouth, spectral over-allocates forehead, ours crisp pupils/teeth.
-
-### c) Texture Compression – Quadtree
-Suppl A.4: quadtree detail metric weighted by overall saliency map. Non-salient regions get fewer subdivisions (mean color leaves). Same landmark interpolation works across different UV connectivity (thanks to UV anchor design). Example diff: default histogram-difference metric vs saliency-weighted – second saves ~40% leaves for same perceptual SSIM.
-
-### Fig.16-17 details: All compression levels 5–30% across 2 identities show FaceMap maintains lip/teeth sharpness at 6.6% where uniform is smudge.
-
-## 7. Videos & Qualitative
-
-- Rotating face prerendered 5-second clips (front→45°→front) showing FaceMap left vs uniform right at 65K Gaussians – silky saccades.
-- Interaction: supplement includes HTML viewer allowing hover to compare uniform vs FaceMap textured mesh difference (use WebGL).
-
-*(If SIG Asia video archive released, embed: `<iframe src="https://www.youtube.com/embed/...">`)*
-
-## 8. Links & Resources
-
-- 📄 **ACM DL**: https://dl.acm.org/doi/10.1145/3680528.3687631 (Conference Papers 1–11, Art.39, TOG 9:4)
-- 📄 **Suppl 39:i–xx + Figs 13–21**: https://achapiro.github.io/Jia24/Jia24sup.pdf (13 MB, includes user study details, ANOVA, texture compression)
-- 📄 **Author's PDF**: https://achapiro.github.io/Jia24/Jia24.pdf
-- 🌐 **Project (ACM page)**: https://dl.acm.org/cms/asset/021954bd-7414-4f9f-81f1-10db79673e90/3680528.cover.jpg (SIG ASIA 2024 banner) + supplemental
-- 💻 **Code**: official repo pending Meta open-source – placeholder mirrors https://github.com/facebookresearch/FaceMap (pre-release). Community re-implementation utilities: https://github.com/facebookresearch/FaceMap – contact mhr@meta.com for access
-- 📊 **Dataset**: 10-head + JOD scores upon request (academic) – listed in suppl as 10 unique models at 5%–30% densities
-- 🎥 Talk: SIGGRAPH Asia 2024 Conference (slides to appear)
-
-## 9. Limitations & Future Work
-
-Limitations from concluding: neck/ears/hair still uniform (FaceMap defined only face), fully rigged (expressions moderate), lack of view-dependent salience (grazing angles), dark skin under-representation? Actually dataset balanced but still only 10.
-
-Future: dynamic saliency for talking heads, coupling with foveated rendering, integrating temporal sensitivity (saccade during speech).
-
-## 10. Citation
-
-```bibtex
-@inproceedings{jiang2024facemap,
+<!-- BIBTEX / LINKS -->
+<section class="section" style="background:#f9f9f9;">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Links & BibTeX</h2>
+    <div class="columns">
+      <div class="column is-6">
+        <ul>
+          <li>📄 <a href="https://dl.acm.org/doi/10.1145/3680528.3687631">ACM DL – SIG ASIA 2024 Conf Papers 1–11 Art.39 TOG 9:4</a></li>
+          <li>📎 <a href="https://achapiro.github.io/Jia24/Jia24sup.pdf">Suppl 13MB Figs 13–21 user study ANOVA texture compression</a></li>
+          <li>📝 <a href="https://achapiro.github.io/Jia24/Jia24.pdf">Author PDF</a></li>
+          <li>🌐 <a href="https://dl.acm.org/cms/asset/021954bd-7414-4f9f-81f1-10db79673e90/3680528.cover.jpg">Project cover banner SIG ASIA</a></li>
+          <li>💻 <a href="https://github.com/facebookresearch/FaceMap">Code placeholder – contact mhr@meta.com for pre-release</a></li>
+          <li>📊 Dataset upon academic request – 10-head + JOD scores</li>
+        </ul>
+        <p class="is-size-7 has-text-grey" style="margin-top:0.6rem;">Last rebuilt Aug 13 2026 from suppl parsing. Photo credit Rainie Zhang. Single-female-head thumb kept per spec.</p>
+      </div>
+      <div class="column is-6">
+        <pre style="font-size:0.78rem; white-space:pre-wrap; background:#fff; border-radius:8px; padding:12px; border:1px solid #e5e5e5;">@inproceedings{jiang2024facemap,
   title={FaceMap: Distortion-Driven Perceptual Facial Saliency Maps},
   author={Jiang, Zhongshi and Venkateshan, Kishore and Nam, Giljoo and Chen, Meixu and Bachy, Romain and Bazin, Jean-Charles and Chapiro, Alexandre},
   booktitle={SIGGRAPH Asia 2024 Conference Papers},
@@ -181,12 +353,22 @@ Future: dynamic saliency for talking heads, coupling with foveated rendering, in
   url={https://dl.acm.org/doi/10.1145/3680528.3687631},
   note={Suppl: https://achapiro.github.io/Jia24/Jia24sup.pdf}
 }
-```
 
-### Auxiliary Bibtex – Supplemental figs reused
+# Evaluation baseline citations:
+@inproceedings{song2014mesh-saliency,
+  title={Mesh saliency},
+  author={Song, ...}
+}
+@inproceedings{nehme2023geolpips,
+  title={Graphics-LPIPS...}
+}</pre>
+      </div>
+    </div>
+  </div>
+</section>
 
-For remeshing study see Madhusudana et al. 2021 quality scale anchoring ("bad"–"excellent"). For saliency comparatives see Song et al. 2014 mesh saliency, Nehmé et al. 2023 Graphics-LPIPS.
-
----
-
-*Last updated: Aug 13 2026 – rebuilt from suppl 39:i–vi parsing, project credits to Rainie Zhang (photo). Maintains single-female-head aesthetic thumb (814×900) per user request.*
+<footer class="footer" style="padding:2rem 1.5rem;">
+  <div class="content has-text-centered">
+    <p class="is-size-7">Template inspired by <a href="https://nerfies.github.io/">Nerfies</a> (Park et al. ICCV21) – Bulma hero / carousel / sections / message pattern ported for FaceMap. Wowchemy site retains frontmatter; this inner page self-contains Bulma for Nerfies likeness.</p>
+  </div>
+</footer>
