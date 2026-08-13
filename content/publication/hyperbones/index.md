@@ -11,7 +11,6 @@ summary = "HyperBones — realtime neural garment simulation conditioned via hyp
 selected = true
 tags = ["garment","real-time","digital humans"]
 url_pdf = "https://arxiv.org/abs/2605.20460"
-url_preprint = "https://arxiv.org/abs/2605.20460"
 url_project = "https://arxiv.org/abs/2605.20460"
 url_code = ""
 math = false

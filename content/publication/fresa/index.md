@@ -12,7 +12,6 @@ selected = true
 tags = ["avatar","reconstruction","CVPR"]
 url_project = "https://rongakowang.github.io/fresa/fresa.html"
 url_pdf = "https://arxiv.org/abs/2503.19207"
-url_preprint = "https://arxiv.org/abs/2503.19207"
 url_code = "https://github.com/rongakowang/FRESA"
 math = false
 highlight = true

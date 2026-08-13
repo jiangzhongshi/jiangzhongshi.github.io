@@ -20,7 +20,6 @@ projects = []
 tags = ["digital humans","codec avatars","Meta"]
 
 url_pdf = "https://arxiv.org/abs/2604.02320v2"
-url_preprint = "https://arxiv.org/abs/2604.02320v2"
 url_code = "https://github.com/junxuan-li/lca"
 url_dataset = ""
 url_project = "https://junxuan-li.github.io/lca"

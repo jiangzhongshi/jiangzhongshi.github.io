@@ -14,7 +14,6 @@ url_pdf = "https://arxiv.org/abs/2407.13094"
 url_project = "https://feint6k.github.io"
 url_code = "https://github.com/jbluv/feint6k"
 url_dataset = "https://feint6k.github.io"
-url_preprint = "https://arxiv.org/abs/2407.13094"
 math = false
 highlight = true
 +++

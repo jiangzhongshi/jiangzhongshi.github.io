@@ -42,8 +42,7 @@ projects = []
 tags = []
 
 # Links (optional).
-url_pdf = ""
-url_preprint = "https://arxiv.org/pdf/2007.05094.pdf"
+url_pdf = "https://arxiv.org/pdf/2007.05094.pdf"
 url_code = "https://github.com/deshanadesai/acorns"
 url_dataset = ""
 url_project = "https://github.com/deshanadesai/acorns"

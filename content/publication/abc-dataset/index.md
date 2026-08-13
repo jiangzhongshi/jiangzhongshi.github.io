@@ -34,7 +34,6 @@ selected: true
 projects: []
 tags: []
 url_pdf: 'https://arxiv.org/abs/1812.06216'
-url_preprint: 'https://arxiv.org/abs/1812.06216'
 url_code: ''
 url_dataset: 'https://archive.nyu.edu/handle/2451/43778'
 url_project: 'https://deep-geometry.github.io/abc-dataset/'
