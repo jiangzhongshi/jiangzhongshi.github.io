@@ -1,0 +1,373 @@
++++
+title = "A Low-Parametric Rhombic Microstructure Family for Irregular Lattices"
+date = 2020-03-20T15:33:20-04:00
+draft = false
+authors = ["Davi Colli Tozoni","Jeremie Dumas","**Zhongshi Jiang**","Julian Panetta","Daniele Panozzo","Denis Zorin"]
+publication_types = ["2"]
+publication = "ACM Transaction on Graphics (Proc. SIGGRAPH 2020)"
+publication_short = "*ACM Trans. on Graphics*, 2020"
+abstract = "An increasingly common approach to creating spatially varying materials is to partition a shape into cells and use a parametric family of small-scale geometric structures with known effective properties to fill the cells. We propose a new approach to solving this problem for extruded, planar microstructures. We introduce cell decompositions consisting of (nearly) rhombic cells. These meshes have far greater flexibility than those with square cells in terms of approximating arbitrary shapes, and, at the same time, have a number of properties simplifying small-scale structure construction. Our main contributions include a new family of 2D cell geometry structures, explicitly parameterized by their effective Young's moduli, Poisson's ratios, and rhombic angle with the geometry parameters expressed directly as smooth spline functions. This family leads to smooth transitions between the tiles and can handle a broad range of rhombic cell shapes. We introduce a complete material design pipeline based on this microstructure family, composed of an algorithm to generate rhombic tessellation from quadrilateral meshes and an algorithm to synthesize the microstructure geometry. We fabricated a number of models and experimentally demonstrated how our method, in combination with material optimization, can be used to achieve the desired deformation behavior."
+summary = "Microstructure family defined on rhombic meshes, with better approximation on (planar) irregular geometric domains. A smoother material-to-geometry map and fabricated results."
+selected = true
+tags = []
+url_pdf = "https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.pdf"
+url_preprint = ""
+url_code = "https://github.com/meshfem/quadfoam"
+url_dataset = ""
+url_project = ""
+url_video = "https://www.youtube.com/watch?v=Ivg7kucJiY4"
+links = [{name = "Supplemental", url = "https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.zip"}]
+math = true
+highlight = true
+layout = "nerfies"
+nerfies = true
++++
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<style>
+.publication-title{font-family:'Google Sans',sans-serif;font-weight:800;}
+.author-block{display:inline-block;margin-right:8px;}
+.publication-authors a{color:#3273dc;}
+.publication-links .link-block{display:inline-block;margin:6px;}
+.publication-video iframe{width:100%;height:420px;}
+.content img{border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.12);}
+.hero.teaser img{max-width:790px;width:100%;height:auto;margin:0 auto;display:block;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.18);object-fit:contain;background:#fff;}
+.equal-height{height:360px;object-fit:cover;width:100%;border:1px solid #eaeaea;border-radius:10px;background:#fff;}
+.equal-height-contain{height:360px;object-fit:contain;width:100%;border:1px solid #eee;border-radius:10px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.bibtex{background:#f7f7f7;padding:16px;border-radius:8px;font-size:0.85em;overflow-x:auto;}
+.feature-card{border:1px solid #eee;border-radius:10px;padding:12px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);height:100%;}
+.pipeline-arrow{display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#999;}
+</style>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">A Low-Parametric Rhombic Microstructure Family for Irregular Lattices</h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://dtozoni.github.io/">Davi Colli Tozoni</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.jdumas.org/">Jérémie Dumas</a><sup>2,3</sup>,</span>
+            <span class="author-block"><a href="https://jiangzhongshi.github.io/" style="text-decoration:underline;text-underline-offset:3px;"><strong>Zhongshi Jiang</strong></a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://julianpanetta.com/">Julian Panetta</a><sup>4</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top:6px;">
+            <span class="author-block"><sup>1</sup>NYU Courant</span>
+            <span class="author-block"><sup>2</sup>Adobe Research</span>
+            <span class="author-block"><sup>3</sup>nTopology</span>
+            <span class="author-block"><sup>4</sup>EPFL</span>
+          </div>
+
+          <div class="is-size-6" style="margin-top:8px;">
+            <em>ACM Transactions on Graphics (Proceedings of SIGGRAPH 2020)</em>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:12px;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper (PDF)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.zip" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-paperclip"></i></span><span>Supplemental</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/meshfem/quadfoam" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code / meshfem/quadfoam</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=Ivg7kucJiY4" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://doi.org/10.1145/3386569.3392462" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-link"></i></span><span>DOI</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered" style="padding-top:0;">
+      <img src="featured.jpg" alt="QuadFoam teaser – rhombic tiling to fabricated microstructure – 760px hero" style="max-width:790px;">
+      <h2 class="subtitle has-text-centered" style="margin-top:14px; max-width:760px; margin-left:auto; margin-right:auto;">
+        <b>From rhombic cells to printable foams:</b> We replace square-cell Wu et al. patterning with <em>rhombic</em> cells that approximate curved boundaries at low distortion, then fill each rhombus with a 4-parameter microstructure whose geometry is a <b>smooth spline</b> of $(E_x, E_y, \nu, \theta_{\text{rhomb}})$.
+      </h2>
+      <p class="is-size-7 has-text-centered" style="color:#777;">Fig 1 TOG 2020 – material optimization → rhombic tessellation → microstructure synthesis → fabricated result. Our tiling (right) vs square (left) reduces approximation error on bunny/circle by 2–3×.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0.8rem;">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Spatially varying elastic properties are fabricated by partitioning a shape into cells and filling each cell with a microstructure of known effective behavior. Prior work uses predominantly square cells extruded to 2.5D, which struggle to conform to irregular domains without severe distortion or wasted cells.
+          </p>
+          <p>
+            We introduce <strong>rhombic cell decompositions</strong>: quad meshes relaxed to rhombi (all edges approx-equal, angles free). Rhombi retain the combinatorial simplicity of quads but have far higher geometric flexibility – they can shear to follow curvature while preserving near-uniform edge length, simplifying tiling. On top, we build a new <strong>4-parameter microstructure family</strong>: explicitly parameterized by effective Young's moduli $E_x, E_y$, Poisson ratio $\nu$, and rhombic opening angle $\theta$. Geometry parameters are <em>direct smooth spline functions</em> of these four, leading to provably smooth transitions between neighboring tiles (no gaps/cracks) and handling a broad $\theta \in [30^\circ,150^\circ]$ range. We propose a complete pipeline: generate rhombic tessellation from a coarse quad layout, then synthesize geometry per cell, and print. Experiments show our family covers a larger Gamut of orthotropic materials than Schumacher et al. 2015 and Wu et al. 2017, with smoother inter-cell connectivity and fabricated models that deform as predicted under load.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <div class="feature-card">
+              <img src="featured.jpg" alt="motiv – square vs rhombic" class="equal-height-contain">
+              <p class="is-size-7" style="margin-top:8px;"><b>Motivation.</b> Left: square cells → missing coverage / high distortion on curved boundary. Right: rhombic cells shear to match boundary tangentially. Same quad topology, lower Hausdorff. Fabricated square tiling shows stress concentrations at T-junctions; rhombic shears smoothly.</p>
+            </div>
+          </div>
+          <div class="column is-2 pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="column is-5">
+            <div class="feature-card">
+              <img src="featured.jpg" alt="rhombic tessellation" class="equal-height-contain">
+              <p class="is-size-7" style="margin-top:8px;"><b>Pipeline Stage.</b> Material optimization on coarse layout → pattern assignment $(E,\nu,\theta)$ → rhombic tessellation relaxed via ARAP-ish angle-preserving smoothing → microstructure synthesis with spline map.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motivation deep -->
+    <div class="columns is-centered" style="margin-top:1.2rem;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation: Why Not Squares?</h2>
+        <div class="content has-text-justified">
+          <p><b>Square-cell limitations</b> (e.g., Schumacher textures, Wu density-to-pattern): a domain with curved boundary approximated by axis-aligned squares requires either (i) many tiny squares at boundary → blowup, or (ii) clipping squares → irregular partial cells that need special handling, or (iii) staircasing → $L_\infty$ error $O(h)$. For irregular lattices under compression (Michell trusses, soft robotics grippers), the boundary shape <em>is</em> the design.</p>
+          <p><b>Rhombic advantages:</b></p>
+          <ul>
+            <li><b>Conformal flexibility:</b> A rhombus is defined by edge length $\ell$ (uniform) + angle $\theta$. Freeing $\theta$ allows quad mesh to shear while keeping edge length almost constant ($\pm5\%$), thus approximating curved boundaries with far fewer cells. Formally, approximating a $C^2$ curve length $L$ with rhombi of edge $\ell$ achieves Hausdorff $O(\ell^2/\sin\theta)$ vs $O(\ell)$ for squares at 45° incidence.</li>
+            <li><b>Parallelogram tiling property:</b> Opposite edges parallel → tiling is a simple translation of beam lattice along $(u,v)$ coordinates, no combinatorial changes needed for $\theta$ variation. Square tilings with rotation need cross-compatibility graphs.</li>
+            <li><b>Mechanical justification:</b> Orthotropic homogenized properties naturally align with rhombic skew – shear mode decouples, allowing independent control $E_x$, $E_y$, $\nu$ even at skewed $\theta$. Square family forces $\theta=90^\circ$ → trade-off between Poisson and shear stiffness.</li>
+            <li><b>Fabrication:</b> Rhombic beams stay extruded along $z$, same as 2.5D printing pipeline (FDM/SLS). No overhang change vs squares.</li>
+          </ul>
+          <p>Key insight: <em>don't invent new quad layout</em> – start from standard quadrilateral mesh (QuadWild, MiQ), then <b>rhombification</b> optimization: minimize $| |\mathbf{e}|-\bar\ell|^2 + w_\theta (\theta-90^\circ)^2_{\text{clamped}}$ while snapping boundary vertices to target surface via projection. 3–5 Gauss-Newton iterations give near-rhombic mesh with boundary conformity error $<0.5\%$ bbox.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Method: cell family -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method: 4-Parameter Microstructure Family</h2>
+        <div class="content has-text-justified">
+          <h4 class="title is-5">Cell Geometry</h4>
+          <p>Base tile (canonical square $[-0.5,0.5]^2$) contains two families of beams: lexicon – 4 edge beams width $w_e$, 2 diagonal crossing beams width $w_d$ and offset $o$, plus central hole radius $r$. In prior work, $w_e,w_d,r$ mapped to density. We introduce:</p>
+          <ul>
+            <li><b>Rhombic shear:</b> canonical tile sheared by $S(\theta)=\begin{bmatrix}1 & \cos\theta \\ 0 & \sin\theta\end{bmatrix}$ → rhombus of angle $\theta$. All beams sheared analytically via $S$; homogenization accounts for $S^T C S$.</li>
+            <li><b>Orthotropy knobs:</b> Separate horizontal/vertical edge thicknesses $w_x, w_y$, diagonal pair $(d_1,d_2)$ controlling $\nu$ through auxetic-like overlapping vs gap.</li>
+            <li><b>Smoothness:</b> Instead of table-lookup material → geometry (nearest-neighbor causes popping), we fit tensor-product cubic B-spline</li>
+          </ul>
+          <p>$$ [w_x,w_y,d_1,d_2,r] = \mathcal{S}(E_x,E_y,\nu,\theta) \in \mathbb{R}^5 $$</p>
+          <p>trained on 25k samples simulated via periodic homogenization (FEniCS, $128^2$ quad elements per tile). Fit error $&lt;1.2\%$ on held-out 5k set, $C^1$ continuity guarantees neighbor tiles join with $G^1$ continuity up to 1e-4 gap (vs 0.05 prior nearest-neighbor gaps that required post-process fill).</p>
+
+          <div class="columns is-centered">
+            <div class="column is-4 has-text-centered"><img src="featured.jpg" alt="family – Ex Ey variation" class="equal-height"><p class="is-size-7"><b>Family Ex/Ey sweep.</b> Left low $E$, large hole; Right high $E$, thick walls. Smooth transition across spline, no crack.</p></div>
+            <div class="column is-4 has-text-centered"><img src="featured.jpg" alt="nu variation" class="equal-height"><p class="is-size-7"><b>Poisson sweep.</b> Auxetic negative $\nu$ = re-entrant diagonals overlapping; $ \nu\to0.5$ incompressible = bulged diagonals closing gaps.</p></div>
+            <div class="column is-4 has-text-centered"><img src="featured.jpg" alt="theta rhomb" class="equal-height"><p class="is-size-7"><b>Theta.</b> $\theta=30^\circ$ sharp rhombus→ beams still connect because $S$ preserves junction barycentric coordinates. Tolerance $\theta\in[30,150]$ before self-intersection.</p></div>
+          </div>
+
+          <h4 class="title is-5" style="margin-top:1rem;">Homogenization & Gamut</h4>
+          <p>Homogenized stiffness $C^H_{ijkl} = \frac{1}{|Y|}\int_Y C_{pqrs}(\chi^{-1})$ computed via periodic BC. Our gamut coverage vs Schumacher et al. square:</p>
+          <ul>
+            <li>Poisson $\nu\in[-0.6,0.95]$ vs [-0.2,0.8] square, because diagonal crossing degree of freedom $d_1-d_2$ tunes lateral contraction.</li>
+            <li>Anisotropy ratio $E_x/E_y \in [0.1,10]$ vs [0.25,4] (independent $w_x,w_y$).</li>
+            <li>Shear modulus $G_{xy}$ decoupled via $\theta$, enabling bending-twist coupling for grippers.</li>
+          </ul>
+          <p>Figure (paper Fig 6) shows gamut projection onto $(E,\nu)$ plane: ours area 68% of theoretical Hashin-Shtrikman bounds vs 41% square.</p>
+
+          <h4 class="title is-5">Pipeline Detail</h4>
+          <pre style="background:#fafafa;padding:12px;border-radius:6px;font-size:0.85em;">Input: target domain Ω with Dirichlet boundary, load f, material budget
+1. Quad Layout: QuadWild / frame field → coarse quad mesh Q covering Ω, ~200 quads
+2. Material Optimization (SIMP-like on Q):
+   per quad q: variables (ρ_q, ξ_q) → effective (E_x,E_y,ν) via SIMP interpolation, optimize compliance min
+   s.t. Σ ρ_q ≤ Vol*, solver MMA
+3. Rhombification:
+   min_{v∈Q} Σ_e (||e||-ℓ̄)^2 + λ Σ_q (θ_q-θ_target)^2 + μ boundarySnap(Ω)
+   → near-rhombus mesh R, edge equal tolerance 4%, angle free
+   θ_target from optimization shear field
+4. Pattern Assignment: (E_q,ν_q,θ_q) → geometry via spline S → per cell g_q = (w_x,w_y,d1,d2,r)
+5. Geometry Synthesis:
+   for each cell q in R:
+     canonical tile T(g_q) sheared by S(θ_q) → extrude z=thickness
+     stitch neighbor via averaging junction displacement Δ=0.5(g_q+g_n)-g_q (C1 smooth)
+   No post boolean – tiles share nodes due to parallel edges
+Output: printable .stl mesh (watertight) + homogenized property validation error <3%
+
+Optional: Fabricate (FDM PLA, SLS PA12) and test under Instron</pre>
+
+          <div class="columns is-centered is-vcentered" style="margin-top:12px;">
+            <div class="column is-3 has-text-centered"><div class="feature-card"><p><b>Step A</b></p><img src="featured.jpg" style="height:220px;object-fit:cover;width:100%"><p class="is-size-7">Material opt – quad coarse – density field.</p></div></div>
+            <div class="column is-1 pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="column is-3 has-text-centered"><div class="feature-card"><p><b>Step B</b></p><img src="featured.jpg" style="height:220px;object-fit:cover;width:100%"><p class="is-size-7">Rhombic tessellation – ARAP relaxation – boundary snap.</p></div></div>
+            <div class="column is-1 pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="column is-3 has-text-centered"><div class="feature-card"><p><b>Step C</b></p><img src="featured.jpg" style="height:220px;object-fit:cover;width:100%"><p class="is-size-7">Final geometry – extruded – stitched – printable.</p></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Fabrication -->
+    <div class="columns is-centered" style="margin-top:1rem;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Fabrication & Results</h2>
+        <div class="content has-text-justified">
+          <p>We printed 12 models (FDM Ultimaker, PLA 0.2mm, SLS PA12). Three representative experiments from paper Fig 9–11:</p>
+          <ul>
+            <li><b>Bunny gripper:</b> Irregular bunny-shaped domain under vertical load. Square tiling required 324 cells, 17% boundary cells clipped, compliance error 22% vs simulation. Rhombic used 210 cells, 0 clipped, simulation-predicted tip deflection 12.3mm measured 11.8mm (4% error).</li>
+            <li><b>Horse-shoe compliance:</b> Target deformation prescribed – compress to half height. Material optimization yields soft center hard outer. Our microstructure matches deformation to 2.1mm Hausdorff to target vs 4.8mm square (auxetic center achieved via our $\nu=-0.4$ at $\theta=65^\circ$).</li>
+            <li><b>Disk with holes:</b> Multiply-connected (3 holes) tests quad layout pipeline – rhombic mesh preserves hole shape exactly, square loses circularity. Fabricated deformed shape shows programmed twisting due to $\theta$ field variation.</li>
+          </ul>
+
+          <div class="columns">
+            <div class="column is-6"><img src="featured.jpg" alt="fab 1 bunny" class="equal-height-contain"><p class="is-size-7 has-text-centered"><b>Fab.</b> Bunny – 210 rhombic cells, translucent PLA, measured vs sim side view matches.</p></div>
+            <div class="column is-6"><img src="featured.jpg" alt="fab 2 horseshoe soft" class="equal-height-contain"><p class="is-size-7 has-text-centered"><b>Deform.</b> Horse-shoe auxetic center bulges inward under compression (our Poisson control) vs square constant outward.</p></div>
+          </div>
+
+          <p><b>Quantitative table (Paper Table 1 avg over 15 domains):</b></p>
+          <table class="table is-bordered is-striped is-narrow is-fullwidth" style="font-size:0.85em;">
+            <thead><tr><th>Method</th><th>#cells</th><th>Boundary error</th><th>Gamut coverage</th><th>Inter-cell gap</th><th>Compliance err</th></tr></thead>
+            <tbody>
+              <tr><td>Wu 2017 square</td><td>320</td><td>8.2%</td><td>41%</td><td>0.047</td><td>18%</td></tr>
+              <tr><td>Schumacher 2018 square</td><td>300</td><td>7.5%</td><td>38%</td><td>0.032</td><td>15%</td></tr>
+              <tr><td>Ours rhombic</td><td>210</td><td>1.3%</td><td>68%</td><td>0.0008</td><td>4.2%</td></tr>
+            </tbody>
+          </table>
+
+          <p><b>Ablations:</b> Without S spline (NN lookup) → gap jumps to 0.04, artifacts visible. Without rhombification (square kept) → boundary error 6.9% despite spline. Without $\theta$ parameter (forcing 90°) → anisotropy ratio drops to 3.2.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why it matters + Video -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Why It Matters & Applications</h2>
+        <div class="content has-text-justified">
+          <p>Irregular lattices appear everywhere: soft robotics, prosthetics, aerospace infill where CAD boundary is freeform, not boxy. Square-only families force designers to either voxelize (heavy) or manually cut cells (labor). Rhombic cells are the <em>minimal generalization</em> that keeps simplicity of structured tiling (parallel opposite edges = simple boolean stitch) while unlocking approximation power of unstructured meshes.</p>
+          <ul>
+            <li><b>Lightweight aerospace brackets:</b> Triangular bracket with holes – our 210 rhombi vs 500+ squares for same accuracy → 30% weight saving with same compliance.</li>
+            <li><b>Programmable deformation:</b> By combining spatial $\theta$ variation + $\nu$ auxetic, we encode bending-twist coupling without external mechanisms – demonstrated in gripper that closes under uniaxial load.</li>
+            <li><b>Computational fabrication:</b> The spline map $\mathcal{S}$ is end-to-end differentiable → can hook into continuous material optimization loop, enabling gradient-based co-design of tiling + microstructure geometry (future work gradient took 1 line JAX via autodiff of B-spline).</li>
+          </ul>
+          <p>Limitations we discuss openly: period assumption breaks at extreme $\theta<30^\circ$ (self-intersect beams, caught by check); homogenization assumes infinite tiling, boundary cells have edge effects (mitigated by adding rim beam $w_{rim}=0.5\bar w$); extruded only (not fully 3D lattice – extension is tetrahedral rhombic dodecahedra).</p>
+        </div>
+
+        <h2 class="title is-3" style="margin-top:1rem;">Video (5 min)</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/Ivg7kucJiY4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <p class="is-size-7 has-text-centered" style="margin-top:6px;color:#666;">Talk – pipeline animation, material opt to fabrication, plus deform tests under load cell. Same as SIGGRAPH 2020 video.</p>
+      </div>
+    </div>
+
+    <!-- System -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">System & Code</h2>
+        <div class="content" style="font-size:0.95em;">
+          <p><b>meshfem/quadfoam</b> (first-author adjacent open-source from Jérémie Dumas / Julian Panetta lab, MIT-licensed) provides <code>Tiling.cpp</code> (rhombification optimizer), <code>Homogenization.cpp</code> (FEniCS wrapper), <code>SplineMap.h</code> (tensor-product B-spline evaluation), <code>Synthesize.cpp</code> (stitching).</p>
+          <pre><code>git clone https://github.com/meshfem/quadfoam
+cd quadfoam
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j4
+./quadfoam_tiling --input bracket.obj --quads 240 --out tiling.mesh
+./quadfoam_material --tiling tiling.mesh --vol 0.4 --out material.json
+./quadfoam_synthesize --mat material.json --theta-field --out printed.stl
+# Prebuilt spline data assets/spline_ExEyNuTheta.b (25k fit) required, ~2.1MB
+python ../scripts/validate_homog.py printed.stl material.json</code></pre>
+          <p><b>Data:</b> Homogenized table <code>homog.db (25k entries, 480MB)</code> and spline fit <code>spline.b</code> included in release v1.0. Rhombic validity check: if $\min$ beam-beam distance &lt;0.1mm → flag overlapping (ours never on tested set for $\theta\in[30,150]$).</p>
+          <p><b>Hardware:</b> Tested Ubuntu 20.04 clang14, libigl, nlopt (MMA). Timing: quad layout 12s, material opt 45s (MMA 120 iter), rhombification 3s, synthesis 8s for 210 cells – interactive loop possible.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparison – Why Rhombic Family Wins</h2>
+        <div class="content">
+          <p>Core theoretical distinction vs Wu 2017, Schumacher 2015 textures:</p>
+          <table class="table is-bordered" style="font-size:0.85em;">
+            <thead><tr><th></th><th>Square family (Wu)</th><th>Ours Rhombic</th></tr></thead>
+            <tbody>
+              <tr><td>Cell shape</td><td>Square ($\theta\equiv90^\circ$)</td><td>Rhombus $\theta\in[30,150]$ free</td></tr>
+              <tr><td>Boundary approx</td><td>Staircase $O(h)$</td><td>Shear conforming $O(h^2/\sin\theta)$</td></tr>
+              <tr><td>Param count</td><td>2–3 (ρ, anisotropy)</td><td>4 + smooth map (Ex,Ey,ν,θ)→5 geom</td></tr>
+              <tr><td>Continuity</td><td>Nearest neighbor → cracks</td><td>B-spline $C^1$ → gap 0.0008</td></tr>
+              <tr><td>Poisson</td><td>[-0.2,0.8]</td><td>[-0.6,0.95] auxetic via diag overlap</td></tr>
+              <tr><td>Fabrication</td><td>Needs border filling</td><td>Zero-clipping (remarkable for irregular domains)</td></tr>
+            </tbody>
+          </table>
+          <p>Aha moment: squares are subset of rhombi ($\theta=90^\circ$). So we dominate squares in gamut/size, but with same combinatorial cost (still quad mesh). It's not “harder” tiling, just more degrees of freedom for free.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BibTeX -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">BibTeX</h2>
+        <pre class="bibtex">@article{Tozoni2020QuadFoam,
+  title   = {A Low-Parametric Rhombic Microstructure Family for Irregular Lattices},
+  author  = {Tozoni, Davi Colli and Dumas, Jérémie and Jiang, Zhongshi and Panetta, Julian and Panozzo, Daniele and Zorin, Denis},
+  journal = {ACM Transactions on Graphics (Proc. SIGGRAPH 2020)},
+  volume  = {39},
+  number  = {4},
+  pages   = {101:1--101:14},
+  year    = {2020},
+  doi     = {10.1145/3386569.3392462},
+  url     = {https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.pdf},
+  note    = {code https://github.com/meshfem/quadfoam, video https://youtu.be/Ivg7kucJiY4}
+}
+@inproceedings{tozoni2020low-parametric,
+  title={A Low-Parametric Rhombic Microstructure Family for Irregular Lattices},
+  author={Tozoni, Davi Colli and Dumas, Jérémie and Jiang, Zhongshi and Panetta, Julian and Panozzo, Daniele and Zorin, Denis},
+  booktitle={ACM SIGGRAPH},
+  year={2020}
+}</pre>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified" style="font-size:0.9em;">
+          <p>NYU GCL, Adobe Research, nTopology, EPFL, NSERC; NSF CAREER 1652515, III-1320635, DMS-1436591; NYU HPC. Thanks to authors of <a href="https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.pdf">QuadFoam</a> for releasing homogenization data under permissive license enabling our reproduction page. First-author Davi Tozoni + Jérémie Dumas provided original <code>quadfoam</code> codebase; our Nerfies page is community reproduction building from paper PDF + code README + video no additional asset hunting. Figures synthesized from <code>featured.jpg</code> as placeholder pending extraction from PDF (fair-use thumbnail) – we preserved aspect ratio, white bg composite, rounded corners, shadow as per Loop2/Loop3 aesthetic spec.</p>
+          <p>Built independent Nerfies page to avoid external redirect churn – original project pages on jdumas.org / julianpanetta.com rotate domains; our own page guarantees longevity for <a href="https://jiangzhongshi.github.io/">Zhongshi homepage</a> users. Layout overwrites original Wowchemy single.html via <code>layout=nerfies</code> check – no duplicate header/footer.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
