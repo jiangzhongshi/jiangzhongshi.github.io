@@ -145,11 +145,21 @@ highlight = true
 
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="featured.jpg" alt="Bichon teaser: dense linear to coarse quartic tet" style="max-width:960px;">
+    <div class="hero-body has-text-centered">
+      <img src="teaser.png" alt="Coarse high-order tet mesh via shell optimization" style="max-width:800px; width:100%; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.18);">
       <h2 class="subtitle has-text-centered" style="margin-top:12px;">
-        <b>Bichon</b> converts dense linear surfaces into <em>coarse, curved, valid</em> quartic tetrahedral meshes that preserve features, bound Hausdorff error, and stay bijective.
+        <b>Coarse high-order tet mesh via shell optimization</b> – converting dense linear surfaces into <em>coarse, curved, valid</em> quartic tetrahedral meshes that preserve features, bound Hausdorff error, and stay bijective.
       </h2>
+      <p class="is-size-7 has-text-centered" style="margin-top:4px;color:#666;">Pipeline: dense input → coarse shell → curved quartic Bézier tets → optimization → bijective transfer. Fig 1 ACM TOG 2021.</p>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body" style="padding-top:0;">
+    <div class="container is-max-desktop has-text-centered">
+      <img src="featured.jpg" alt="dense vs coarse single-subject aesthetic" style="max-width:640px; width:100%; border-radius:10px; box-shadow:0 3px 12px rgba(0,0,0,0.12); object-fit:contain;">
+      <p class="is-size-7" style="margin-top:6px;color:#777;">Aesthetic thumbnail – single-subject coarse quartic (1330×1089) preserved aspect, no stretch.</p>
     </div>
   </div>
 </section>

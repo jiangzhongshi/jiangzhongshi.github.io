@@ -131,6 +131,33 @@ caption = "Scaffold structure around mesh patch ensuring global bijectivity"
   </div>
 </section>
 
+<section class="section" style="padding-top:1.2rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Method Gallery – Nerfies Interpolation Row Style</h2>
+    <div class="columns is-centered is-multiline">
+      <div class="column is-4 has-text-centered">
+        <div class="card" style="box-shadow:0 4px 16px rgba(0,0,0,.10); border-radius:10px; overflow:hidden;">
+          <div class="card-image"><figure class="image is-16by9"><img src="teaser.png" alt="Teaser scaffold construction centered 16:9" style="object-fit:cover;"></figure></div>
+          <div class="card-content" style="padding:0.8rem;"><p class="is-size-7"><b>Teaser</b> – Scaffold <b>P</b> (dark) + auxiliary <b>S</b> (light) filling □\P to convex domain. Centered crop ensures scaffold ring visible.</p></div>
+        </div>
+      </div>
+      <div class="column is-4 has-text-centered">
+        <div class="card" style="box-shadow:0 4px 16px rgba(0,0,0,.10); border-radius:10px; overflow:hidden;">
+          <div class="card-image"><figure class="image is-16by9"><img src="method.png" alt="Method scaffold centered 1600x900" style="object-fit:cover; object-position:center;"></figure></div>
+          <div class="card-content" style="padding:0.8rem;"><p class="is-size-7"><b>Method</b> – Joint optimization on D=P∪S, 105k tets untangled, scaffold construction centered (object-position:center).</p></div>
+        </div>
+      </div>
+      <div class="column is-4 has-text-centered">
+        <div class="card" style="box-shadow:0 4px 16px rgba(0,0,0,.10); border-radius:10px; overflow:hidden;">
+          <div class="card-image"><figure class="image is-16by9"><img src="results.png" alt="Results packing multi-chart" style="object-fit:cover;"></figure></div>
+          <div class="card-content" style="padding:0.8rem;"><p class="is-size-7"><b>Results</b> – Multi-chart UV atlas packing, 100% flip-free, 1.2s / 12.3 SymDirichlet; high-qual PNG (351KB) preserved.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="has-text-centered is-size-7" style="color:#888; margin-top:0.6rem;">All images 16:9 with <code>object-fit:cover; object-position:center</code> – centered scaffold, white bg padding via bulma cards – Nerfies template <code>interpolation-image</code> style mimic.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">

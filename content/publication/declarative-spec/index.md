@@ -168,8 +168,12 @@ highlight = true
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered">Why Declarative?</h2>
-        <div class="content has-text-justified">
-          <p><b>Typical loop (libigl/OpenMesh style):</b></p>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="columns is-vcentered">
+              <div class="column is-6">
+                <div class="content has-text-justified">
+                  <p><b>Typical loop (libigl/OpenMesh style):</b></p>
 <pre><code class="language-cpp">while (!Q.empty()) {
   auto [op, eid] = Q.pop();
   if (is_removed(eid)) continue;
@@ -178,27 +182,35 @@ highlight = true
   if (collision_with_envelope) continue;
   lock_one_ring(eid); // hand-rolled
   for (v: one_ring) cache_attr...
-  collapse(eid); // manually splice half-edges
-  for (v: new_ring) recompute_quality, push Q
+  collapse(eid); // manually splice
+  for (v: new_ring) recompute, push Q
   unlock();
 }</code></pre>
-          <p>Every project rewrites <code>link_condition</code>, <code>check_inversion</code>, attribute lerp, locking. Miss one envelope test → self-intersect. Lock order → deadlock.</p>
-
-          <p><b>Our vision – 15 LoC:</b></p>
-<pre><code class="language-cpp">// declarative description – no half-edge juggling
+                  <p style="font-size:0.9em;">Every project rewrites <code>link_condition</code>, <code>check_inversion</code>, attr lerp, locking. Miss one envelope test → self-intersect. Lock order → deadlock.</p>
+                  <p><b>Our vision – 15 LoC:</b></p>
+<pre><code class="language-cpp">// declarative – no half-edge juggling
 auto m = TriMesh::from_file("bunny.obj");
-
-auto invariants = { Manifold, NoInversion, Envelope(1e-3 * diag), LinkCondition };
-auto scheduler = EdgeLengthScheduler&lt;&gt;();
-
-auto op_collapse = EdgeCollapse {
+auto invariants = { Manifold, NoInversion,
+  Envelope(1e-3*diag), LinkCondition };
+auto scheduler = EdgeLengthScheduler<>();
+auto op_collapse = EdgeCollapse{
   .energy = [](Edge e){ return -e.length(); },
-  .precondition = [](Edge e){ return e.length() &lt; 4.0/3 * target; },
-  .transfer = { .pos = Linear, .uv = Wachspress }
+  .precondition = [](Edge e){
+    return e.length() < 4.0/3*target; },
+  .transfer = { .pos=Linear, .uv=Wachspress }
 };
-
-wmtk::run(m, invariants, scheduler, op_collapse);</code></pre>
-          <p>Change <code>4.0/3</code> to <code>sqrt(2)</code> and you have a new paper. The DSL erases simplex access.</p>
+wmtk::run(m,invariants,scheduler,op_collapse);</code></pre>
+                  <p style="font-size:0.9em;">Change <code>4/3</code> to <code>sqrt(2)</code> and you have a new paper.</p>
+                </div>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <figure class="image">
+                  <img src="method.png" alt="System layers DSL to runtime" style="border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.12); max-width:100%;">
+                  <figcaption style="font-size:0.85em; color:#666; margin-top:8px;">Fig. 2 – System layers: DSL → registry → WMTK runtime → parallelism. Colors match Bulma palette <span style="display:inline-block;width:10px;height:10px;background:hsl(204,86%,53%);border-radius:2px;"></span> blue.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

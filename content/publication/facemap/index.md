@@ -100,8 +100,8 @@ highlight = true
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body has-text-centered" style="padding-top:1rem;">
-      <img src="teaser_wide.png" alt="FaceMap wide hero – single female head plus distortion sensitivity map eyes to cheeks" class="teaser-img" style="max-height:none; width:100%; max-width:1120px; aspect-ratio:2/1; object-fit:cover;" loading="eager"/>
-      <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">Wide hero 1400×700 (2:1) – left: single female head thumb (814×900 portrait kept as featured.jpg for site list) – right: perceptually-weighted allocation eyes&gt;wrinkles&gt;mouth&gt;cheeks. Teaser backup portrait: teaser_portrait.png.</p>
+      <img src="teaser.png" alt="FaceMap wide hero – single female head plus distortion sensitivity map eyes to cheeks" class="teaser-img" style="max-height:none; width:100%; max-width:1120px; aspect-ratio:16/9; object-fit:cover;" loading="eager"/>
+      <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">Wide hero 1600×900 (16:9) – left: single female head thumb (800×900 portrait kept as featured.jpg for site list / front-page thumb) – right: perceptually-weighted allocation eyes&gt;wrinkles&gt;mouth&gt;cheeks. Sources: teaser_wide.png (original 1400×700) upscaled to teaser.png 1600×900. Teaser backup portrait: teaser_portrait.png 814×900.</p>
       <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
         <strong>FaceMap</strong> learns where humans notice distortion and reallocates polys / texels / splats there – SROCC 0.82.
       </h2>
@@ -117,9 +117,9 @@ highlight = true
         </div>
         <div class="column is-6 is-flex is-align-items-center">
           <div class="has-text-left">
-            <p class="is-size-6"><strong>Featured thumb preserved:</strong> <code>featured.jpg</code> 814×900 portrait single female head – used by Wowchemy project list for aesthetic &lt;3-subject rule.</p>
+            <p class="is-size-6"><strong>Featured thumb preserved:</strong> <code>featured.jpg</code> 800×900 portrait single female head – used by Wowchemy project list for aesthetic &lt;3-subject rule. Front-page thumbnail unchanged.</p>
             <p class="is-size-7 has-text-grey" style="margin-top:6px;">Portrait teaser backup: <code>teaser_portrait.png</code> 814×900 – stimuli 10×5×6 grid (original).</p>
-            <p class="is-size-7" style="margin-top:8px;"><span class="tag is-info">16:9 wide</span> <span class="tag is-success">1400×700</span> <span class="tag is-light">252KB</span> hero – no stretching of portrait thumb.</p>
+            <p class="is-size-7" style="margin-top:8px;"><span class="tag is-info">16:9 wide</span> <span class="tag is-success">1600×900</span> <span class="tag is-light">~280KB</span> hero (teaser.png = teaser_wide.png upscaled) – no stretching of portrait thumb (featured.jpg kept separate).</p>
           </div>
         </div>
       </div>
@@ -206,8 +206,8 @@ highlight = true
       </div>
       <div class="column is-6">
         <figure class="image">
-          <img src="method.png" alt="FaceMap pipeline method diagram" style="border-radius:10px;" loading="lazy"/>
-          <figcaption class="is-size-7 has-text-centered">Pipeline: distort mesh/tex/splats → 3-view render → patchify → crowd 2AFC → JOD → N-way ANOVA → UNet saliency. 842×814 overview.</figcaption>
+          <img src="method.png" alt="FaceMap pipeline method diagram – 1200x1160 padded" style="border-radius:10px; max-width:100%; height:auto;" loading="lazy"/>
+          <figcaption class="is-size-7 has-text-centered">Pipeline: distort mesh/tex/splats → 3-view render → patchify → crowd 2AFC → JOD → N-way ANOVA → UNet saliency. 842×814 original upscaled to 1200×1160 with 5% white padding to match hero width – no crop, readable labels.</figcaption>
         </figure>
         <article class="message is-small is-link" style="margin-top:1rem;">
           <div class="message-header"><p>N-way ANOVA – what matters?</p></div>
@@ -251,8 +251,8 @@ highlight = true
       </div>
       <div class="column is-7">
         <figure class="image">
-          <img src="results.png" alt="SROCC scatter FaceMap 0.82 vs Song 0.306" style="border-radius:10px;" loading="lazy"/>
-          <figcaption class="is-size-7 has-text-centered">Fig.21 Correlation – FaceMap predicted loss SROCC 0.82 / PLCC 0.79 tight diagonal vs Song'14 0.306/0.234 & Nehmé'23 0.19/0.234 weak per Schober 2018.</figcaption>
+          <img src="results.png" alt="SROCC scatter FaceMap 0.82 vs Song 0.306 – 1600x900 readable" style="border-radius:10px; max-width:100%;" loading="lazy"/>
+          <figcaption class="is-size-7 has-text-centered">Fig.21 Correlation – 1600×900 scatter, axes 0.0–1.0 SROCC/PLCC, tight diagonal FaceMap predicted loss SROCC 0.82 / PLCC 0.79 vs Song'14 0.306/0.234 & Nehmé'23 0.19/0.234 weak per Schober 2018 – labels 12pt preserved for readability.</figcaption>
         </figure>
         <div class="notification is-light" style="margin-top:0.8rem; font-size:0.9rem;">
           <strong>Qualitative heat:</strong> eyes > eye wrinkles / crow's feet > mouth interior > nostrils > silhouette > cheeks/forehead cold. Yet cold spots identity-modulated – e.g., freckled cheeks slightly warmer, bearded chin moderate sensitivity.
@@ -269,8 +269,8 @@ highlight = true
     <div class="columns is-centered">
       <div class="column is-10">
         <figure class="image">
-          <img src="application.png" alt="Applications allocation polys texels splats" style="border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1);" loading="lazy"/>
-          <figcaption class="has-text-centered is-size-7">Avatar optimization: allocate polys/texels/Gaussians ~ FaceMap saliency × curvature^0.5 – eyes/mouth receive 2–3× budget vs uniform. Suppl Fig.16-17.</figcaption>
+          <img src="application.png" alt="Applications allocation polys texels splats – 2-row stacked 1400x1308" style="border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); max-width:100%;" loading="lazy"/>
+          <figcaption class="has-text-centered is-size-7">Avatar optimization: 2832×662 ultra-wide original split into 2×1400×654 rows stacked → 1400×1308 readable (backup application_original.png). Allocate polys/texels/Gaussians ~ FaceMap saliency × curvature^0.5 – eyes/mouth receive 2–3× budget vs uniform. Suppl Fig.16-17.</figcaption>
         </figure>
       </div>
     </div>

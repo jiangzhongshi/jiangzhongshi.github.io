@@ -66,8 +66,20 @@ Node→Face via $D$, Face→Node via $D^*$. Shared trunk 64→256, skip connecti
 
 <h2 class="title is-3">5. Experiments</h2>
 <b>Temporal elastic shell</b> 500 seq ×50 frames Saint Venant–Kirchhoff non-linear. Test L2: Dirac 0.024 vs Lap 0.029 vs PointNet++ 0.038. Wrinkles preserved anisotropic.
-<div class="columns"><div class="column"><img src="lap_vs_dir_gt.png"><p>GT</p></div><div class="column"><img src="lap_vs_dir_lap.png"><p>Lap</p></div><div class="column"><img src="lap_vs_dir_dir.png"><p>Dirac – matches wrinkles</p></div></div>
-<div class="columns"><div class="column"><img src="gt_1.png"></div><div class="column"><img src="lap_1.png"></div><div class="column"><img src="dir_1.png"></div></div>
+
+<!-- Trio GT / Lap / Dirac – equal-height 800×1000 comparison row -->
+<div class="columns is-centered">
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_gt.png" alt="GT" style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.12)"></figure><p class="is-size-7 mt-2"><b>GT</b> – ground truth deformation</p></div>
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_lap.png" alt="Laplacian SN"><p class="is-size-7 mt-2"><b>Lap SN</b> – isotropic blur, wrinkle loss</p></figure></div>
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_dir.png" alt="Dirac SN"><p class="is-size-7 mt-2"><b>Dirac SN</b> – matches anisotropic wrinkles</p></figure></div>
+</div>
+
+<!-- Zoom grid – square 800×800 crops for equal focus -->
+<div class="columns is-centered">
+<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="gt_1.png" alt="GT zoom" style="border-radius:8px; object-fit:cover"></figure><p class="is-size-7 mt-2">GT zoom</p></div>
+<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="lap_1.png" alt="Lap zoom"><p class="is-size-7 mt-2">Lap zoom – over-smoothed</p></figure></div>
+<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="dir_1.png" alt="Dirac zoom"><p class="is-size-7 mt-2">Dirac zoom – preserved</p></figure></div>
+</div>
 
 <b>Mesh MNIST</b> – digits embossed on thin sheet bending (+). VAE NLL 44.7 Dirac best, Laplacian 48.2, PointNet++ 51.1. <img src="mnist.png" style="max-width:480px"> latent disentangles digit vs bend.
 

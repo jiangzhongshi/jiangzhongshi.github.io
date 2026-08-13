@@ -259,9 +259,20 @@ for p in T samples:
 
       <p><b>Distortion test</b> – T→S decimated 50% + 0.5% noise: closest-point 12.4% flipped, Hausdorff 8.3%; ray+shell 0% flipped, $H_{sym}=0.21\%$ bbox, Dirichlet 0.04 vs 0.18 baseline.</p>
 
-      <div class="has-text-centered" style="margin:18px 0">
-        <img src="results.png" alt="Applications mosaic" style="max-width:960px; width:100%; border-radius:10px; box-shadow:0 4px 18px rgba(0,0,0,.18)">
-        <p class="is-size-7">Mosaic – PDE transfer, displacement maps, Booleans, tet-meshing, geometric textures, nested cages. All reuse same shell+Φ. Original paper Fig 1–9 show horse→low-res, bunny displacement, Beethoven Boolean.</p>
+      <!-- Side-by-side Method / Results grid – Nerfies interpolation row style, equal height 400px -->
+      <div class="columns is-centered is-vcentered" style="margin:18px 0;">
+        <div class="column is-6 has-text-centered">
+          <div style="height:400px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10); padding:8px;">
+            <img src="method.png" alt="Method triptych - directions, prismatic shell construction, ray projection" style="max-height:384px; width:auto; max-width:100%; object-fit:contain; border-radius:8px;">
+          </div>
+          <p class="is-size-7" style="margin-top:8px;"><b>Fig A – Method:</b> Vertex direction field → thin prismatic shell (blue volume, intersection-free) → ray $p+tD$ uniqely maps $T$ to $S$. Checked with exact predicates.</p>
+        </div>
+        <div class="column is-6 has-text-centered">
+          <div style="height:400px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10); padding:8px;">
+            <img src="results.png" alt="Results gallery - PDE, displacement, Booleans, tet meshing, textures, cages" style="max-height:384px; width:auto; max-width:100%; object-fit:contain; border-radius:8px;">
+          </div>
+          <p class="is-size-7" style="margin-top:8px;"><b>Fig B – Results Gallery:</b> Applications mosaic – PDE transfer, displacement maps, Booleans, tet-meshing, geometric textures, nested cages all reuse same shell+$\Phi$. Paper Fig 1-9: horse low-res, bunny bark displacement, Beethoven Boolean.</p>
+        </div>
       </div>
 
       <h4 class="title is-5">Applications (one page each in paper)</h4>

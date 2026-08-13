@@ -140,7 +140,7 @@ highlight = true
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body" style="padding-top:0;">
-      <img src="teaser.jpg" alt="Teaser: Tutte fails on 38% of Thingi10k, ours 98.7% valid" style="width:100%;"/>
+      <img src="teaser.jpg" alt="Teaser: Tutte fails on 38% of Thingi10k, ours 98.7% valid – 1600x900 16:9" style="max-width:100%; width:100%; height:auto; border-radius:12px; object-fit:contain;"/>
       <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
         Tutte embedding is provably bijective in $\mathbb{R}$ — but flips in <code>float64</code> on 38% of Thingi10k disk meshes due to exponential area compression. <span class="dnerf">Progressive Embedding</span> collapses invalid regions to a valid coarse mesh, then progressively reinserts vertices while maintaining validity as a hard invariant.
       </h2>
@@ -162,11 +162,13 @@ highlight = true
       </div>
     </div>
 
-    <!-- Method hero image -->
+    <!-- Method hero image – uniform max-width, no stretch -->
     <div class="columns is-centered">
       <div class="column is-10 has-text-centered">
-        <img src="method.jpg" alt="Method – collapse then grow valid" style="width:100%; border-radius:10px; margin-top:1rem;"/>
-        <p class="is-size-7 has-text-grey" style="margin-top:0.4rem;">Pipeline from NYU GCL project site – collapse invalid embedding to coarse valid, then progressive insertion with feasible polygon check.</p>
+        <figure>
+        <img src="method.jpg" alt="Method – collapse then grow valid – Step 1 collapse" style="max-width:100%; width:100%; height:auto; border-radius:10px; margin-top:1rem; object-fit:contain;"/>
+        <figcaption class="is-size-7 has-text-grey" style="margin-top:0.4rem;"><strong>Step 1 – Collapse:</strong> Invalid Tutte embedding (red flips) → priority queue by area distortion → collapsible edges (link-condition) → coarse valid embedding. Pipeline from NYU GCL. 1800×1125 original.</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -184,7 +186,10 @@ $$ L \mathbf{U} = 0,\quad \mathbf{U}_{\partial} = \text{fixed convex boundary}$$
 $$\tilde{A}_t = A_t + \epsilon_{\text{round}}\cdot \kappa(L), \quad \kappa(L)>10^{12}\ \text{on stretched domains}$$
 
           <p>When $\tilde{A}_t$ flips sign, the whole algorithm tangles — a single flipped triangle invalidates downstream MiQ / parameterizations.</p>
-          <img src="method_overview.png" alt="Method overview" style="width:100%; margin:1rem 0; border-radius:8px;"/>
+          <figure>
+          <img src="method_overview.png" alt="Method overview – feasible polygon insertion – Step 2 feasible" style="max-width:100%; width:100%; height:auto; margin:1rem 0; border-radius:8px; object-fit:contain;"/>
+          <figcaption class="is-size-7 has-text-grey"><strong>Step 2 – Feasible:</strong> For each uninserted vertex, convex feasible polygon (green) = intersection of half-planes from one-ring. Chebyshev center insertion maintains $area>10^{-8}$. 2400×800 ultra-wide scaled to 100% width, no stretch.</figcaption>
+          </figure>
           <p><b>Core idea:</b> If initial embedding is invalid, simplify until valid, then grow. Validity is not repaired post-hoc; it is a <em>hard invariant</em> through every insertion.</p>
         </div>
       </div>
@@ -212,8 +217,8 @@ $$\forall t \in \text{star}(v): \text{area}(t,p) > \tau_{\min}=10^{-8}$$
 
 $$E_{\text{SD}} = \sum_t (\sigma_1 + \sigma_1^{-1} + \sigma_2 + \sigma_2^{-1})$$
 
-          <img src="validity.png" alt="Validity preservation feasible polygon" style="width:85%; margin:1rem auto; display:block; border-radius:8px;"/>
-          <p class="is-size-7 has-text-centered has-text-grey">Feasible polygon (green) – intersection of half-planes from incident edges. Insert only if non-empty.</p>
+          <img src="validity.png" alt="Validity preservation feasible polygon – Step 2 detail – feasible polygon" style="max-width:100%; width:85%; height:auto; margin:1rem auto; display:block; border-radius:8px; object-fit:contain;"/>
+          <p class="is-size-7 has-text-centered has-text-grey"><strong>Step 2 detail – Validity:</strong> Feasible polygon (green) – intersection of half-planes from incident edges. Insert only if non-empty. $E_{SD}$ Gauss-Seidel local smoothing minimizes symmetric Dirichlet.</p>
 
           <h4 class="title is-5">3. Matchmaker++: Multiply-Connected Domains</h4>
           <p>Tutte alone handles disk topology. Real assets have holes (T-shirt armholes). Our combined algorithm:</p>
@@ -222,7 +227,10 @@ $$E_{\text{SD}} = \sum_t (\sigma_1 + \sigma_1^{-1} + \sigma_2 + \sigma_2^{-1})$$
             <li>Progressive embedding of cut mesh — cuts treated as extra boundary</li>
             <li>Harmonic solve on top of valid embedding to place holes / interior constraints — injectivity preserved because base is valid.</li>
           </ol>
-          <img src="matchmaker.png" alt="Matchmaker multiply connected" style="width:90%; margin:1rem auto; display:block; border-radius:8px;"/>
+          <figure>
+          <img src="matchmaker.png" alt="Matchmaker multiply connected – Step 3 matchmaker" style="max-width:100%; width:90%; height:auto; margin:1rem auto; display:block; border-radius:8px; object-fit:contain;"/>
+          <figcaption class="is-size-7 has-text-centered has-text-grey"><strong>Step 3 – Matchmaker:</strong> Multiply-connected via MST cut graph → simple polygon → progressive embedding of cut mesh → harmonic hole placement. Injectivity preserved because base is valid.</figcaption>
+          </figure>
 
           <h4 class="title is-5">Algorithm Pseudocode</h4>
 
@@ -259,11 +267,11 @@ Output: bijective U_full
         <h2 class="title is-3">Results</h2>
         <div class="content has-text-justified">
           <p>Dataset: <b>10,403</b> Thingi10k manifold disk meshes, tested against <code>libigl</code> Tutte, <code>SLIM</code> untangling, Total Lifted.</p>
-          <img src="results_comparison.png" alt="Results comparison bar" style="width:100%; border-radius:8px; margin:0.8rem 0;"/>
+          <img src="results_comparison.png" alt="Results comparison bar – 98.7% vs 62% Tutte" style="max-width:100%; width:100%; height:auto; border-radius:8px; margin:0.8rem 0; object-fit:contain;"/>
           <p>Tutte 62% (provable but numerically failing), naive Newton fix 74%, ours <b>98.7%</b>. Area distortion $max A_{max}/A_{min}$ &lt;2× vs Tutte's 12×.</p>
-          <div class="columns">
-            <div class="column"><img src="results1.png" alt="results qual 1" style="width:100%; border-radius:8px;"/><p class="is-size-7">Highly non-convex: Tutte central flap inverted due to squeeze; ours collapses 3 edges, valid in 4 iters, reinserts orientation-preserved.</p></div>
-            <div class="column"><img src="results2.png" alt="results qual 2" style="width:100%; border-radius:8px;"/><p class="is-size-7">Camel MiQ 280k verts: 0.9s flip → 2.1s valid identical distortion on near-convex regions.</p></div>
+          <div class="columns is-multiline">
+            <div class="column is-6"><figure><img src="results1.png" alt="results qual 1 – non-convex 62415" style="max-width:100%; width:100%; height:auto; border-radius:8px; object-fit:contain;"/><figcaption class="is-size-7"><strong>Stepwise:</strong> Highly non-convex 62415_sf – Tutte central flap inverted due to squeeze; ours collapses 3 edges (Step 1 collapse), valid in 4 iters, reinserts orientation-preserved (Step 2 feasible).</figcaption></figure></div>
+            <div class="column is-6"><figure><img src="results2.png" alt="results qual 2 – camel MiQ 280k" style="max-width:100%; width:100%; height:auto; border-radius:8px; object-fit:contain;"/><figcaption class="is-size-7"><strong>Stepwise:</strong> Camel MiQ 280k verts: 0.9s flip → 2.1s valid identical distortion on near-convex regions – demonstrates scalability of Step 1+2.</figcaption></figure></div>
           </div>
 
 | Mesh | Vertices | Tutte | Progressive | Success |
