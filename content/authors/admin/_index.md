@@ -62,7 +62,7 @@ highlight_name: false
 
 I am a Research Scientist at Meta Human AI, working on the next generation of human-centric communication.
 
-I finished my Ph.D. degree at New York University, working on computer graphics and geometry processing. My PhD research aims to provide robust discrete geometry processing tools for machine learning, digital fabrication and scientific computing. My research has been recognized by Adobe Research Fellowship 2018, Geometry Processing Dataset Award 2019, and Jacob T. Schwartz PhD Fellowship 2020.
+I finished my Ph.D. degree at New York University, working on computer graphics and geometry processing. My PhD research aims to provide robust discrete geometry processing tools for machine learning, digital fabrication and scientific computing. My research has been recognized by Adobe Research Fellowship 2018 and Geometry Processing Dataset Award 2019.
 
 I earned my Bachelor of Science in Mathematics and Applied Mathematics from the School of Gifted Young, University of Science and Technology of China in 2016.
 
