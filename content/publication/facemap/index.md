@@ -101,7 +101,7 @@ highlight = true
   <div class="container is-max-desktop">
     <div class="hero-body has-text-centered" style="padding-top:1rem;">
       <img src="teaser.png" alt="FaceMap wide hero – single female head plus distortion sensitivity map eyes to cheeks" class="teaser-img" style="max-height:none; width:100%; max-width:1120px; aspect-ratio:16/9; object-fit:cover;" loading="eager"/>
-      <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">Wide hero 1600×900 (16:9) – left: single female head thumb (800×900 portrait kept as featured.jpg for site list / front-page thumb) – right: perceptually-weighted allocation eyes&gt;wrinkles&gt;mouth&gt;cheeks. Sources: teaser_wide.png (original 1400×700) upscaled to teaser.png 1600×900. Teaser backup portrait: teaser_portrait.png 814×900.</p>
+      <p class="is-size-7 has-text-grey" style="margin-top:0.5rem;">Wide hero 1600×900 (16:9) – single female head left + distortion heatmap right. Front-page thumb remains <code>featured.jpg</code> 800×900 single-subject.</p>
       <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
         <strong>FaceMap</strong> learns where humans notice distortion and reallocates polys / texels / splats there – SROCC 0.82.
       </h2>
@@ -117,9 +117,8 @@ highlight = true
         </div>
         <div class="column is-6 is-flex is-align-items-center">
           <div class="has-text-left">
-            <p class="is-size-6"><strong>Featured thumb preserved:</strong> <code>featured.jpg</code> 800×900 portrait single female head – used by Wowchemy project list for aesthetic &lt;3-subject rule. Front-page thumbnail unchanged.</p>
-            <p class="is-size-7 has-text-grey" style="margin-top:6px;">Portrait teaser backup: <code>teaser_portrait.png</code> 814×900 – stimuli 10×5×6 grid (original).</p>
-            <p class="is-size-7" style="margin-top:8px;"><span class="tag is-info">16:9 wide</span> <span class="tag is-success">1600×900</span> <span class="tag is-light">~280KB</span> hero (teaser.png = teaser_wide.png upscaled) – no stretching of portrait thumb (featured.jpg kept separate).</p>
+            <p class="is-size-6"><strong>Featured thumb preserved:</strong> <code>featured.jpg</code> 800×900 portrait single female head – Wowchemy list & front page single-subject.</p>
+            <p class="is-size-7" style="margin-top:8px;"><span class="tag is-info">16:9 wide</span> <span class="tag is-success">1600×900</span> <span class="tag is-light">~406KB</span> hero – no stretching of portrait thumb (featured.jpg kept separate).</p>
           </div>
         </div>
       </div>
@@ -169,8 +168,8 @@ highlight = true
           <div class="columns is-centered">
             <div class="column is-10">
               <figure class="image">
-                <img src="teaser_portrait.png" alt="Stimuli 10 bases x distortion levels portrait backup" style="border-radius:10px;" loading="lazy"/>
-                <figcaption class="has-text-centered is-size-7">Suppl Fig.14 – Stimuli (portrait backup 814×900): 10 bases (rows) × distortion levels (cols), FaceMap left vs uniform right vertical split. Wide hero uses teaser_wide.png 1400×700.</figcaption>
+                <img src="teaser.png" alt="Stimuli 10 bases x distortion levels wide hero" style="border-radius:10px;" loading="lazy"/>
+                <figcaption class="has-text-centered is-size-7">Suppl Fig.14 – 10 bases × distortion levels wide hero composition (1600×900) – left head, right patches allocation eyes>wrinkles>mouth>cheeks. Single-subject featured.jpg remains 800×900.</figcaption>
               </figure>
             </div>
           </div>
@@ -206,7 +205,7 @@ highlight = true
       </div>
       <div class="column is-6">
         <figure class="image">
-          <img src="method.png" alt="FaceMap pipeline method diagram – 1200x1160 padded" style="border-radius:10px; max-width:100%; height:auto;" loading="lazy"/>
+          <img src="method.png" alt="FaceMap pipeline method diagram – 1200x1160 padded" style="border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.12); max-width:100%; height:auto;" loading="lazy"/>
           <figcaption class="is-size-7 has-text-centered">Pipeline: distort mesh/tex/splats → 3-view render → patchify → crowd 2AFC → JOD → N-way ANOVA → UNet saliency. 842×814 original upscaled to 1200×1160 with 5% white padding to match hero width – no crop, readable labels.</figcaption>
         </figure>
         <article class="message is-small is-link" style="margin-top:1rem;">
@@ -269,8 +268,8 @@ highlight = true
     <div class="columns is-centered">
       <div class="column is-10">
         <figure class="image">
-          <img src="application.png" alt="Applications allocation polys texels splats – 2-row stacked 1400x1308" style="border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); max-width:100%;" loading="lazy"/>
-          <figcaption class="has-text-centered is-size-7">Avatar optimization: 2832×662 ultra-wide original split into 2×1400×654 rows stacked → 1400×1308 readable (backup application_original.png). Allocate polys/texels/Gaussians ~ FaceMap saliency × curvature^0.5 – eyes/mouth receive 2–3× budget vs uniform. Suppl Fig.16-17.</figcaption>
+          <img src="application.png" alt="Applications allocation polys texels splats – 2-row stacked 1400x1308" style="border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); width:100%; height:auto; object-fit:contain;" loading="lazy"/>
+          <figcaption class="has-text-centered is-size-7" style="margin-top:0.4rem;">Applications: remesh / texture / GS reallocation – eyes & mouth get 2–3× budget vs uniform. 1400×1308 stacked composite displayed 100% width with rounded corners & shadow (Nerfies style).</figcaption>
         </figure>
       </div>
     </div>

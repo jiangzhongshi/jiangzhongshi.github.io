@@ -176,7 +176,7 @@ Shell $\mathcal{S}= \cup_t P_t$.
 <div class="column is-7">
 <ul>
 <li><b>Intersection-free:</b> interior of $P_i\cap P_j =\emptyset$ except shared faces – checked with exact <code>orient3d</code> predicates.</li>
-<li><b>Max thickness search:</b> Ray cast $r(t)=v+tD_v$ against BVH, $d_{hit}$ = first self-intersection. $h_{max}\le 0.49 d_{hit}$ safety. Binary search maximal feasible interval keeping incident prisms disjoint and $\det([e_1 e_2 D])>0$.</li>
+<li><b>Max thickness search:</b> Ray cast $r(t)=v+tD_v$ against BVH, $d_{\text{hit}}$ = first self-intersection. $$h_{\max}\le 0.49\, d_{\text{hit}}$$ safety. Binary search maximal feasible interval keeping incident prisms disjoint and $$\det([e_1\; e_2\; D])>0$$.</li>
 <li><b>Statistics – Thingi10k 9.8k manifolds:</b> 99.3% fully shelled, mean thickness 1.8% bbox diag, 1–8 sec / 50k tris.</li>
 </ul>
 <p>
@@ -186,7 +186,7 @@ Greedy expansion + Laplacian smoothing → thick on flats, thin on fingers/eyeli
 </p>
 </div>
 <div class="column is-5">
-<img src="method.png" alt="Method triptych – directions, shell, ray" style="width:100%; box-shadow:0 4px 12px rgba(0,0,0,.15)">
+<img src="method.png" alt="Method triptych – directions, shell, ray" style="width:100%; max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15); object-fit:cover;">
 <p class="is-size-7 has-text-centered">Triptych: vertex directions → shell (blue layer) → ray $p+tD$ intersecting target uniqely.</p>
 </div>
 </div>
@@ -259,17 +259,17 @@ for p in T samples:
 
       <p><b>Distortion test</b> – T→S decimated 50% + 0.5% noise: closest-point 12.4% flipped, Hausdorff 8.3%; ray+shell 0% flipped, $H_{sym}=0.21\%$ bbox, Dirichlet 0.04 vs 0.18 baseline.</p>
 
-      <!-- Side-by-side Method / Results grid – Nerfies interpolation row style, equal height 400px -->
+      <!-- Side-by-side Method / Results grid – Nerfies interpolation row style, equal height 400px, 3-col responsive -->
       <div class="columns is-centered is-vcentered" style="margin:18px 0;">
         <div class="column is-6 has-text-centered">
           <div style="height:400px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10); padding:8px;">
-            <img src="method.png" alt="Method triptych - directions, prismatic shell construction, ray projection" style="max-height:384px; width:auto; max-width:100%; object-fit:contain; border-radius:8px;">
+            <img src="method.png" alt="Method triptych - directions, prismatic shell construction, ray projection" style="height:400px; width:100%; max-width:100%; object-fit:cover; border-radius:8px;">
           </div>
-          <p class="is-size-7" style="margin-top:8px;"><b>Fig A – Method:</b> Vertex direction field → thin prismatic shell (blue volume, intersection-free) → ray $p+tD$ uniqely maps $T$ to $S$. Checked with exact predicates.</p>
+          <p class="is-size-7" style="margin-top:8px;"><b>Fig A – Method:</b> Vertex direction field → thin prismatic shell (blue volume, intersection-free) → ray $p+tD$ uniqely maps $T$ to $S$. Checked with exact predicates. $$t = 0.49\, d_{\text{hit}}$$ safety margin.</p>
         </div>
         <div class="column is-6 has-text-centered">
           <div style="height:400px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10); padding:8px;">
-            <img src="results.png" alt="Results gallery - PDE, displacement, Booleans, tet meshing, textures, cages" style="max-height:384px; width:auto; max-width:100%; object-fit:contain; border-radius:8px;">
+            <img src="results.png" alt="Results gallery - PDE, displacement, Booleans, tet meshing, textures, cages" style="height:400px; width:100%; max-width:100%; object-fit:cover; border-radius:8px;">
           </div>
           <p class="is-size-7" style="margin-top:8px;"><b>Fig B – Results Gallery:</b> Applications mosaic – PDE transfer, displacement maps, Booleans, tet-meshing, geometric textures, nested cages all reuse same shell+$\Phi$. Paper Fig 1-9: horse low-res, bunny bark displacement, Beethoven Boolean.</p>
         </div>

@@ -127,7 +127,7 @@ highlight = true
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="teaser.png" alt="Declarative DSL -> four algorithms: harmonic triang, Qslim, isotropic remesh, TetWild" style="width:100%;"/>
+      <img src="teaser.png" alt="Declarative DSL -> four algorithms: harmonic triang, Qslim, isotropic remesh, TetWild" style="width:100%; height:auto; background:#fff; display:block; border-radius:10px;" class="img-fluid"/>
       <h2 class="subtitle has-text-centered" style="margin-top:14px;">
         <span class="dnerf">Declarative</span> – one high-level description drives isotropic remeshing, simplification, harmonic triangulation, and robust TetWild-style filling.
         <br><i>Fig. 1 from paper: <18–32 LoC per algorithm vs ~0.5–3k legacy.</i>
@@ -154,7 +154,7 @@ highlight = true
             (collapse/split/swap/smooth + attribute transfer). The runtime – now the <a href="https://github.com/wildmeshing/wildmeshing-toolkit">Wild Meshing Toolkit (WMTK)</a> – guarantees invariants, rolls back failed ops, transfers attributes, and provides up to <b>10× speedup on 16 cores</b> with deterministic output. Four classic lines of C++ express what previously required 1–3k LoC.
           </p>
           <div style="text-align:center; margin:14px;">
-            <img src="featured.jpg" alt="One abstraction many algorithms" style="max-width:720px; border-radius:10px;"/>
+            <img src="featured.jpg" alt="One abstraction many algorithms" style="max-width:760px; width:100%; height:auto; background:#fff; border-radius:10px; display:block; margin:0 auto; object-fit:contain;" class="img-fluid"/>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@ wmtk::run(m,invariants,scheduler,op_collapse);</code></pre>
               </div>
               <div class="column is-6 has-text-centered">
                 <figure class="image">
-                  <img src="method.png" alt="System layers DSL to runtime" style="border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.12); max-width:100%;">
+                  <img src="method.png" alt="System layers DSL to runtime" style="border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.12); max-width:100%; width:100%; height:auto; background:#fff; display:block; object-fit:contain;" class="img-fluid">
                   <figcaption style="font-size:0.85em; color:#666; margin-top:8px;">Fig. 2 – System layers: DSL → registry → WMTK runtime → parallelism. Colors match Bulma palette <span style="display:inline-block;width:10px;height:10px;background:hsl(204,86%,53%);border-radius:2px;"></span> blue.</figcaption>
                 </figure>
               </div>

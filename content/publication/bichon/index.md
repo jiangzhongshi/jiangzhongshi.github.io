@@ -146,7 +146,7 @@ highlight = true
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body has-text-centered">
-      <img src="teaser.png" alt="Coarse high-order tet mesh via shell optimization" style="max-width:800px; width:100%; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.18);">
+      <img src="teaser.png" alt="Coarse high-order tet mesh via shell optimization" style="max-width:760px; width:100%; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.18); display:block; margin:0 auto;">
       <h2 class="subtitle has-text-centered" style="margin-top:12px;">
         <b>Coarse high-order tet mesh via shell optimization</b> – converting dense linear surfaces into <em>coarse, curved, valid</em> quartic tetrahedral meshes that preserve features, bound Hausdorff error, and stay bijective.
       </h2>
@@ -158,8 +158,8 @@ highlight = true
 <section class="hero is-small">
   <div class="hero-body" style="padding-top:0;">
     <div class="container is-max-desktop has-text-centered">
-      <img src="featured.jpg" alt="dense vs coarse single-subject aesthetic" style="max-width:640px; width:100%; border-radius:10px; box-shadow:0 3px 12px rgba(0,0,0,0.12); object-fit:contain;">
-      <p class="is-size-7" style="margin-top:6px;color:#777;">Aesthetic thumbnail – single-subject coarse quartic (1330×1089) preserved aspect, no stretch.</p>
+      <img src="featured.jpg" alt="dense vs coarse single-subject aesthetic" style="max-width:640px; width:100%; height:auto; border-radius:10px; box-shadow:0 3px 12px rgba(0,0,0,0.12); object-fit:contain; display:block; margin:0 auto;">
+      <p class="is-size-7" style="margin-top:6px;color:#777;">Aesthetic thumbnail – single-subject coarse quartic, responsive preserved aspect, no stretch.</p>
     </div>
   </div>
 </section>
@@ -241,7 +241,7 @@ Return: (lagr, cells, complete_cp, mV, mbase, mtop, mF)</pre>
           <h4>Bijective Map & Transfer</h4>
           <p>Shell gives correspondence: any p∈M maps to q∈∂M_out via normal shoot within tube. Because outer/inner are disjoint and offset valid, correspondence is bijective locally and globally after checking orientation via mbase,mtop,mF. Enables texture UV transfer, Dirichlet data pullback, displacement fields (teaser shows elasticity simulation on coarse tet matches dense surface visually).</p>
         </div>
-        <img src="method.png" alt="method comparison" style="max-width:100%;">
+        <img src="method.png" alt="method comparison" style="max-width:100%; border:1px solid #e0e0e0; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
         <p class="has-text-centered is-size-7"><b>Figure 2</b> – Left: dense linear vs right: coarse curved quartic wireframe. Hausdorff error heatmap. Boundary curvature captured with ~1/30th faces.</p>
       </div>
     </div>
@@ -278,8 +278,8 @@ Return: (lagr, cells, complete_cp, mV, mbase, mtop, mF)</pre>
         </div>
 
         <div class="interp-row" style="margin-top:12px;">
-          <img src="featured.jpg" alt="dense vs coarse">
-          <img src="method.png" alt="heatmap">
+          <img src="featured.jpg" alt="dense vs coarse" style="max-width:48%; height:auto; object-fit:contain; border-radius:8px;">
+          <img src="method.png" alt="heatmap" style="max-width:48%; height:auto; object-fit:contain; border-radius:8px; border:1px solid #e0e0e0;">
         </div>
       </div>
     </div>

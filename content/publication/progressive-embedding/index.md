@@ -166,8 +166,8 @@ highlight = true
     <div class="columns is-centered">
       <div class="column is-10 has-text-centered">
         <figure>
-        <img src="method.jpg" alt="Method – collapse then grow valid – Step 1 collapse" style="max-width:100%; width:100%; height:auto; border-radius:10px; margin-top:1rem; object-fit:contain;"/>
-        <figcaption class="is-size-7 has-text-grey" style="margin-top:0.4rem;"><strong>Step 1 – Collapse:</strong> Invalid Tutte embedding (red flips) → priority queue by area distortion → collapsible edges (link-condition) → coarse valid embedding. Pipeline from NYU GCL. 1800×1125 original.</figcaption>
+        <img src="method.jpg" alt="Method – collapse then grow valid – Step 1 collapse" style="max-width:100%; width:100%; height:auto; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.12); margin-top:1rem; object-fit:contain;"/>
+        <figcaption class="is-size-7 has-text-grey has-text-centered" style="margin-top:0.4rem;"><strong>Method Step 1 – Collapse onto valid coarse.</strong> Invalid Tutte (red flips) → priority queue by area distortion → link-condition edge collapses → coarse valid mesh. 1800×1125 → Nerfies hero width 100%, centered, rounded corners.</figcaption>
         </figure>
       </div>
     </div>
@@ -187,8 +187,8 @@ $$\tilde{A}_t = A_t + \epsilon_{\text{round}}\cdot \kappa(L), \quad \kappa(L)>10
 
           <p>When $\tilde{A}_t$ flips sign, the whole algorithm tangles — a single flipped triangle invalidates downstream MiQ / parameterizations.</p>
           <figure>
-          <img src="method_overview.png" alt="Method overview – feasible polygon insertion – Step 2 feasible" style="max-width:100%; width:100%; height:auto; margin:1rem 0; border-radius:8px; object-fit:contain;"/>
-          <figcaption class="is-size-7 has-text-grey"><strong>Step 2 – Feasible:</strong> For each uninserted vertex, convex feasible polygon (green) = intersection of half-planes from one-ring. Chebyshev center insertion maintains $area>10^{-8}$. 2400×800 ultra-wide scaled to 100% width, no stretch.</figcaption>
+          <img src="method_overview.png" alt="Method overview – feasible polygon insertion – Step 2 feasible" style="max-width:100%; width:100%; height:auto; margin:1rem 0; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.10); object-fit:contain;"/>
+          <figcaption class="is-size-7 has-text-grey has-text-centered"><strong>Method Step 2 – Feasible Polygon.</strong> For uninserted vertex, convex feasible polygon = intersection half-planes (green). Chebyshev center insertion maintains $area>10^{-8}$. 2400×800 ultra-wide scaled 100% width Nerfies style, no stretch, rounded.</figcaption>
           </figure>
           <p><b>Core idea:</b> If initial embedding is invalid, simplify until valid, then grow. Validity is not repaired post-hoc; it is a <em>hard invariant</em> through every insertion.</p>
         </div>
@@ -270,8 +270,8 @@ Output: bijective U_full
           <img src="results_comparison.png" alt="Results comparison bar – 98.7% vs 62% Tutte" style="max-width:100%; width:100%; height:auto; border-radius:8px; margin:0.8rem 0; object-fit:contain;"/>
           <p>Tutte 62% (provable but numerically failing), naive Newton fix 74%, ours <b>98.7%</b>. Area distortion $max A_{max}/A_{min}$ &lt;2× vs Tutte's 12×.</p>
           <div class="columns is-multiline">
-            <div class="column is-6"><figure><img src="results1.png" alt="results qual 1 – non-convex 62415" style="max-width:100%; width:100%; height:auto; border-radius:8px; object-fit:contain;"/><figcaption class="is-size-7"><strong>Stepwise:</strong> Highly non-convex 62415_sf – Tutte central flap inverted due to squeeze; ours collapses 3 edges (Step 1 collapse), valid in 4 iters, reinserts orientation-preserved (Step 2 feasible).</figcaption></figure></div>
-            <div class="column is-6"><figure><img src="results2.png" alt="results qual 2 – camel MiQ 280k" style="max-width:100%; width:100%; height:auto; border-radius:8px; object-fit:contain;"/><figcaption class="is-size-7"><strong>Stepwise:</strong> Camel MiQ 280k verts: 0.9s flip → 2.1s valid identical distortion on near-convex regions – demonstrates scalability of Step 1+2.</figcaption></figure></div>
+            <div class="column is-6"><figure><img src="results1.png" alt="results qual 1 – non-convex 62415" style="max-width:100%; width:100%; height:auto; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.10); object-fit:contain;"/><figcaption class="is-size-7 has-text-centered has-text-grey" style="margin-top:0.35rem;"><strong>Non-convex 62415_sf:</strong> Tutte central flap inverted squeeze – collapse 3 edges (Step 1) → 4 iters valid – reinsert orientation preserved (Step 2).</figcaption></figure></div>
+            <div class="column is-6"><figure><img src="results2.png" alt="results qual 2 – camel MiQ 280k" style="max-width:100%; width:100%; height:auto; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.10); object-fit:contain;"/><figcaption class="is-size-7 has-text-centered has-text-grey" style="margin-top:0.35rem;"><strong>Camel MiQ 280k:</strong> 0.9s flip → 2.1s valid identical distortion on convex – shows scalability Step 1+2.</figcaption></figure></div>
           </div>
 
 | Mesh | Vertices | Tutte | Progressive | Success |

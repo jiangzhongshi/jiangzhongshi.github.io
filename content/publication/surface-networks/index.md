@@ -52,7 +52,10 @@ PointNet, Geodesic CNN O(NK²) unstable, ACNN umbilic singularities, Torus metho
 <b>2.2 Laplacian SN:</b> Layer $x^{k+1}= \rho(A\Delta x + Bx)$ isotropic high-pass + skip – cannot distinguish cylinder bending directions.<br>
 <b>2.3 Dirac deep dive:</b> Quaternion face embedding $D_{f,j} = -\frac{1}{2|A_f|} e_j$, Real part $Re D^* D = \Delta$, adjoint $D^* = M_V^{-1} D^H M_F$. Chunk dim multiple 4 enables rotation-equivariant transport. Comparison: Laplacian → mean curvature $H$, Dirac → principal curvatures $k_1,k_2$ + directions.
 
-<div class="columns is-centered"><div class="column is-5"><img src="lapresnet.png" alt="Laplacian ResNet"><p class="is-size-7">Laplacian ResNet block – isotropic.</p></div><div class="column is-5"><img src="dirresnet.png" alt="Dirac ResNet"><p class="is-size-7">Dirac ResNet node↔face alternating – anisotropic.</p></div></div>
+<div class="columns is-centered is-vcentered">
+<div class="column is-5 has-text-centered"><figure class="image"><img src="lapresnet.png" alt="Laplacian ResNet" style="height:320px; width:100%; object-fit:contain; border:1px solid #e0e0e0; border-radius:8px; background:#fff"></figure><p class="is-size-7 mt-2"><b>Laplacian (isotropic)</b></p></div>
+<div class="column is-5 has-text-centered"><figure class="image"><img src="dirresnet.png" alt="Dirac ResNet" style="height:320px; width:100%; object-fit:contain; border:1px solid #e0e0e0; border-radius:8px; background:#fff"></figure><p class="is-size-7 mt-2"><b>Dirac (anisotropic)</b></p></div>
+</div>
 
 Pseudo quaternion mul: chunk $4k$ dims, $q \cdot p$, mass renorm $M_F^{1/2} D M_V^{-1/2}$ symmetric, pynvrtc CUDA JIT 5×, block-diagonal batching, curriculum bending 5 epochs flat.
 
@@ -67,11 +70,11 @@ Node→Face via $D$, Face→Node via $D^*$. Shared trunk 64→256, skip connecti
 <h2 class="title is-3">5. Experiments</h2>
 <b>Temporal elastic shell</b> 500 seq ×50 frames Saint Venant–Kirchhoff non-linear. Test L2: Dirac 0.024 vs Lap 0.029 vs PointNet++ 0.038. Wrinkles preserved anisotropic.
 
-<!-- Trio GT / Lap / Dirac – equal-height 800×1000 comparison row -->
-<div class="columns is-centered">
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_gt.png" alt="GT" style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.12)"></figure><p class="is-size-7 mt-2"><b>GT</b> – ground truth deformation</p></div>
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_lap.png" alt="Laplacian SN"><p class="is-size-7 mt-2"><b>Lap SN</b> – isotropic blur, wrinkle loss</p></figure></div>
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_dir.png" alt="Dirac SN"><p class="is-size-7 mt-2"><b>Dirac SN</b> – matches anisotropic wrinkles</p></figure></div>
+<!-- Trio GT / Lap / Dirac – equal-height 800px 3-col with border – final polish Loop3 -->
+<div class="columns is-centered is-vcentered">
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_gt.png" alt="GT" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"></figure><p class="is-size-7 mt-2"><b>GT</b> – ground truth deformation</p></div>
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_lap.png" alt="Laplacian SN" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"><p class="is-size-7 mt-2"><b>Lap SN</b> – isotropic blur, wrinkle loss</p></figure></div>
+<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_dir.png" alt="Dirac SN" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"><p class="is-size-7 mt-2"><b>Dirac SN</b> – matches anisotropic wrinkles</p></figure></div>
 </div>
 
 <!-- Zoom grid – square 800×800 crops for equal focus -->
