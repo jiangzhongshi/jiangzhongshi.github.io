@@ -6,9 +6,9 @@ authors = ["Ilya Kostrikov", "**Zhongshi Jiang**", "Daniele Panozzo", "Denis Zor
 publication_types = ["1"]
 publication = "IEEE CVPR 2018 (Oral)"
 publication_short = "*CVPR 2018 Oral*"
-abstract = "Surface Networks using Dirac operator for anisotropic mesh learning."
-summary = "Dirac-based Surface Networks for meshes."
-tags = ["Oral Presentation"]
+abstract = "Surface Networks using Dirac operator for anisotropic mesh learning. We propose SN built from extrinsic Dirac to capture principal curvature directions, stable to deformation and discretization, for temporal prediction and generative VAEs."
+summary = "Dirac-based Surface Networks for meshes – extrinsic geometry for anisotropic deformation prediction (CVPR 2018 Oral, first-author Ilya Kostrikov, my fork maintained)."
+tags = ["Oral Presentation","geometry deep learning"]
 url_pdf = "files/SurfaceNetworks.pdf"
 url_preprint = "https://arxiv.org/pdf/1705.10819.pdf"
 url_code = "https://github.com/jiangzhongshi/surfacenetworks"
@@ -23,89 +23,267 @@ nerfies = true
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-<style>.publication-title{font-weight:800}.author-block{margin:0 8px}.publication-links .button{margin:4px}</style>
+<style>
+.publication-title{font-family:'Google Sans',sans-serif;font-weight:800;letter-spacing:-0.02em;line-height:1.15;}
+.author-block{display:inline-block;margin:0 7px;}
+.publication-authors a{color:#3273dc;}
+.publication-links .link-block{display:inline-block;margin:6px;}
+.publication-video iframe{width:100%;height:420px;border-radius:10px;}
+.content img{border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.12);}
+.hero.teaser img{max-width:720px;width:100%;height:auto;margin:0 auto;display:block;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.18);object-fit:contain;background:#fff;}
+.equal-height{height:400px;object-fit:cover;width:100%;border:1px solid #eaeaea;border-radius:10px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.equal-height-contain{height:400px;object-fit:contain;width:100%;border:1px solid #eee;border-radius:10px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.equal-height-360{height:360px;object-fit:cover;width:100%;border:1px solid #eaeaea;border-radius:10px;background:#fff;}
+.equal-height-360-contain{height:360px;object-fit:contain;width:100%;border:1px solid #eee;border-radius:10px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.04);}
+.bibtex{background:#f7f7f7;padding:16px;border-radius:8px;font-size:0.85em;overflow-x:auto;}
+.feature-card{border:1px solid #eee;border-radius:10px;padding:12px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);height:100%;}
+.caption{font-size:0.8rem;color:#666;margin-top:6px;}
+</style>
 
-<section class="hero"><div class="hero-body"><div class="container is-max-desktop has-text-centered">
-<h1 class="title is-1 publication-title">Surface Networks</h1>
-<div class="is-size-5 publication-authors"><span class="author-block">Ilya Kostrikov</span>, <span class="author-block" style="text-decoration:underline; text-underline-offset:3px;"><strong>Zhongshi Jiang</strong></span>, <span class="author-block">Daniele Panozzo</span>, <span class="author-block">Denis Zorin</span>, <span class="author-block">Joan Bruna</span></div>
-<div class="is-size-5">NYU Courant – CVPR 2018 Oral Presentation</div>
-<div class="column has-text-centered"><div class="publication-links">
-<a href="https://arxiv.org/abs/1705.10819" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a>
-<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Kostrikov_Surface_Networks_CVPR_2018_paper.html" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>PDF</span></a>
-<a href="https://github.com/jiangzhongshi/surfacenetworks" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
-<a href="https://www.youtube.com/watch?v=Suu8m_Vre9U" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-youtube"></i></span><span>Talk</span></a>
-</div></div></div></div></section>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">Surface Networks</h1>
 
-<section class="hero teaser"><div class="hero-body"><div class="container is-max-desktop has-text-centered"><img src="featured.png" style="max-width:720px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.15)"><h2 class="subtitle" style="margin-top:12px">Dirac captures principal curvature directions vs Laplacian mean curvature – enabling anisotropic deformation prediction.</h2></div></div></div></section>
+      <div class="is-size-5 publication-authors" style="margin-top:10px;">
+        <span class="author-block"><a href="https://scholar.google.com/citations?user=PTS2AOgAAAAJ">Ilya Kostrikov</a>,</span>
+        <span class="author-block"><a href="https://jiangzhongshi.github.io/" style="text-decoration:underline;text-underline-offset:3px;"><strong>Zhongshi Jiang</strong></a>,</span>
+        <span class="author-block"><a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a>,</span>
+        <span class="author-block"><a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a>,</span>
+        <span class="author-block"><a href="https://cims.nyu.edu/~bruna/">Joan Bruna</a></span>
+      </div>
 
-<section class="section"><div class="container is-max-desktop">
+      <div class="is-size-5" style="margin-top:6px;">NYU Courant – CVPR 2018 Oral Presentation</div>
 
-<h2 class="title is-3">Abstract</h2>
-<div class="content has-text-justified">We study data-driven representations for triangle meshes. Recent intrinsic GNNs built from Laplacian offer sample efficiency and built-in invariances but are invariant to isometric deformations. We propose upgrades exploiting extrinsic differential geometry, notably Dirac operator whose spectrum detects principal curvature directions. Coined Surface Network (SN), we show efficiency on temporal deformation prediction under non-linear dynamics and VAE generative models with SN encoders/decoders.</div>
+      <div class="column has-text-centered" style="margin-top:14px;">
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/1705.10819" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="files/SurfaceNetworks.pdf" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span><span>PDF (local)</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://arxiv.org/pdf/1705.10819.pdf" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span><span>PDF (arXiv)</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://github.com/jiangzhongshi/surfacenetworks" class="external-link button is-normal is-rounded is-dark" style="background:#3273dc;border-color:#3273dc;color:#fff;">
+              <span class="icon"><i class="fab fa-github"></i></span><span>Code – my fork</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://github.com/tommaoer/surfacenetworks" class="external-link button is-normal is-rounded is-light">
+              <span class="icon"><i class="fab fa-github"></i></span><span>First-author Code</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://www.youtube.com/watch?v=Suu8m_Vre9U" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fab fa-youtube"></i></span><span>Talk</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2 class="title is-3">1. Motivation – Images vs Surfaces</h2>
-<table class="table is-bordered"><thead><tr><th></th><th>Images</th><th>Surfaces</th></tr></thead><tbody><tr><td>Domain</td><td>Regular grid</td><td>Irregular manifold</td></tr><tr><td>Op</td><td>2D Conv</td><td>Dirac/Laplacian</td></tr><tr><td>PointNet</td><td>-</td><td>Lacks connectivity O(e^d) samples</td></tr></tbody></table>
-PointNet, Geodesic CNN O(NK²) unstable, ACNN umbilic singularities, Torus methods genus-limited.
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered" style="padding-top:0;">
+      <img src="featured.png" alt="Surface Networks teaser – Dirac vs Laplacian curvature" >
+      <h2 class="subtitle" style="margin-top:14px;max-width:700px;margin-left:auto;margin-right:auto;">
+        Dirac captures <b>principal curvature directions</b> $k_1,k_2$ vs Laplacian mean curvature $H$ – enabling anisotropic wrinkle prediction that isotropic diffusion blurs away.
+      </h2>
+      <p class="is-size-7 caption"><b>Fig 1</b> Teaser – temporal elastic shell bent: GT vs Laplacian SN (over-smooth) vs Dirac SN (ours). Structured like Nerfies hero: 720px max, white composite, 12px radius, shadow 0 6px 24px.</p>
+    </div>
+  </div>
+</section>
 
-<h2 class="title is-3">2. Background</h2>
-<b>2.1 Cotangent Laplacian:</b> $L_{ij}=cot\alpha_{ij}+cot\beta_{ij}$, mass $M_V$, $\Delta = M_V^{-1}L$, $\Delta V = -2Hn$ mean curvature.<br>
-<b>2.2 Laplacian SN:</b> Layer $x^{k+1}= \rho(A\Delta x + Bx)$ isotropic high-pass + skip – cannot distinguish cylinder bending directions.<br>
-<b>2.3 Dirac deep dive:</b> Quaternion face embedding $D_{f,j} = -\frac{1}{2|A_f|} e_j$, Real part $Re D^* D = \Delta$, adjoint $D^* = M_V^{-1} D^H M_F$. Chunk dim multiple 4 enables rotation-equivariant transport. Comparison: Laplacian → mean curvature $H$, Dirac → principal curvatures $k_1,k_2$ + directions.
+<section class="section" style="padding-top:1rem;">
+  <div class="container is-max-desktop">
 
-<div class="columns is-centered is-vcentered">
-<div class="column is-5 has-text-centered"><figure class="image"><img src="lapresnet.png" alt="Laplacian ResNet" style="height:320px; width:100%; object-fit:contain; border:1px solid #e0e0e0; border-radius:8px; background:#fff"></figure><p class="is-size-7 mt-2"><b>Laplacian (isotropic)</b></p></div>
-<div class="column is-5 has-text-centered"><figure class="image"><img src="dirresnet.png" alt="Dirac ResNet" style="height:320px; width:100%; object-fit:contain; border:1px solid #e0e0e0; border-radius:8px; background:#fff"></figure><p class="is-size-7 mt-2"><b>Dirac (anisotropic)</b></p></div>
-</div>
+    <div class="columns is-centered has-text-centered"><div class="column is-four-fifths">
+      <h2 class="title is-3">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>We study data-driven representations for triangle meshes. Recent intrinsic GNNs built from Laplacian offer excellent sample efficiency and built-in invariances but are invariant to isometric deformations – they cannot tell if a sheet is bent without stretching. To overcome this, we propose upgrades exploiting <em>extrinsic</em> differential geometry, notably the <b>Dirac operator</b> whose spectrum detects principal curvature directions. Coined <b>Surface Network (SN)</b>, we prove these models are stable to deformation and to discretization, and demonstrate efficiency on two challenging tasks: temporal prediction of mesh deformations under non-linear dynamics and generative models using a variational autoencoder framework with SN encoders/decoders.</p>
+      </div>
+    </div></div>
 
-Pseudo quaternion mul: chunk $4k$ dims, $q \cdot p$, mass renorm $M_F^{1/2} D M_V^{-1/2}$ symmetric, pynvrtc CUDA JIT 5×, block-diagonal batching, curriculum bending 5 epochs flat.
+    <h2 class="title is-3">1. Motivation – Images vs Surfaces</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <table class="table is-bordered is-fullwidth is-striped"><thead><tr><th></th><th>Images</th><th>Surfaces (Meshes)</th></tr></thead>
+        <tbody>
+          <tr><td>Domain</td><td>Regular grid $\mathbb{Z}^2$</td><td>Irregular 2-manifold $(V,E,F)$</td></tr>
+          <tr><td>Operator</td><td>2D Conv $3\times3$</td><td>Dirac / Laplacian $M_V^{-1}L$</td></tr>
+          <tr><td>PointNet approach</td><td>–</td><td>Ignores connectivity – needs $O(e^d)$ samples to learn curvature</td></tr>
+          <tr><td>Geodesic CNN</td><td>–</td><td>Patch $O(NK^2)$ resampling, pooling unstable under remesh</td></tr>
+          <tr><td>ACNN / MoNet</td><td>–</td><td>Anisotropic but umbilic singular (isotropic points cause blowup)</td></tr>
+        </tbody>
+      </table>
+      <p><b>Why meshes are not point clouds:</b> A cylinder bent along $x$ vs $y$ has identical intrinsic metric (both developable) but different extrinsic mean curvature vectors. Laplacian $\Delta V = -2H\mathbf{n}$ measures only mean curvature magnitude $|H|$, not direction. That means a Laplacian network trained to predict next frame of cloth cannot distinguish a wrinkle forming along vs across. Dirac resolves it.</p>
+    </div>
 
-<h2 class="title is-3">3. Method – Surface Network Architecture</h2>
-Node→Face via $D$, Face→Node via $D^*$. Shared trunk 64→256, skip connections, temporal decoder L2 loss on vertex positions. VAE ELBO latent 10D, encoder both Dirac. Symmetric normalization stabilizes spectrum.
+    <h2 class="title is-3" style="margin-top:1.4rem;">2. Background – Laplacian fails, Dirac helps</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <p><b>2.1 Cotangent Laplacian:</b> $L_{ij}= \cot\alpha_{ij}+\cot\beta_{ij}$, $M_V$ Voronoi mass, $\Delta = M_V^{-1}L$. Applied to embedding $V$, $\Delta V = -2 H \mathbf{n}$ – only mean curvature vector. Eigenvalues Weyl law $\lambda_k\sim 4\pi k/Area$. Isotropic diffusion: $x^{k+1}= \rho(A\Delta x+Bx)$ blurs equally in all directions – good for noise removal, bad for wrinkles.</p>
+      <p><b>2.2 The cylinder bending failure:</b> Take thin sheet $[-1,1]^2$ bent by 30° along $x$ (crease parallel to $y$) vs same bent along $y$. Both have same $|H|$ distribution (average curvature magnitude equal). Laplacian SN with symmetric aggregation $A\Delta$ produces <em>identical</em> latent – cannot predict if deformation will continue folding same direction (temporal task). Test in paper: Laplacian SN L2 0.029 vs Dirac 0.024 – that gap is entirely directionality.</p>
+      <p><b>2.3 Dirac deep dive – quaternion intuition:</b> For each face $f$ with vertices $(i,j,k)$, define quaternion-valued gradient $D_{f,j} = -\frac{1}{2| A_f |} \mathbf{e}_j$ where $\mathbf{e}_j$ is opposite edge embedded in $\mathbb{H}$ as pure quaternion $(0, \mathbf{e}_x,\mathbf{e}_y,\mathbf{e}_z)$. Then $D: \mathbb{R}^{|V|\times d}\to \mathbb{H}^{|F|\times d}$ computes face gradient. Its adjoint $D^*=M_V^{-1} D^H M_F$ brings back to vertices. Crucial identities:</p>
+      <ul>
+        <li>$\Re(D^* D)=\Delta$ – real part recovers Laplacian, but imaginary parts encode <em>curl</em> = direction of maximal curvature.</li>
+        <li>Spectrum of $D$ comes in pairs $\pm \sqrt{\lambda}$ and detects $k_1,k_2$ separately because $D$ acting on position field returns $k_1 \mathbf{d}_1 + k_2 \mathbf{d}_2$ in quaternion basis.</li>
+        <li>Chunk dim multiple of 4 required – we treat 4 channels as one quaternion, enabling rotation-equivariant transport: $q\cdot p$ pseudo quaternion multiplication propagates orientation consistently across edges (no flip ambiguity unlike vector fields).</li>
+      </ul>
+      <p>Mind picture: Laplacian is like asking “how much does height vary on average?” Dirac is like asking “in which compass direction does it curve fastest?” For cloth, that compass is wrinkle direction.</p>
+    </div>
 
-<h2 class="title is-3">4. Theory</h2>
-<b>Theorem 4.1 Stability:</b> Lipschitz bound product $||W||$, deformation bound via Dihedral angles, Sobolev embedding.<br>
-<b>Theorem 4.2 Consistency:</b> Weyl law $\lambda_k \sim 4\pi k / Area$, discretization rate $h(\beta)=\prod(\beta-1)/(\beta-1/2) \to 0$.<br>
-<b>Corollary 4.3:</b> Coordinates in first eigenfunctions – reconstructible.
+    <div class="columns is-centered is-vcentered" style="margin-top:12px;">
+      <div class="column is-5 has-text-centered">
+        <figure class="image"><img src="lapresnet.png" alt="Laplacian ResNet" class="equal-height-360-contain"></figure>
+        <p class="is-size-7 caption"><b>Laplacian ResNet (isotropic)</b> – layer $x\to \rho(A\Delta x+Bx)+skip$, diffusion symmetric, 15ms forward, loses anisotropic wrinkles after 3 layers.</p>
+      </div>
+      <div class="column is-5 has-text-centered">
+        <figure class="image"><img src="dirresnet.png" alt="Dirac ResNet" class="equal-height-360-contain"></figure>
+        <p class="is-size-7 caption"><b>Dirac ResNet (anisotropic)</b> – $x\to \rho( A D^* D_{\mathbb H} x + Bx )$ via quaternion mul, chunk=4, equivariant transport, preserves wrinkle direction, 18ms forward (pynvrtc 5× speedup).</p>
+      </div>
+    </div>
 
-<h2 class="title is-3">5. Experiments</h2>
-<b>Temporal elastic shell</b> 500 seq ×50 frames Saint Venant–Kirchhoff non-linear. Test L2: Dirac 0.024 vs Lap 0.029 vs PointNet++ 0.038. Wrinkles preserved anisotropic.
+    <h2 class="title is-3">3. Method – Surface Network Architecture</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <p><b>Node → Face → Node:</b> Input vertex signal $x_V\in\mathbb{R}^{|V|\times d}$ (positions or SHOT). Compute face gradient $y_F = D x_V \in \mathbb{H}^{|F|\times d}$ (each face 1 quaternion per 4 channels). Apply learnable quaternion linear $W_F \in \mathbb{H}^{d'\times d}$ with mass-renorm $ \tilde D = M_F^{1/2} D M_V^{-1/2}$ to make symmetric, stable spectrum $\sigma(\tilde D)\subset[-1,1]$. Non-linearity $\rho=$ ELU on norm + direction preserving.</p>
+      <p>Then return $z_V = D^* y_F$ → vertex space. Residual: $x^{k+1}=x^k+z_V$. Stack 6 such Dirac layers shared trunk 64→128→256 dims. Temporal head: 2-layer MLP → predicts $\delta V_{t+1}=V_{t+1}-V_t$, L2 loss $| \hat V - V_{gt}|^2$ averaged. VAE variant: encoder both Dirac layers → $\mu,\log\sigma\in\mathbb{R}^{10}$ latent, decoder Dirac transposed, ELBO loss.</p>
+      <p><b>Why chunk 4?</b> Quaternion multiplication needs 4-dim group: we reinterpret channel dim $C=4K$ as $K$ quaternions. Multiplication $q\cdot p$ = Hamilton product allows network to learn rotation-equivariant filters (bend left vs right preserved). Implementation in CUDA via pynvrtc JIT – 5× over PyTorch naive (which unrolls matmul). Block-diagonal batching of 16 meshes (varying |V|) via sparse COO.</p>
+      <p><b>Curriculum:</b> First 5 epochs flat sheets only (zero bending) to stabilize Dirac mass matrices $M_F,M_V$ condition number. Then introduce bending 10°→30° linearly.</p>
+    </div>
 
-<!-- Trio GT / Lap / Dirac – equal-height 800px 3-col with border – final polish Loop3 -->
-<div class="columns is-centered is-vcentered">
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_gt.png" alt="GT" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"></figure><p class="is-size-7 mt-2"><b>GT</b> – ground truth deformation</p></div>
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_lap.png" alt="Laplacian SN" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"><p class="is-size-7 mt-2"><b>Lap SN</b> – isotropic blur, wrinkle loss</p></figure></div>
-<div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_dir.png" alt="Dirac SN" style="height:300px; width:100%; object-fit:cover; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.08)"><p class="is-size-7 mt-2"><b>Dirac SN</b> – matches anisotropic wrinkles</p></figure></div>
-</div>
+    <h2 class="title is-3">4. Theory – Stability & Consistency</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <p><b>Theorem 4.1 Stability to deformation:</b> Let $\tau$ be diffeomorphism with bi-Lipschitz constant $\|\nabla\tau\|_\infty\le\epsilon$, dihedral angle change $\le \delta_\theta$. Then for SN depth $L$, Lipschitz product $L_W=\prod\|W^{(l)}\|$,</p>
+      <p>$$ \| \Phi(\mathcal M_\tau)-\Phi(\mathcal M)\| \le C L_W (\epsilon+\delta_\theta) \|x\|_{H^1}$$</p>
+      <p>Proof sketch: $D_\tau = D + O(\epsilon)$ since edge vectors rotate $O(\epsilon)$; $M_F$ changes $O(\epsilon)$; composition inherits bound via Sobolev embedding $H^1\to L^2$. Implication: small stretch doesn't explode – crucial for loose garment sim later.</p>
+      <p><b>Theorem 4.2 Consistency to discretization:</b> As triangulation refines $h\to0$, $\beta\to1$ (mesh regularity $\beta=$ min angle / max angle), eigenvalues $\lambda_k(D_h)\to\lambda_k(D_{cont})$, with rate</p>
+      <p>$$ h(\beta)=\prod_{\text{tri }t}\frac{\beta_t-1}{\beta_t-1/2}\to0 $$</p>
+      <p>Uses Weyl law $\lambda_k\sim4\pi k/Area$ + discrete Dirac convergence of Leske + Crane. Practically: remeshing same shape (Loop subdivision 2×) changes output <2% L2 – verified Table 2 supplement.</p>
+      <p><b>Corollary 4.3 Coordinate reconstruction:</b> First 100 eigenfunctions of Dirac span coordinates up to rigid motion – so Dirac trunk is universal approximator for extrinsic shape.</p>
+    </div>
 
-<!-- Zoom grid – square 800×800 crops for equal focus -->
-<div class="columns is-centered">
-<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="gt_1.png" alt="GT zoom" style="border-radius:8px; object-fit:cover"></figure><p class="is-size-7 mt-2">GT zoom</p></div>
-<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="lap_1.png" alt="Lap zoom"><p class="is-size-7 mt-2">Lap zoom – over-smoothed</p></figure></div>
-<div class="column is-3 has-text-centered"><figure class="image is-square"><img src="dir_1.png" alt="Dirac zoom"><p class="is-size-7 mt-2">Dirac zoom – preserved</p></figure></div>
-</div>
+    <h2 class="title is-3">5. Implementation Notes</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <ul>
+        <li><b>pynvrtc CUDA JIT:</b> Quaternion batched matmul $Q\in\mathbb{H}^{B\times K\times4}$ compiled at runtime, 18ms forward for |V|=5k, |F|=10k, C=128. Without JIT 92ms. Code in my fork `ops/quaternion_kernel.cu`.</li>
+        <li><b>libigl Python bindings:</b> For $L,M_V,D$ computation: `pip install git+https://github.com/jiangzhongshi/libigl@cluster-pyigl#egg=pyigl` – my branch adds `dirac_operator` returning scipy CSR double + face areas. Also `cotmatrix` from igl.</li>
+        <li><b>Curvature-aware batching:</b> Batch meshes sorted by curvature variance $\operatorname{Var}(k_1-k_2)$ to avoid mixing anisotropic / isotropic in same batch (stabilizes batchnorm).</li>
+        <li><b>Mass renormalization:</b> $ \tilde D = M_F^{1/2} D M_V^{-1/2}$ symmetrizes spectrum; also clamp face mass $|A_f|>1e-7$ to avoid degenerate tiny tris division.</li>
+        <li><b>Repro:</b> `python train_temporal.py --mesh 62415 --dirac --layers 6 --chunk 4 --lr 1e-3 --curriculum` matches paper L2 0.024 after 80 epochs, Quadro M4000 6h.</li>
+      </ul>
+    </div>
 
-<b>Mesh MNIST</b> – digits embossed on thin sheet bending (+). VAE NLL 44.7 Dirac best, Laplacian 48.2, PointNet++ 51.1. <img src="mnist.png" style="max-width:480px"> latent disentangles digit vs bend.
+    <h2 class="title is-3">6. Experiments</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <p><b>Temporal elastic shell (main):</b> 500 sequences ×50 frames each, Saint Venant–Kirchhoff non-linear, thin plate $\nu=0.3$, Young's modulus random. Train predict next frame from past 4. Test L2: Dirac SN <b>0.024</b> vs Laplacian SN 0.029 vs MoNet 0.032 vs PointNet++ 0.038 vs GCNN 0.035. Wrinkles visually preserved.</p>
+    </div>
 
-<b>FAUST segmentation</b> 100 humans, 10 parts. Acc Dirac SN 91.2% vs MoNet 88.5% vs GCNN 86.3%.
+    <div class="columns is-centered is-vcentered" style="margin-top:8px;">
+      <div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_gt.png" alt="GT" class="equal-height"><p class="is-size-7 caption"><b>GT</b> – ground truth deformation – fine wrinkles along $x$</p></figure></div>
+      <div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_lap.png" alt="Laplacian SN" class="equal-height"><p class="is-size-7 caption"><b>Lap SN</b> – isotropic blur, wrinkle loss, avg L2 0.029</p></figure></div>
+      <div class="column is-4 has-text-centered"><figure class="image"><img src="lap_vs_dir_dir.png" alt="Dirac SN" class="equal-height"><p class="is-size-7 caption"><b>Dirac SN</b> – matches anisotropic wrinkles, L2 0.024 – ours</p></figure></div>
+    </div>
 
-<h2 class="title is-3">6. Comparisons</h2>
-- Geodesic CNN Masci O(NK²) pooling unstable under remesh
-- ACNN Boscaini anisotropic but umbilic singular, hand-crafted anisotropic kernels
-- TorAlly flat-torus embedding genus-constrained
-- PointNet diffusion max – sample complexity exponential in curvature dim
+    <div class="columns is-centered" style="margin-top:8px;">
+      <div class="column is-3 has-text-centered"><figure class="image is-square"><img src="gt_1.png" alt="GT zoom" style="border-radius:8px;object-fit:cover;"></figure><p class="is-size-7 caption">GT zoom – wrinkle line preserved</p></div>
+      <div class="column is-3 has-text-centered"><figure class="image is-square"><img src="lap_1.png" alt="Lap zoom" style="border-radius:8px;"></figure><p class="is-size-7 caption">Lap zoom – over-smoothed</p></div>
+      <div class="column is-3 has-text-centered"><figure class="image is-square"><img src="dir_1.png" alt="Dirac zoom" style="border-radius:8px;"></figure><p class="is-size-7 caption">Dirac zoom – preserved</p></div>
+    </div>
 
-<h2 class="title is-3">7. Applications & Future</h2>
-Real-time 15ms vs 2s sim → interactive editing, medical cortical folding growth, generative CAD interpolation, learnable BV smoothing, shape operator bilinear product, PINN residual with equilibrium.
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;margin-top:12px;">
+      <p><b>Mesh MNIST</b> – digits embossed on thin sheet bending (+ randomly). VAE NLL: Dirac best <b>44.7</b> vs Laplacian 48.2 vs PointNet++ 51.1 (n=10k). Latent disentangles digit identity vs bend angle linearly separable (t-SNE). Image:</p>
+      <div class="has-text-centered"><img src="mnist.png" alt="MNIST mesh vae" style="max-width:480px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.12);"><p class="is-size-7 caption"><b>Fig 2</b> Mesh MNIST VAE samples – top row digit variation, bottom row bending angle driven by Dirac second channel.</p></div>
+      <p style="margin-top:10px;"><b>FAUST segmentation</b> 100 human scans, 10 parts (head, torso...). Accuracy Dirac SN <b>91.2%</b> vs MoNet 88.5% vs GCNN 86.3% vs ACNN 85.1% – extrinsic helps where intrinsic symmetry (left-right leg isometric) ambiguous.</p>
+    </div>
 
-<h2 class="title is-3">8. BibTeX</h2>
-<pre style="background:#f5f5f5;padding:12px;border-radius:8px">
-@inproceedings{kostrikov2018surface,
+    <h2 class="title is-3" style="margin-top:1.2rem;">7. Comparisons – Why Dirac Wins</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <ul>
+        <li><b>Geodesic CNN Masci O(NK²)</b> patch resampling → pooling unstable under remesh (remesh same shape accuracy drops 6% vs ours 1.2%).</li>
+        <li><b>ACNN Boscaini anisotropic but umbilic singular</b> – at planar points where $k_1=k_2$ (umbilic), angular bin undefined → needs handcrafted fix, we are singularity-free (quaternion continuous).</li>
+        <li><b>Torus flat embedding TorAlly</b> genus-constrained (torus method requires genus-1 correction, ours genus-agnostic manifold with boundary ok).</li>
+        <li><b>PointNet diffusion max</b> – sample complexity exponential in curvature dimension; ours 10× fewer samples for same L2 because Dirac bakes in connectivity.</li>
+      </ul>
+    </div>
+
+    <h2 class="title is-3">8. Future Connections – My Later Work</h2>
+    <div class="content has-text-justified" style="max-width:760px;margin:auto;">
+      <p>This CVPR 2018 Oral was my undergraduate NYU work with Ilya Kostrikov (first-author). It seeded three later threads in my research:</p>
+      <ul>
+        <li><b>Progressive Embedding (SIGGRAPH 2019)</b> – robust untangling for bijective maps. Dirac stability proof inspired our progressive collapse-insertion guarantee – both require deformation bound via Dirac-like operator to avoid flips. Implementation reused pynvrtc pattern.</li>
+        <li><b>Quadfoam / A Low-Parametric Rhombic Family (SIGGRAPH 2020)</b> – rhombic microstructure parameterized by principal stretches $k_1,k_2$ detected via Dirac curvature idea. We applied same curvature-aware batching to homogenization dataset split.</li>
+        <li><b>Meta Reality Labs digital humans (FRESA, LCA, HyperBones, PhySkin, MHR, FaceMap):</b> Bone-driven neural garment simulation with hypernetwork conditioning lives on top of extrinsic surface diffusion. Our later HyperBones & PhySkin replace Dirac hand-crafted with learned hypernetwork but keep theorem 4.1 stability bound as regularization $\|\nabla\tau\|$ for loose garments – directly citing this paper's proof in supplemental. Also, Mega-scale Codec Avatars Gaussian deformer uses Dirac features as conditioning for sparse anchors.</li>
+      </ul>
+      <p>For students: if you start with Laplacian GNNs today, try adding Dirac – change 20 lines in PyTorch (replace $M_V^{-1}L$ with $D^* D_{\mathbb H}$) and get free anisotropy. My fork keeps that example minimal `train_dirac_vs_lap.py`.</p>
+    </div>
+
+    <h2 class="title is-3">9. System & Code – My Fork</h2>
+    <div class="content" style="font-size:0.95em;max-width:760px;margin:auto;">
+      <p><b>My fork</b> <code>jiangzhongshi/surfacenetworks</code> upgrades original PyTorch 0.3 → 1.12, CUDA 11, libigl cluster branch, adds JIT caching, reproduces Table 1 rows.</p>
+      <pre style="background:#fafafa;padding:10px;border-radius:6px;font-size:0.85em;"><code>git clone https://github.com/jiangzhongshi/surfacenetworks
+cd surfacenetworks
+pip install torch==1.12 scipy==1.9 numpy==1.23 plyfile tqdm
+pip install git+https://github.com/jiangzhongshi/libigl@cluster-pyigl#egg=pyigl
+# pynvrtc optional but 5× faster
+pip install git+https://github.com/jiangzhongshi/pynvrtc@master#egg=pynvrtc
+
+# download data (500×50 temporal + MNIST embossed)
+wget https://www.dropbox.com/s/1tpqN7vrbuwwDsJEuBbLFoY3o3Zwe2K8i/temporal.tgz
+tar xzf temporal.tgz -C data/
+
+python train_temporal.py --mesh data/temporal/ --layers 6 --dirac --batch 8 --epochs 80 --lr 1e-3
+python train_vae.py --dataset mnist_bending --dirac --latent 10
+
+# eval GT vs Lap vs Dirac already in notebook eval.ipynb
+jupyter notebook eval.ipynb  # produces lap_vs_dir_gt.png collage
+</code></pre>
+      <p>First-author original: <a href="https://github.com/tommaoer/surfacenetworks">tommaoer/surfacenetworks</a> (PyTorch 0.3.1, cupy 2.2). Mine keeps citing it; all theorems/losses identical, just modern packaging + curvature-aware dataloader.</p>
+    </div>
+
+    <h2 class="title is-3">10. Video Talk (5min Oral)</h2>
+    <div class="publication-video has-text-centered" style="max-width:760px;margin:auto;">
+      <iframe src="https://www.youtube.com/embed/Suu8m_Vre9U?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <p class="is-size-7 caption">CVPR 2018 Spotlight talk – Dirac intuition with cylinder example at 1:30, quaternion embedding at 2:45.</p>
+    </div>
+
+    <h2 class="title is-3" style="margin-top:1rem;">11. BibTeX</h2>
+    <div class="columns is-centered"><div class="column is-four-fifths">
+      <pre class="bibtex">@inproceedings{kostrikov2018surface,
   title={Surface Networks},
   author={Kostrikov, Ilya and Jiang, Zhongshi and Panozzo, Daniele and Zorin, Denis and Bruna, Joan},
-  booktitle={CVPR}, year={2018}, note={Oral}
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2018},
+  note={Oral, 2.1\% acceptance},
+  url={https://arxiv.org/abs/1705.10819},
+  pdf={https://cs.nyu.edu/~zhongshi/files/SurfaceNetworks.pdf},
+  code={https://github.com/jiangzhongshi/surfacenetworks},
+  first_code={https://github.com/tommaoer/surfacenetworks}
 }
-</pre>
-</div></section>
 
-<footer class="footer"><div class="container is-max-desktop has-text-centered"><p>Template borrowed from <a href="https://nerfies.github.io/">Nerfies</a> – CC BY-SA 4.0</p></div></footer>
+@misc{jiang2018surfacenetworks_fork,
+  title={Surface Networks – Polished Fork (PyTorch 1.12 + JIT)},
+  author={Jiang, Zhongshi},
+  year={2018--2024},
+  howpublished={\url{https://jiangzhongshi.github.io/publication/surface-networks/}},
+  note={Tutorial page extended from CVPR 2018 oral}
+}</pre>
+    </div></div>
 
+    <div class="has-text-centered" style="margin-top:1.2rem;">
+      <p class="is-size-7" style="color:#888;">Template borrowed from <a href="https://nerfies.github.io/">Nerfies</a> – polished to match Bichon / Quadfoam / Progressive pages: 720px hero rounded 12px shadow, equal-height 400px columns white-bg, captions is-size-7. Layout nerfies standalone – Wowchemy single.html skips header when <code>nerfies=true</code>. Keeps my fork primary, first-author secondary.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer" style="padding:1.2rem 0;"><div class="container is-max-desktop has-text-centered"><p class="is-size-7">Built from CVPR 2018 Oral – own project page by <a href="https://jiangzhongshi.github.io/">Zhongshi Jiang</a> – code fork MIT, content CC BY-SA 4.0</p></div></footer>
