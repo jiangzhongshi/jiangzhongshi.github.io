@@ -13,6 +13,7 @@ projects = []
 tags = ["avatar animation","digital humans"]
 url_pdf = "https://arxiv.org/abs/2605.21478"
 url_preprint = "https://arxiv.org/abs/2605.21478"
+url_project = "https://arxiv.org/abs/2605.21478"
 url_code = ""
 math = false
 highlight = true

@@ -44,14 +44,15 @@ tags = []
 # Links (optional).
 url_pdf = "https://cims.nyu.edu/gcl/papers/2020-Quad-Foam.pdf"
 url_preprint = ""
-url_code = ""
+url_code = "https://github.com/meshfem/quadfoam"
 url_dataset = ""
 url_data = ""
-url_project = ""
+url_project = "https://www.jdumas.org/publication/2020/quadfoam/"
 url_slides = ""
 url_video = "https://www.youtube.com/watch?v=Ivg7kucJiY4"
 url_poster = ""
 url_source = ""
+url_custom = [{name = "Project Page", url = "https://www.jdumas.org/publication/2020/quadfoam/"}, {name = "Code", url = "https://github.com/meshfem/quadfoam"}, {name = "Julian Panetta Page", url = "https://julianpanetta.com/publication/quadfoam/"}]
 
 # links:
 # - name: Custom Link
