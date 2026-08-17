@@ -45,7 +45,7 @@ social:
   link: //linkedin.com/in/zhongshi-jiang/
 - icon: google-scholar
   icon_pack: ai
-  link: https://scholar.google.com/citations?user=LAf3hJ0AAAAJ
+  link: https://scholar.google.com/citations?user=h8bGMF4AAAAJ
 - icon: github
   icon_pack: fab
   link: https://github.com/jiangzhongshi
