@@ -46,12 +46,6 @@ design:
 
 * **Geometric Computing in Python** — *Lecturer*, [Symposium on Geometry Processing 2021](https://sgp2021.github.io/program/) — [📺 YouTube Playlist](https://youtube.com/playlist?list=PL6Bl-NTBamMIf9jEmPNYgDyUs0zDTdZe_)
 
-## External Events & Invited Talks
-
-* Invited lecture series on robust geometry processing and neural representations for digital humans — notes and recordings on YouTube.
-
-* Invited panelist at industry events on photorealistic avatars and physics-aware garment simulation (Meta Reality Labs) — 2023–2026.
-
 ## YouTube Channels
 
 * **Personal / Lectures** — [youtube.com/@zhongshijiang](https://www.youtube.com/channel/UCmngYxW54HS82dDZwHBPFqQ) — geometry processing, robust optimization, and recent SIGGRAPH / CVPR paper walkthroughs
