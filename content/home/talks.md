@@ -50,7 +50,7 @@ design:
 
 * Invited lecture series on robust geometry processing and neural representations for digital humans — notes and recordings on YouTube.
 
-* Industry panels on photorealistic avatars and physics-aware garment simulation (Meta Reality Labs) — 2023–2026.
+* Invited panelist at industry events on photorealistic avatars and physics-aware garment simulation (Meta Reality Labs) — 2023–2026.
 
 ## YouTube Channels
 
