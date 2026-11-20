@@ -189,7 +189,7 @@ nerfies = true
 
     <h2 class="title is-3">6. Experiments</h2>
     <div class="content has-text-justified" style="max-width:760px;margin:auto;">
-      <p><b>Temporal elastic shell (main):</b> 500 sequences ×50 frames each, Saint Venant–Kirchhoff non-linear, thin plate $\nu=0.3$, Young's modulus random. Train predict next frame from past 4. Test L2: Dirac SN <b>0.024</b> vs Laplacian SN 0.029 vs MoNet 0.032 vs PointNet++ 0.038 vs GCNN 0.035. Wrinkles visually preserved.</p>
+      <p><b>Temporal elastic shell (main):</b> 500 sequences ×50 frames each, Saint Venant–Kirchhoff non-linear, thin plate $\nu=0.3$, Young's modulus random. Train predict next frame from past 4. Test L2: Dirac SN <b>0.024</b> vs Laplacian SN 0.029 vs MoNet 0.032 vs PointNet++ 0.038 vs GCNN 0.035. Wrinkles visually preserved. The shells are 10k patches cut from MPI-FAUST human scans, each simulated falling to the ground for 50 frames (thin elastic shell, ARAP).</p>
     </div>
 
     <div class="columns is-centered is-vcentered" style="margin-top:8px;">
@@ -207,7 +207,6 @@ nerfies = true
     <div class="content has-text-justified" style="max-width:760px;margin:auto;margin-top:12px;">
       <p><b>Mesh MNIST</b> – digits embossed on thin sheet bending (+ randomly). VAE NLL: Dirac best <b>44.7</b> vs Laplacian 48.2 vs PointNet++ 51.1 (n=10k). Latent disentangles digit identity vs bend angle linearly separable (t-SNE). Image:</p>
       <div class="has-text-centered"><img src="mnist.png" alt="MNIST mesh vae" style="max-width:480px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.12);"><p class="is-size-7 caption"><b>Fig 2</b> Mesh MNIST VAE samples – top row digit variation, bottom row bending angle driven by Dirac second channel.</p></div>
-      <p style="margin-top:10px;"><b>FAUST segmentation</b> 100 human scans, 10 parts (head, torso...). Accuracy Dirac SN <b>91.2%</b> vs MoNet 88.5% vs GCNN 86.3% vs ACNN 85.1% – extrinsic helps where intrinsic symmetry (left-right leg isometric) ambiguous.</p>
     </div>
 
     <h2 class="title is-3" style="margin-top:1.2rem;">7. Comparisons – Why Dirac Wins</h2>
@@ -222,7 +221,7 @@ nerfies = true
 
     <h2 class="title is-3">8. Future Connections – My Later Work</h2>
     <div class="content has-text-justified" style="max-width:760px;margin:auto;">
-      <p>This CVPR 2018 Oral was my undergraduate NYU work with Ilya Kostrikov (first-author). It seeded three later threads in my research:</p>
+      <p>This CVPR 2018 Oral was my early PhD work at NYU Courant with Ilya Kostrikov (first author). It seeded three later threads in my research:</p>
       <ul>
         <li><b>Progressive Embedding (SIGGRAPH 2019)</b> – robust untangling for bijective maps. Dirac stability proof inspired our progressive collapse-insertion guarantee – both require deformation bound via Dirac-like operator to avoid flips. Implementation reused pynvrtc pattern.</li>
         <li><b>Quadfoam / A Low-Parametric Rhombic Family (SIGGRAPH 2020)</b> – rhombic microstructure parameterized by principal stretches $k_1,k_2$ detected via Dirac curvature idea. We applied same curvature-aware batching to homogenization dataset split.</li>
